@@ -1,9 +1,9 @@
-import MainLayout from "./components/MainLayout";
+import HomePage from "./pages/home/HomePage";
 
 function App() {
   return (
     <div className="App font-sans">
-      <MainLayout></MainLayout>
+      <HomePage />
     </div>
   );
 }
