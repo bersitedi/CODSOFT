@@ -11,7 +11,7 @@ const ArticleCard = ({ className }) => {
         alt="title"
         className="w-full object-cover object-center h-60 lg:h-48 "
       />
-      <div className="p-5">
+      <div className="p-2">
         <h2 className="font-roboto font-bold text-l text-dark-soft ">
           Yogurt and Chia Seed Pudding
         </h2>
@@ -25,18 +25,13 @@ const ArticleCard = ({ className }) => {
               alt=""
               className="rounded-full w-10 h-10 "
             />
-            <div className="flex flex-col">
+            <div className="flex gap-x-1">
               <h4 className="font-bold italic text-dark-soft text-sm ">
                 Bersi Tedi
               </h4>
-              <div className="flex items-center gap-x-1 gap-y-3">
-                <span className="bg-green-300 w-fit bg-opacity-20 p-1.5 rounded-full">
-                  <BsCheckLg className="text-green-500 w-3 h-3" />
-                </span>
-                <span className="italic text-dark-soft text-xs ">
-                  Verified writer
-                </span>
-              </div>
+              <span className="bg-green-300 w-fit bg-opacity-20 p-1.5 rounded-full">
+                <BsCheckLg className="text-green-500 w-3 h-3" />
+              </span>
             </div>
           </div>
 

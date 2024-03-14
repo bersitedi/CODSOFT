@@ -17,7 +17,7 @@ const Title = ({ className }) => {
         </h1>
       </div>
       <section className=" bg-white">
-        <div className="mx-auto md:py-4 px-6">
+        <div className="mx-auto md:py-4 ">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 h-80">
             <div className="col-span-2 sm:col-span-1 md:col-span-2 bg-gray-50 h-auto md:h-full flex flex-col">
               <a
