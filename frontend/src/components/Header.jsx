@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   AiOutlineClose,
   AiOutlineMenu,
@@ -27,11 +26,11 @@ const Header = ({ navItemsList }) => {
     <section className="sticky top-0 right-0 left-0 z-50">
       <header className="flex justify-between items-center -py-1 px-8 md:px-15 relative bg-white">
         <div className="hidden sm:flex sm:items-center sm:justify-between sm:w-full">
-          <div className="flex flex-1 items-center justify-between">
-            <div className="overflow-hidden w-[90px] h-[90px]">
+          <div className="flex flex-1 items-center justify-between sm:-mt-8 ">
+            <div className="overflow-hidden w-[90px] h-[90px] sm:w-36 sm:h-36">
               <img src={logo} alt="logo" className="w-full" />
             </div>
-            <div className="ml-4 flex gap-3 items-center">
+            <div className="ml-4 flex gap-3 items-center ">
               {navItemsList.map((item, index) => (
                 <div key={index}>
                   {item.type === "link" && (
@@ -49,7 +48,7 @@ const Header = ({ navItemsList }) => {
                         item.name === "Pages" ? "" : ""
                       }`}
                     >
-                      <div className="flex flex-col items-center">
+                      <div className="flex flex-col items-center ">
                         <button className=" flex gap-x-1 items-center">
                           <span>{item.name}</span>
                           <AiOutlineDown

@@ -8,7 +8,7 @@ const Articles = () => {
   return (
     <section className="container mx-auto px-2 py-10 flex flex-col lg:flex-row lg:gap-10">
       <div className="lg:w-3/4 lg:pr-6">
-        <Title className="hiden lg:w-full lg:mb-10" />
+        <Title className="w-full mb-10" />
         <div className="flex flex-wrap justify-between md:gap-x-5 gap-y-5 pb-10">
           <ArticleCard className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
           <ArticleCard className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />

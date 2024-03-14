@@ -7,19 +7,17 @@ import food5 from "../../assets/food5.jpg";
 
 const Title = ({ className }) => {
   return (
-    <div
-      className={`hidden lg:block  lg:overflow-hidden lg:shadow-md ${className}`}
-    >
+    <div className={`lg:overflow-hidden lg:shadow-lg ${className}`}>
       <div className="border-b-2">
         <h1 className="text-2xl font-semibold text-cta p-10">
           Top 10 Healthy Breakfast Ideas to Start Your Day Right Are you tired
           of the same old breakfast routine?
         </h1>
       </div>
-      <section className=" bg-white">
-        <div className="mx-auto md:py-4 ">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 h-80">
-            <div className="col-span-2 sm:col-span-1 md:col-span-2 bg-gray-50 h-auto md:h-full flex flex-col">
+      <section className="bg-white">
+        <div className="mx-auto md:py-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="col-span-2 sm:col-span-1 md:col-span-2 bg-gray-50 h-auto sm:h-full flex flex-col">
               <a
                 href=""
                 className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow"
@@ -27,7 +25,7 @@ const Title = ({ className }) => {
                 <img
                   src={food1}
                   alt=""
-                  className="absolute inset-0  h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                 <h3 className="z-10 text-l font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
@@ -81,7 +79,7 @@ const Title = ({ className }) => {
                 </a>
               </div>
             </div>
-            <div className="col-span-2 sm:col-span-1 md:col-span-1 bg-sky-50 h-auto md:h-full flex flex-col">
+            <div className="col-span-2 sm:col-span-1 md:col-span-1 bg-sky-50 h-auto sm:h-full flex flex-col">
               <a
                 href=""
                 className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow"

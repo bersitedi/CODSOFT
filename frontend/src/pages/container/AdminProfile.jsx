@@ -4,7 +4,7 @@ import { FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
 
 const AdminProfile = ({ className }) => {
   return (
-    <section className={`hidden lg:block lg:overflow-hidden ${className}`}>
+    <section className={`mt-8 lg:mt-0 lg:overflow-hidden ${className}`}>
       <div className="lg:bg-white lg:shadow-md">
         <div className="bg-cta flex items-center p-6">
           <img
@@ -34,7 +34,7 @@ const AdminProfile = ({ className }) => {
           </a>
         </div>
       </div>
-      <div className="mt-10 bg-white shadow-md ">
+      <div className="mt-10 bg-white shadow-md">
         <div className="p-6 bg-cta">
           <h3 className="text-xl text-white font-semibold mb-2">
             Recent Articles:
