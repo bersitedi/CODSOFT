@@ -5,17 +5,17 @@ import { BsCheckLg } from "react-icons/bs";
 
 const ArticleCard = ({ className }) => {
   return (
-    <div className={`rounded-xl overflow-hidden shadow-md ${className}`}>
+    <div className={`rounded overflow-hidden shadow-md ${className}`}>
       <img
         src={pudding}
         alt="title"
         className="w-full object-cover object-center h-60 lg:h-48 "
       />
       <div className="p-5">
-        <h2 className="font-roboto font-bold text-l text-dark-soft md:text-xl">
+        <h2 className="font-roboto font-bold text-l text-dark-soft ">
           Yogurt and Chia Seed Pudding
         </h2>
-        <p className="text-dark-soft mt-2 text-sm ">
+        <p className="text-dark-soft mt-2 text-sm lg:text-xs">
           Healthy Breakfast Ideas to Start Your Day Right
         </p>
         <div className="flex justify-between flex-nowrap items-center mt-5">
