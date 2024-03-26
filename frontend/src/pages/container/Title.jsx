@@ -7,7 +7,7 @@ import food5 from "../../assets/food5.jpg";
 
 const Title = ({ className }) => {
   return (
-    <div className={`lg:overflow-hidden lg:shadow-lg ${className}`}>
+    <div className={`lg:overflow-hidden lg:shadow-lg lg:mb-20 ${className}`}>
       <div className="border-b-2">
         <h1 className="text-2xl font-semibold text-cta p-10">
           Top 10 Healthy Breakfast Ideas to Start Your Day Right Are you tired
@@ -15,12 +15,12 @@ const Title = ({ className }) => {
         </h1>
       </div>
       <section className="bg-white">
-        <div className="mx-auto md:py-4">
+        <div className="mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
             <div className="col-span-2 sm:col-span-1 md:col-span-2 bg-gray-50 h-auto sm:h-full flex flex-col">
               <a
                 href=""
-                className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow"
+                className="group relative flex flex-col overflow-hidden  px-4 pb-4 pt-40 flex-grow"
               >
                 <img
                   src={food1}
@@ -36,7 +36,7 @@ const Title = ({ className }) => {
             <div className="col-span-2 sm:col-span-1 md:col-span-2 bg-stone-50">
               <a
                 href=""
-                className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 mb-4"
+                className="group relative flex flex-col overflow-hidden  px-4 pb-4 pt-40 mb-4"
               >
                 <img
                   src={food2}
@@ -51,7 +51,7 @@ const Title = ({ className }) => {
               <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2">
                 <a
                   href=""
-                  className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40"
+                  className="group relative flex flex-col overflow-hidden  px-4 pb-4 pt-40"
                 >
                   <img
                     src={food3}
@@ -65,7 +65,7 @@ const Title = ({ className }) => {
                 </a>
                 <a
                   href=""
-                  className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40"
+                  className="group relative flex flex-col overflow-hidden  px-4 pb-4 pt-40"
                 >
                   <img
                     src={food4}
@@ -82,7 +82,7 @@ const Title = ({ className }) => {
             <div className="col-span-2 sm:col-span-1 md:col-span-1 bg-sky-50 h-auto sm:h-full flex flex-col">
               <a
                 href=""
-                className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow"
+                className="group relative flex flex-col overflow-hidden  px-4 pb-4 pt-40 flex-grow"
               >
                 <img
                   src={food5}

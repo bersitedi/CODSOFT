@@ -10,9 +10,9 @@ const Articles = () => {
       <div className="lg:w-3/4 lg:pr-6">
         <Title className="w-full mb-10" />
         <div className="flex flex-wrap justify-between md:gap-x-5 gap-y-5 pb-10">
-          <ArticleCard className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
-          <ArticleCard className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
-          <ArticleCard className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
+          <ArticleCard className="w-full md:w-[calc(50%-20px)] xl:w-[calc(33.33%-21px)]" />
+          <ArticleCard className="w-full md:w-[calc(50%-20px)] xl:w-[calc(33.33%-21px)]" />
+          <ArticleCard className="w-full md:w-[calc(50%-20px)] xl:w-[calc(33.33%-21px)]" />
         </div>
         <button className="flex items-center gap-x-2 mx-auto font-bold text-primary border-2 border-primary px-6 py-1 rounded-lg hover:text-white hover:bg-primary shadow-md ">
           <span>More articles</span>

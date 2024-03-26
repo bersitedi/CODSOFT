@@ -1,13 +1,14 @@
 import React from "react";
 import pudding from "../assets/photo1.jpg";
+import { images } from "../constant";
 import defaultprofile from "../assets/defaultpfp.jpg";
 import { BsCheckLg } from "react-icons/bs";
 
 const ArticleCard = ({ className }) => {
   return (
-    <div className={`rounded overflow-hidden shadow-md ${className}`}>
+    <div className={`rounded-md overflow-hidden shadow-md ${className}`}>
       <img
-        src={pudding}
+        src={images.ArticleCardImage}
         alt="title"
         className="w-full object-cover object-center h-60 lg:h-48 "
       />
