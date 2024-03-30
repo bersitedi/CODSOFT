@@ -1,5 +1,4 @@
 import React from "react";
-import pudding from "../assets/photo1.jpg";
 import { images } from "../constant";
 import defaultprofile from "../assets/defaultpfp.jpg";
 import { BsCheckLg } from "react-icons/bs";
@@ -22,7 +21,7 @@ const ArticleCard = ({ className }) => {
         <div className="flex justify-between flex-nowrap items-center mt-5">
           <div className="flex items-center gap-x-2 md:gap-x-2.5">
             <img
-              src={defaultprofile}
+              src={images.PostProfileImage}
               alt=""
               className="rounded-full w-10 h-10 "
             />

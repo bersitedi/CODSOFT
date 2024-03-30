@@ -4,6 +4,7 @@ import BreadCrumbs from "../../components/BreadCrumbs";
 import { Link } from "react-router-dom";
 import SimilarPosts from "./container/SimilarPosts";
 import { images } from "../../constant";
+import CommentsContainer from "../../components/comments/CommentsContainer";
 
 const breadCrumbsData = [
   { name: "Home", link: "/" },
@@ -64,6 +65,7 @@ const ArticleDetailPage = () => {
               preferences.
             </p>
           </div>
+          <CommentsContainer className="mt-10" loggedinUserId="a" />
         </article>
         <SimilarPosts
           header="Latest Article"
