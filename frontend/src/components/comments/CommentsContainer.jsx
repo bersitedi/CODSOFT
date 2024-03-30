@@ -74,6 +74,7 @@ const CommentsContainer = ({ className, loggedinUserId }) => {
       <div className="space-y-4 mt-8">
         {mainComments.map((comment) => (
           <Comment
+            key={comment._id} // Assign unique _id as key prop
             comment={comment}
             loggedinUserId={loggedinUserId}
             changedComment={changedComment}
