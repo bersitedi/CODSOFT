@@ -2,6 +2,10 @@ import express from "express";
 
 import dotenv from "dotenv";
 import connectDB from "./config/db";
+import {
+  errorResponseHandler,
+  invalidPathHandler,
+} from "./middleware/errorHandler";
 
 import userRoutes from "./routes/userRoutes";
 
@@ -17,6 +21,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+
+app.use(invalidPathHandler);
+app.use(errorResponseHandler);
 
 const PORT = process.env.PORT || 5000;
 
