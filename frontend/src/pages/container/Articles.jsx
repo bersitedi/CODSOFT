@@ -3,16 +3,8 @@ import ArticleCard from "../../components/ArticleCard";
 import { FaArrowRight } from "react-icons/fa";
 import Title from "./Title";
 import AdminProfile from "./AdminProfile";
-import { useSelector, useDispatch } from "react-redux";
-import { changeCount } from "../../store/actions/countActions";
 
 const Articles = () => {
-  const dispatch = useDispatch();
-  const count = useSelector((state) => state.count);
-
-  const countChangeHandler = (type) => {
-    dispatch(changeCount(type));
-  };
   return (
     <section className="container mx-auto px-2 py-10 flex flex-col lg:flex-row lg:gap-10">
       <div className="lg:w-3/4 lg:pr-6">
@@ -30,11 +22,6 @@ const Articles = () => {
 
       <div className="lg:w-1/4">
         <AdminProfile className="w-full h-full" />
-      </div>
-      <div className="mt-2 flex items-center gap-x-5">
-        <button onClick={() => countChangeHandler("DECREASE")}>decrease</button>
-        {count.number}
-        <button onClick={() => countChangeHandler("INCREASE")}>increase</button>
       </div>
     </section>
   );
