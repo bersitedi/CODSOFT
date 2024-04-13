@@ -1,45 +1,36 @@
 import React from "react";
-import { images } from "../constant";
-import defaultprofile from "../assets/defaultpfp.jpg";
-import { BsCheckLg } from "react-icons/bs";
+import hero from "../assets/art.jpg";
 
 const ArticleCard = ({ className }) => {
   return (
-    <div className={`rounded-md overflow-hidden shadow-md ${className}`}>
-      <img
-        src={images.ArticleCardImage}
-        alt="title"
-        className="w-full object-cover object-center h-60 lg:h-48 "
-      />
-      <div className="p-2">
-        <h2 className="font-roboto font-bold text-l text-dark-soft ">
-          Yogurt and Chia Seed Pudding
-        </h2>
-        <p className="text-dark-soft mt-2 text-sm lg:text-xs">
-          Healthy Breakfast Ideas to Start Your Day Right
-        </p>
-        <div className="flex justify-between flex-nowrap items-center mt-5">
-          <div className="flex items-center gap-x-2 md:gap-x-2.5">
-            <img
-              src={images.PostProfileImage}
-              alt=""
-              className="rounded-full w-10 h-10 "
-            />
-            <div className="flex gap-x-1">
-              <h4 className="font-bold italic text-dark-soft text-sm ">
-                Bersi Tedi
-              </h4>
-              <span className="bg-green-300 w-fit bg-opacity-20 p-1.5 rounded-full">
-                <BsCheckLg className="text-green-500 w-3 h-3" />
-              </span>
-            </div>
-          </div>
+    <div
+      className={`${className} bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
+    >
+      <a href="#">
+        <img className="rounded-t-lg" src={hero} alt="" />
+      </a>
 
-          <span className="font-bold text-dark-soft italic text-sm ">
-            02 May
-          </span>
-        </div>
-      </div>
+      <a
+        href="#"
+        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-blue-600 rounded-lg hover:text-cta "
+      >
+        Read more
+        <svg
+          className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 14 10"
+        >
+          <path
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M1 5h12m0 0L9 1m4 4L9 9"
+          />
+        </svg>
+      </a>
     </div>
   );
 };
