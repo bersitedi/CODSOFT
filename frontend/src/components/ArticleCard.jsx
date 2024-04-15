@@ -1,15 +1,32 @@
 import React from "react";
 import hero from "../assets/art.jpg";
+import { images, stables } from "../constant";
+import { Link } from "react-router-dom";
 
-const ArticleCard = ({ className }) => {
+const ArticleCard = ({ post, className }) => {
   return (
     <div
       className={`${className} bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
     >
-      <a href="#">
-        <img className="rounded-t-lg" src={hero} alt="" />
-      </a>
-
+      <Link to={`/project/${post.slug}`}>
+        <img
+          className="rounded-t-lg"
+          src={
+            post.photo
+              ? stables.UPLOAD_FOLDER_BASE_URL + post.photo
+              : images.Post1Image
+          }
+          alt=""
+        />
+      </Link>
+      <Link to={`/project/${post.slug}`}>
+        <h2 className="font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-xl p-3">
+          {post.title}
+        </h2>
+        <p className="text-gray-500 mt-2 text-sm md:text-lg pl-3">
+          {post.caption}
+        </p>
+      </Link>
       <a
         href="#"
         className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-blue-600 rounded-lg hover:text-cta "

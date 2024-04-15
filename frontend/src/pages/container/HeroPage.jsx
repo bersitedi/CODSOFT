@@ -19,6 +19,7 @@ const HeroPage = () => {
   return (
     <div className="items-center h-[100%]">
       <BackgroundSlider />
+
       <div className="hidden md:block md:text-center">
         <div className="flex flex-row items-center">
           <p className="mt-5 mr-4 md:ml-2 text-gray-400">

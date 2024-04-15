@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import imageSlide from "../../data";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import Search from "../../components/Search";
 
 const BackgroundSlider = () => {
   const [currentState, setCurrentState] = useState(0);
@@ -50,6 +51,7 @@ const BackgroundSlider = () => {
               curated by food enthusiasts and chefs from around the world.
             </p>
           </div>
+          <Search className="mt-10 lg:mt-6 xl:mt-10" />
 
           <div>
             <h1 className="text-2xl text-left md:text-6xl lg:text-7xl font-bold">

@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import MainLayout from "../../components/MainLayout";
 import BreadCrumbs from "../../components/BreadCrumbs";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SimilarPosts from "./container/SimilarPosts";
-import { images } from "../../constant";
-import CommentsContainer from "../../components/comments/CommentsContainer";
+import { images, stables } from "../../constant";
 import SocialShareButtons from "../../components/SocialShareButtons";
+import { useQuery } from "@tanstack/react-query";
+import { getSinglePost } from "../../services/index/posts";
+import { generateHTML } from "@tiptap/html";
+import Bold from "@tiptap/extension-bold";
+// Option 2: Browser-only (lightweight)
+// import { generateHTML } from '@tiptap/core'
+import Document from "@tiptap/extension-document";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
+import Italic from "@tiptap/extension-italic";
+import parse from "html-react-parser";
 
-const breadCrumbsData = [
-  { name: "Home", link: "/" },
-  { name: "Blog", link: "/blog" },
-  { name: "Article title", link: "/blog/1" },
-];
 const postData = [
   {
     _id: "1",
@@ -40,33 +45,56 @@ const postData = [
 ];
 
 const tagsData = ["Cooking", "Lifestyle", "Healthy", "Food", "Diet", "Learn"];
-const ArticleDetailPage = () => {
+const ArticleDetailPage = ({ post }) => {
+  const { slug } = useParams();
+  const [breadCrumbsData, setBreadCrumbsData] = useState([]);
+  const [body, setBody] = useState(null);
+
+  const { data } = useQuery({
+    queryKey: ["Project", slug],
+    queryFn: () => getSinglePost({ slug }),
+    onSuccess: (data) => {
+      setBreadCrumbsData([
+        { name: "Home", link: "/" },
+        { name: "Project", link: "/projects" },
+        { name: "Article title", link: `/project/${data.slug}` },
+      ]);
+      setBody(
+        parse(
+          generateHTML(data?.body, [Bold, Italic, Text, Paragraph, Document])
+        )
+      );
+    },
+  });
   return (
     <MainLayout>
       <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
         <article className="flex-1">
           <BreadCrumbs data={breadCrumbsData} />
-          <img src={images.Post1Image} className="w-full rounded-xl" alt="" />
-          <Link
-            to="/blog?category=selectedCategory"
-            className="text-primary text-sm font-roboto inline-block md:text-base"
-          >
-            COOKING
-          </Link>
-          <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
-            Learn how to cook healthy meals
-          </h1>
-          <div className="mt-4 text-dark-soft">
-            <p className="leading-7 ">
-              Indulging in a sweet treat can be guilt-free and effortless with
-              pudding. Modern recipes prioritize wholesome ingredients like
-              almond milk and natural sweeteners, making it a healthy dessert
-              option. With minimal effort and versatile ingredients, pudding is
-              a quick and adaptable dessert suitable for various dietary
-              preferences.
-            </p>
+          <img
+            src={
+              data?.photo
+                ? stables.UPLOAD_FOLDER_BASE_URL | data?.photo
+                : images.Post1Image
+            }
+            className="w-full rounded-xl"
+            alt={data?.title}
+          />
+          <div className="mt-4 flex gap-2">
+            {data?.categories.map((category) => (
+              <Link
+                to={`/project?category=${category.name}`}
+                className="text-primary text-sm font-roboto inline-block md:text-base"
+              >
+                {category.name}
+              </Link>
+            ))}
           </div>
-          <CommentsContainer className="mt-10" loggedinUserId="a" />
+
+          <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
+            {data?.title}
+          </h1>
+          <div className="mt-4 prose prose-sm sm:prose-base">{body}</div>
         </article>
         <div>
           <SimilarPosts

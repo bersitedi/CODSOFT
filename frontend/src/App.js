@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App font-sans">
       <Routes>
-        <Route path="/project/:id" element={<ArticleDetailPage />} />
+        <Route path="/project/:slug" element={<ArticleDetailPage />} />
         <Route index path="/" element={<HomePage />} />
         <Route index path="/register" element={<RegisterPage />} />
         <Route index path="/login" element={<LoginPage />} />
