@@ -9,6 +9,10 @@ import ContactForm from "./pages/contact/ContactForm";
 import Services from "./pages/services/Services";
 import AboutUs from "./pages/about/AboutUs";
 import Projects from "./pages/projects/Projects";
+import AdminLayout from "./pages/admin/AdminLayout";
+import Admin from "./pages/admin/screens/Admin";
+import NewPost from "./pages/admin/screens/posts/NewPost";
+import ManagePost from "./pages/admin/screens/posts/ManagePost";
 
 function App() {
   return (
@@ -16,13 +20,18 @@ function App() {
       <Routes>
         <Route path="/project/:slug" element={<ArticleDetailPage />} />
         <Route index path="/" element={<HomePage />} />
-        <Route index path="/register" element={<RegisterPage />} />
-        <Route index path="/login" element={<LoginPage />} />
-        <Route index path="/profile" element={<ProfilePage />} />
-        <Route index path="/contact" element={<ContactForm />} />
-        <Route index path="/services" element={<Services />} />
-        <Route index path="/about" element={<AboutUs />} />
-        <Route index path="/projects" element={<Projects />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/contact" element={<ContactForm />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Admin />} />
+          <Route path="posts/new" element={<NewPost />} />
+          <Route path="posts/manage" element={<ManagePost />} />
+        </Route>
       </Routes>
       <Toaster />
     </div>

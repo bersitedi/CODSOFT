@@ -153,7 +153,7 @@ const Header = () => {
                         <button
                           onClick={() => navigate("/admin")}
                           type="button"
-                          className="hover:bg-dark-hard  px-4 py-2 text-white lg:text-dark-soft"
+                          className="hover:bg-blue-500 hover:text-white  px-4 py-2 text-white lg:text-dark-soft"
                         >
                           Admin Dashboard
                         </button>
