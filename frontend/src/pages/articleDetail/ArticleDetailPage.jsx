@@ -7,17 +7,9 @@ import { images, stables } from "../../constant";
 import SocialShareButtons from "../../components/SocialShareButtons";
 import { useQuery } from "@tanstack/react-query";
 import { getAllPosts, getSinglePost } from "../../services/index/posts";
-import { generateHTML } from "@tiptap/html";
-import Bold from "@tiptap/extension-bold";
-// Option 2: Browser-only (lightweight)
-// import { generateHTML } from '@tiptap/core'
-import Document from "@tiptap/extension-document";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import Italic from "@tiptap/extension-italic";
-import parse from "html-react-parser";
 import ArticleDetailSkeleton from "./component/ArticleDetailSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
+import parseJsonToHtml from "../../utils/parseJsonToHtml";
 
 const ArticleDetailPage = ({ post }) => {
   const { slug } = useParams();
@@ -33,11 +25,7 @@ const ArticleDetailPage = ({ post }) => {
         { name: "Project", link: "/projects" },
         { name: "Article title", link: `/project/${data.slug}` },
       ]);
-      setBody(
-        parse(
-          generateHTML(data?.body, [Bold, Italic, Text, Paragraph, Document])
-        )
-      );
+      setBody(parseJsonToHtml(data?.body));
     },
   });
   const { data: postsData } = useQuery({
