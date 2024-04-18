@@ -1,5 +1,4 @@
 import React from "react";
-import hero from "../assets/art.jpg";
 import { images, stables } from "../constant";
 import { Link } from "react-router-dom";
 
@@ -14,7 +13,7 @@ const ArticleCard = ({ post, className }) => {
           src={
             post.photo
               ? stables.UPLOAD_FOLDER_BASE_URL + post.photo
-              : images.Post1Image
+              : images.samplePostImage
           }
           alt=""
         />
@@ -27,9 +26,11 @@ const ArticleCard = ({ post, className }) => {
           {post.caption}
         </p>
       </Link>
-      <a
-        href="#"
-        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-blue-600 rounded-lg hover:text-cta "
+
+      <Link
+        to={`/project/${post.slug}`}
+        className="inline-flex items-center px-3 py-2 text-sm font-medium
+        text-center text-blue-600 rounded-lg ml-3 hover:text-cta "
       >
         Read more
         <svg
@@ -47,7 +48,7 @@ const ArticleCard = ({ post, className }) => {
             d="M1 5h12m0 0L9 1m4 4L9 9"
           />
         </svg>
-      </a>
+      </Link>
     </div>
   );
 };

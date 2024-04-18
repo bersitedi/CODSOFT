@@ -10,6 +10,7 @@ import { getAllPosts, getSinglePost } from "../../services/index/posts";
 import ArticleDetailSkeleton from "./component/ArticleDetailSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
 import parseJsonToHtml from "../../utils/parseJsonToHtml";
+import Editor from "../../components/editor/Editor";
 
 const ArticleDetailPage = ({ post }) => {
   const { slug } = useParams();
@@ -17,7 +18,7 @@ const ArticleDetailPage = ({ post }) => {
   const [body, setBody] = useState(null);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["Project", slug],
+    queryKey: ["project", slug],
     queryFn: () => getSinglePost({ slug }),
     onSuccess: (data) => {
       setBreadCrumbsData([
@@ -43,12 +44,12 @@ const ArticleDetailPage = ({ post }) => {
           <article className="flex-1">
             <BreadCrumbs data={breadCrumbsData} />
             <img
+              className="rounded-xl w-full"
               src={
                 data?.photo
-                  ? stables.UPLOAD_FOLDER_BASE_URL | data?.photo
-                  : images.Post1Image
+                  ? stables.UPLOAD_FOLDER_BASE_URL + data?.photo
+                  : images.samplePostImage
               }
-              className="w-full rounded-xl"
               alt={data?.title}
             />
             <div className="mt-4 flex gap-2">
@@ -65,7 +66,11 @@ const ArticleDetailPage = ({ post }) => {
             <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
               {data?.title}
             </h1>
-            <div className="mt-4 prose prose-sm sm:prose-base">{body}</div>
+            <div className="w-full">
+              {!isLoading && !isError && (
+                <Editor content={data?.body} editable={false} />
+              )}
+            </div>
           </article>
           <div>
             <SimilarPosts

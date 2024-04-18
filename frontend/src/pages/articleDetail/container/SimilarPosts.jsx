@@ -19,9 +19,9 @@ const SimilarPosts = ({ className, header, posts = [], tags }) => {
             <img
               className="aspect-square object-cover rounded-lg w-1/5"
               src={
-                item?.image
-                  ? stables.UPLOAD_FOLDER_BASE_URL + item?.image
-                  : images.Post1Image
+                item?.photo
+                  ? stables.UPLOAD_FOLDER_BASE_URL + item?.photo
+                  : images.samplePostImage
               }
               alt={item.title}
             />

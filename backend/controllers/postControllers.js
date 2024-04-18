@@ -27,11 +27,13 @@ const createPost = async (req, res, next) => {
 const updatePost = async (req, res, next) => {
   try {
     const post = await Post.findOne({ slug: req.params.slug });
+
     if (!post) {
       const error = new Error("Post aws not found");
       next(error);
       return;
     }
+
     const upload = uploadPicture.single("postPicture");
 
     const handleUpdatePostData = async (data) => {

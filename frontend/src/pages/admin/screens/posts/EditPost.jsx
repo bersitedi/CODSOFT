@@ -8,8 +8,7 @@ import { stables } from "../../../../constant";
 import { HiOutlineCamera } from "react-icons/hi";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
-
-import parseJsonToHtml from "../../../../utils/parseJsonToHtml";
+import Editor from "../../../../components/editor/Editor";
 
 const EditPost = () => {
   const { slug } = useParams();
@@ -29,16 +28,72 @@ const EditPost = () => {
     queryFn: () => getSinglePost({ slug }),
     queryKey: ["project", slug],
   });
+
+  const {
+    mutate: mutateUpdatePostDetail,
+    isLoading: isLoadingUpdatePostDetail,
+  } = useMutation({
+    mutationFn: ({ updatedData, slug, token }) => {
+      return updatePost({
+        updatedData,
+        slug,
+        token,
+      });
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(["project", slug]);
+      toast.success("Post is updated");
+      navigate(`/admin/posts/manage/edit/${data.slug}`, { replace: true });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      console.log(error);
+    },
+  });
+
   useEffect(() => {
     if (!isLoading && !isError) {
       setInitialPhoto(data?.photo);
-      setBody(parseJsonToHtml(data?.body));
     }
-  });
+  }, [data, isError, isLoading]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setPhoto(file);
+  };
+  const handleUpdatePost = async () => {
+    let updatedData = new FormData();
+
+    if (!initialPhoto && photo) {
+      updatedData.append("postPicture", photo);
+    } else if (initialPhoto && !photo) {
+      const urlToObject = async (url) => {
+        let reponse = await fetch(url);
+        let blob = await reponse.blob();
+        const file = new File([blob], initialPhoto, { type: blob.type });
+        return file;
+      };
+      const picture = await urlToObject(
+        stables.UPLOAD_FOLDER_BASE_URL + data?.photo
+      );
+
+      updatedData.append("postPicture", picture);
+    }
+
+    updatedData.append("document", JSON.stringify({ body }));
+
+    mutateUpdatePostDetail({
+      updatedData,
+      slug,
+      token: userState.userInfo.token,
+    });
+  };
+
+  const handleDeleteImage = () => {
+    if (window.confirm("Do you want to delete your Post picture?")) {
+      setInitialPhoto(null);
+      setPhoto(null);
+    }
   };
 
   return (
@@ -46,7 +101,7 @@ const EditPost = () => {
       {isLoading ? (
         <ArticleDetailSkeleton />
       ) : isError ? (
-        <ErrorMessage message="Something went wrong, Couldn't fetch the post detail" />
+        <ErrorMessage message="Couldn't fetch the post detail" />
       ) : (
         <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
           <article className="flex-1">
@@ -75,21 +130,45 @@ const EditPost = () => {
               id="postPicture"
               onChange={handleFileChange}
             />
+            <button
+              type="button"
+              onClick={handleDeleteImage}
+              className="w-fit bg-red-500 text-sm text-white font-semibold rounded-lg px-2 py-1 mt-5"
+            >
+              Delete Image
+            </button>
             <div className="mt-4 flex gap-2">
               {data?.categories.map((category) => (
                 <Link
-                  to={`/project?category=${category.name}`}
+                  to={`/blog?category=${category.name}`}
                   className="text-primary text-sm font-roboto inline-block md:text-base"
                 >
                   {category.name}
                 </Link>
               ))}
             </div>
-
             <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
               {data?.title}
             </h1>
-            <div className="mt-4 prose prose-sm sm:prose-base">{body}</div>
+            <div className="w-full">
+              {!isLoading && !isError && (
+                <Editor
+                  content={data?.body}
+                  editable={true}
+                  onDataChange={(data) => {
+                    setBody(data);
+                  }}
+                />
+              )}
+            </div>
+            <button
+              disabled={isLoadingUpdatePostDetail}
+              type="button"
+              onClick={handleUpdatePost}
+              className="w-full bg-green-500 text-white font-semibold rounded-lg px-4 py-2 disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              Update Post
+            </button>
           </article>
         </section>
       )}
