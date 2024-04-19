@@ -9,7 +9,7 @@ const ArticleCard = ({ post, className }) => {
     >
       <Link to={`/project/${post.slug}`}>
         <img
-          className="rounded-t-lg"
+          className="rounded-t-lg w-full"
           src={
             post.photo
               ? stables.UPLOAD_FOLDER_BASE_URL + post.photo
