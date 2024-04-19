@@ -28,12 +28,6 @@ const RegisterPage = () => {
     },
   });
 
-  useEffect(() => {
-    if (userState.userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userState.userInfo]);
-
   const {
     register,
     handleSubmit,

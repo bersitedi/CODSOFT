@@ -8,7 +8,7 @@ const createPostCategory = async (req, res, next) => {
     const postCategory = await PostCategories.findOne({ title });
 
     if (postCategory) {
-      const error = new Error("Category is already created!");
+      const error = new Error("Category is already exists!");
       return next(error);
     }
 
