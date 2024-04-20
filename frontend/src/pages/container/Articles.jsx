@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const Articles = () => {
   const { data, isLoading, isError } = useQuery({
-    queryFn: () => getAllPosts(),
+    queryFn: () => getAllPosts("", 1, 6),
     queryKey: ["posts"],
     onError: (error) => {
       toast.error(error.message);
@@ -41,7 +41,7 @@ const Articles = () => {
         )}
       </div>
       <Link
-        to=""
+        to="/project"
         className="mx-auto flex items-center gap-x-2 font-bold text-primary border-2 border-primary px-6 py-1 rounded-lg hover:bg-cta hover:text-white"
       >
         <span>More articles</span>

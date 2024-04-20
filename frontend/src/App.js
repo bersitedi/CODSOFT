@@ -16,12 +16,15 @@ import EditPost from "./pages/admin/screens/posts/EditPost";
 import Categories from "./pages/admin/screens/categories/Categories";
 import EditCategories from "./pages/admin/screens/categories/EditCategories";
 import Users from "./pages/admin/screens/users/Users";
+import ProjectsPage from "./pages/projects/ProjectsPage";
 
 function App() {
   return (
     <div className="App font-sans">
       <Routes>
         <Route path="/project/:slug" element={<ArticleDetailPage />} />
+        <Route path="/project" element={<ProjectsPage />} />
+        <Route path="/projects" element={<Projects />} />
         <Route index path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -29,7 +32,6 @@ function App() {
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/projects" element={<Projects />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Admin />} />
           <Route path="posts/manage" element={<ManagePosts />} />
