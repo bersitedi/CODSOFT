@@ -147,8 +147,8 @@ const ManagePosts = () => {
                       </td>
                     </tr>
                   ) : (
-                    postsData?.data.map((post, index) => (
-                      <tr key={index}>
+                    postsData?.data.map((post) => (
+                      <tr key={post._id}>
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                           <div className="flex items-center">
                             <div className="flex-shrink-0">
@@ -195,14 +195,15 @@ const ManagePosts = () => {
                           <div className="flex gap-x-2">
                             {post.tags.length > 0
                               ? post.tags.map((tag, index) => (
-                                  <p>
+                                  <p key={`${tag}-${index}`}>
                                     {tag}
-                                    {post.tags.length - 1 !== index && ","}
+                                    {index !== post.tags.length - 1 && ","}
                                   </p>
                                 ))
                               : "No tags"}
                           </div>
                         </td>
+
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200 space-x-5">
                           <button
                             disabled={isLoadingDeletePost}

@@ -61,7 +61,7 @@ const Header = () => {
   return (
     <header className="flex h-fit w-full items-center justify-between p-4 lg:h-full lg:max-w-[300px] lg:flex-col lg:items-start lg:justify-start lg:p-0">
       <Link to="/">
-        <img src={logo} alt="logo" className="w-16 lg:hidden" />
+        <AiFillHome className="text-4xl lg:hidden" />
       </Link>
       <div className="cursor-pointer lg:hidden">
         {isMenuActive ? (
@@ -72,7 +72,7 @@ const Header = () => {
       </div>
 
       {isMenuActive && (
-        <div className="fixed inset-0 lg:static lg:h-full lg:w-full">
+        <div className="fixed inset-0 z-50 lg:static lg:h-full lg:w-full">
           <div
             className="fixed inset-0 bg-black opacity-50 lg:hidden"
             onClick={toggleMenuHandler}
