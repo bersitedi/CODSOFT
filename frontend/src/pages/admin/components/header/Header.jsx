@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../../assets/logo.jpg";
 import { AiFillDashboard, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdMessage } from "react-icons/md";
 import NavItem from "./NavItem";
 import NavItemCollapse from "./NavItemCollapse";
 import { useWindowSize } from "@uidotdev/usehooks";
@@ -111,6 +111,14 @@ const Header = () => {
                 link="/admin/users/manage"
                 icon={<FaUser className="text-xl" />}
                 name="users"
+                activeNavName={activeNavName}
+                setActiveNavName={setActiveNavName}
+              />
+              <NavItem
+                title="Messages"
+                link="/admin/messages/manage"
+                icon={<MdMessage className="text-xl" />}
+                name="messages"
                 activeNavName={activeNavName}
                 setActiveNavName={setActiveNavName}
               />

@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-import { FiSearch } from "react-icons/fi"; // Import your icon component here
+import { FiSearch } from "react-icons/fi";
+import { submitMessage } from "../services/index/messages";
 
 const Drawer = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const handleShowDrawer = () => {
     setIsDrawerOpen(true);
@@ -12,9 +21,26 @@ const Drawer = () => {
     setIsDrawerOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
+    setSubmitting(true);
+    setSubmitError(null);
+    setSubmitSuccess(false);
+
+    try {
+      await submitMessage(formData);
+      setSubmitSuccess(true);
+      setFormData({ email: "", subject: "", message: "" });
+    } catch (error) {
+      setSubmitError(error.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -73,6 +99,9 @@ const Drawer = () => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="mt-1 p-2 w-full border rounded-md focus:ring-blue-500 focus:border-blue-500"
                   placeholder="name@gmail.com"
                   required
@@ -88,6 +117,9 @@ const Drawer = () => {
                 <input
                   type="text"
                   id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   className="mt-1 p-2 w-full border rounded-md focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Let us know how we can help you"
                   required
@@ -102,19 +134,31 @@ const Drawer = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows="4"
                   className="mt-1 p-2 w-full border rounded-md focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Your message..."
+                  required
                 ></textarea>
               </div>
               <button
                 type="submit"
                 className="w-full bg-blue-700 hover:bg-blue-800 text-white font-medium py-2 rounded-md focus:ring-4 focus:ring-blue-300"
+                disabled={submitting}
               >
-                Send message
+                {submitting ? "Submitting..." : "Send message"}
               </button>
+              {submitError && (
+                <p className="text-red-500 text-sm mt-2">{submitError}</p>
+              )}
+              {submitSuccess && (
+                <p className="text-green-500 text-sm mt-2">
+                  Message submitted successfully
+                </p>
+              )}
             </form>
-            {/* Additional content */}
           </div>
         </div>
       )}

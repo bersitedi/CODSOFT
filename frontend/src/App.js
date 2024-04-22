@@ -17,6 +17,7 @@ import Categories from "./pages/admin/screens/categories/Categories";
 import EditCategories from "./pages/admin/screens/categories/EditCategories";
 import Users from "./pages/admin/screens/users/Users";
 import ProjectsPage from "./pages/projects/ProjectsPage";
+import Messages from "./pages/admin/screens/messages/Messages";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             element={<EditCategories />}
           />
           <Route path="users/manage" element={<Users />} />
+          <Route path="messages/manage" element={<Messages />} />
         </Route>
       </Routes>
       <Toaster />
