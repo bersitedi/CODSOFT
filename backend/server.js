@@ -12,7 +12,7 @@ import {
 import userRoutes from "./routes/userRoutes";
 import postRoutes from "./routes/postRoutes";
 import postCategoriesRoutes from "./routes/postCategoriesRoutes";
-import messageRoutes from "./routes/messageRoutes"; // Import messageRoutes
+import messageRoutes from "./routes/messageRoutes";
 
 dotenv.config();
 

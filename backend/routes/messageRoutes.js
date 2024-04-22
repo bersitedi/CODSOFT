@@ -2,14 +2,14 @@ import express from "express";
 import {
   submitMessage,
   getAllMessages,
+  getMessageById,
 } from "../controllers/messageController";
 
 const router = express.Router();
 
-// Route to submit a new message
 router.post("/submit", submitMessage);
 
-// Route to get all messages
 router.get("/", getAllMessages);
+router.get("/:id", getMessageById);
 
 export default router;

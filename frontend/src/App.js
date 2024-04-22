@@ -18,6 +18,7 @@ import EditCategories from "./pages/admin/screens/categories/EditCategories";
 import Users from "./pages/admin/screens/users/Users";
 import ProjectsPage from "./pages/projects/ProjectsPage";
 import Messages from "./pages/admin/screens/messages/Messages";
+import ViewMessages from "./pages/admin/screens/messages/ViewMessages";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           />
           <Route path="users/manage" element={<Users />} />
           <Route path="messages/manage" element={<Messages />} />
+          <Route path="messages/manage/view/:id" element={<ViewMessages />} />
         </Route>
       </Routes>
       <Toaster />

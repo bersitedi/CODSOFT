@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../../assets/logo.jpg";
-import { AiFillDashboard, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import {
+  AiFillDashboard,
+  AiFillHome,
+  AiOutlineClose,
+  AiOutlineMenu,
+} from "react-icons/ai";
 import { MdDashboard, MdMessage } from "react-icons/md";
 import NavItem from "./NavItem";
 import NavItemCollapse from "./NavItemCollapse";
@@ -74,7 +79,7 @@ const Header = () => {
           />
           <div className="fixed top-0 bottom-0 left-0 z-50 w-3/4 overflow-y-auto bg-white p-4 lg:static lg:h-full lg:w-full lg:p-6">
             <Link to="/">
-              <img src={logo} alt="logo" className="w-16" />
+              <AiFillHome className="text-4xl" />
             </Link>
             <h4 className="mt-10 font-bold text-[#C7C7C7]">Main Menue</h4>
             <div className="mt-6 flex flex-col gap-y-[0.563rem]">

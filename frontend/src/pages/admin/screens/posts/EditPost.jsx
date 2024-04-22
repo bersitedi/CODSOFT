@@ -16,6 +16,7 @@ import {
   categoryToOption,
   filterCategories,
 } from "../../../../utils/multiSelectTagUtils";
+import { FiArrowLeft } from "react-icons/fi";
 
 const promiseOptions = async (inputValue) => {
   const { data: categoriesData } = await getAllCategories();
@@ -117,6 +118,14 @@ const EditPost = () => {
 
   return (
     <div>
+      <div className="flex items-center mb-4">
+        <Link
+          to="/admin/posts/manage"
+          className="text-gray-600 hover:text-gray-900 p-1 rounded-full text-2xl border border-green-400"
+        >
+          <FiArrowLeft className="mr-2 text-green-500 pl-1" />
+        </Link>
+      </div>
       {isLoading ? (
         <ArticleDetailSkeleton />
       ) : isError ? (
