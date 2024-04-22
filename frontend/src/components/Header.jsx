@@ -38,7 +38,10 @@ const NavItem = ({ item }) => {
       className={`relative ${item.type === "dropdown" ? "group" : ""}`}
     >
       {item.type === "link" && (
-        <a href={item.href} className="hover:text-blue-500">
+        <a
+          href={item.href}
+          className="py-2 px-4 hover:border-b-2 hover:text-blue-500 hover:border-blue-500"
+        >
           {item.name}
         </a>
       )}
@@ -49,7 +52,7 @@ const NavItem = ({ item }) => {
         >
           <button
             onClick={toggleDropdown}
-            className="flex items-center justify-between w-full px-4 py-2 text-left"
+            className="flex items-center justify-between w-full px-4 py-2 text-left hover:border-b-2 hover:text-blue-500 hover:border-blue-500"
           >
             {item.name}
             {isDropdownOpen ? (
@@ -60,21 +63,23 @@ const NavItem = ({ item }) => {
           </button>
           {isDropdownOpen && (
             <ul
-              className="absolute left-0  bg-white rounded-lg shadow-lg"
+              className="absolute -left-20 lg:left-0 w-80 z-50 bg-cta lg:bg-white rounded-lg shadow-lg"
               onMouseEnter={handleDropdownMouseEnter}
               onMouseLeave={handleDropdownMouseLeave}
             >
-              {item.items.map((subItem, index) => (
-                <li key={index}>
-                  <Link
-                    to={`/projects?category=${subItem.category}`}
-                    className="block px-4 py-2 text-sm text-gray-700
+              <div className="flex flex-col w-full">
+                {item.items.map((subItem, index) => (
+                  <li key={index}>
+                    <Link
+                      to={`/projects?category=${subItem.category}`}
+                      className="block px-4 py-2 text-sm text-white lg:text-gray-700
                     hover:bg-blue-500 hover:text-white"
-                  >
-                    {subItem.title}
-                  </Link>
-                </li>
-              ))}
+                    >
+                      {subItem.title}
+                    </Link>
+                  </li>
+                ))}
+              </div>
             </ul>
           )}
         </div>
@@ -156,7 +161,7 @@ const Header = () => {
             navIsVisible ? "right-0" : "-right-full"
           } transition-all duration-300 mt-[56px] lg:mt-0 bg-primary lg:bg-white z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center overflow-y-auto lg:overflow-y-visible`}
         >
-          <ul className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold">
+          <ul className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-5 font-semibold">
             {navItems.map((item) => (
               <NavItem key={item.name} item={item} />
             ))}
@@ -164,9 +169,9 @@ const Header = () => {
           {userState.userInfo ? (
             <div className="items-center gap-y-5text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold">
               <div className="relative group">
-                <div className="flex flex-col items-center">
+                <div className="mt-5 lg:mt-0 flex flex-col items-center">
                   <button
-                    className="flex border-l-2 border-l-gray-500 pl-1 text-lg font-semibold hover:border-b-2 hover:text-blue-500 hover:border-blue-500 "
+                    className="flex border-l-2 text-white lg:text-gray-700 border-l-gray-500 pl-1 text-lg font-semibold hover:border-b-2 hover:text-blue-500 hover:border-blue-500 "
                     onClick={() => setProfileDropdown(!profileDropdown)}
                   >
                     <span>Account</span>
