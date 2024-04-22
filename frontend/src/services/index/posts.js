@@ -12,6 +12,17 @@ export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
     throw new Error(error.message);
   }
 };
+export const fetchPostsByCategory = async (categoryTitle) => {
+  try {
+    const response = await axios.get(
+      `/api/posts/category?category=${categoryTitle}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching posts by category:", error);
+    throw error;
+  }
+};
 export const getSinglePost = async ({ slug }) => {
   try {
     const { data } = await axios.get(`/api/posts/${slug}`);

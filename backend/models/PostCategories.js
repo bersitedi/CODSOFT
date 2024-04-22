@@ -3,6 +3,7 @@ import { Schema, model } from "mongoose";
 const PostCategoriesSchema = new Schema(
   {
     title: { type: String, required: true },
+    posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   },
   { timestamps: true }
 );

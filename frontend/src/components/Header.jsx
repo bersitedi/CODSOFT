@@ -108,7 +108,7 @@ const Header = () => {
               ...item,
               items: categories.map((category) => ({
                 title: category.title,
-                href: `/projects/${category._id}`,
+                category: category.title, // Pass category title here
               })),
             };
           }
