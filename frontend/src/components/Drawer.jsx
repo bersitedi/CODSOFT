@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { submitMessage } from "../services/index/messages";
+import { FaArrowRight } from "react-icons/fa";
 
 const Drawer = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -45,21 +46,20 @@ const Drawer = () => {
 
   return (
     <div className="flex items-center h-full">
-      <div className="hidden md:block md:text-center">
-        <div className="flex items-center">
-          <p className="mt-5 mr-4 md:ml-10 text-gray-400">
-            Get a free consultation, visit our office
-          </p>
-          <button
-            className="text-white mt-5 bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded-md flex items-center"
-            type="button"
-            onClick={handleShowDrawer}
-          >
-            Contact us
-            <FiSearch className="w-4 h-4 ml-2" />
-          </button>
-        </div>
+      <div className="flex md:items-center">
+        <p className="hidden md:flex md:mt-5 md:mr-4 md:ml-16 md:text-gray-400">
+          Get a free consultation, visit our office
+        </p>
+        <button
+          className="text-blue-800 md:text-white -mt-3 md:mt-5 md:bg-blue-700 md:hover:bg-blue-800 px-3 py-2 rounded-md flex items-center ml-3 md:ml-1"
+          type="button"
+          onClick={handleShowDrawer}
+        >
+          Contact us
+          <FaArrowRight className="w-4 h-4 ml-2" />
+        </button>
       </div>
+
       {isDrawerOpen && (
         <div className="fixed top-0 left-0 z-50 h-screen w-screen bg-gray-800 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white w-80 md:w-96 p-6 rounded-lg">

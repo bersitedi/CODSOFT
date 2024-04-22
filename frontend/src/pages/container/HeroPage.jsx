@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import BackgroundSlider from "./BackgroundSlider";
-import Search from "../../components/Search";
-import { Link } from "react-router-dom";
-import backgroundImage from "../../assets/art.jpg";
+import backgroundImage from "../../assets/hero.jpg";
 import Drawer from "../../components/Drawer";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +14,7 @@ const HeroPage = () => {
   };
 
   return (
-    <div className=" md:mb-32 lg:mb-40">
+    <div className="mb:20 lg:mb-32">
       <>
         <span className="absolute -z-10 hidden h-[560px] w-full md:block">
           <svg
@@ -66,9 +63,11 @@ const HeroPage = () => {
           <div className="w-100 mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
             <div className="grid items-center gap-12 lg:grid-cols-2">
               <div className="mt-12 lg:mt-0">
-                <h1 className="mb-16 text-4xl font-bold tracking-tight xl:text-5xl">
-                  The best offer <br />
-                  <span className="text-primary">for your business</span>
+                <h1 className="mb-16 text-3xl font-bold tracking-tight xl:text-4xl text-primary">
+                  The best place <br />
+                  <span className=" text-gray-500">
+                    for Crafting Your Vision, Building Your Future
+                  </span>
                 </h1>
                 <form
                   onSubmit={handleSubmit}
@@ -92,18 +91,18 @@ const HeroPage = () => {
                   </button>
                 </form>
               </div>
-              <div className="hidden lg:block lg:mb-0">
+              <div className="hidden lg:block lg:mb-0 lg:mt-20">
                 <img
                   src={backgroundImage}
-                  className="w-full rounded-lg shadow-lg dark:shadow-black/20"
+                  className="w-full rounded-lg opacity-6"
                   alt=""
                 />
               </div>
             </div>
           </div>
         </div>
+        <Drawer />
       </>
-      <Drawer />
     </div>
   );
 };
