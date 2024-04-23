@@ -1,75 +1,141 @@
 import React from "react";
 import art from "../../assets/art.jpg";
 import MainLayout from "../../components/MainLayout";
+import { FaTwitter, FaFacebook, FaInstagram, FaEnvelope } from "react-icons/fa";
+import AboutSection from "./component/AboutSection";
 
 const AboutUs = () => {
   return (
     <MainLayout>
-      <div className="bg-gray-900 text-white py-12 text-center">
-        <h1 className="text-4xl font-bold">About Us Page</h1>
-        <p className="mt-4">Some text about who we are and what we do.</p>
-        <p>
-          Resize the browser window to see that this page is responsive by the
-          way.
-        </p>
+      <div className="min-h-75 flex flex-wrap justify-center">
+        <div className="max-w-1320 flex flex-col items-center my-20">
+          <p className="font-bold text-3xl text-blue-700 mb-5">Meet Our team</p>
+          <p className="text-lg text-gray-600 max-w-md text-center mb-12">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+          <div className="flex flex-wrap justify-center">
+            <div className="w-72 mb-10 mx-4 p-4 shadow-gray-100 shadow-lg">
+              <div className="flex flex-col items-center">
+                <div className="w-full h-28 flex justify-center items-center">
+                  <img
+                    className="w-28 h-28 rounded-full"
+                    src={art}
+                    alt="Instructor"
+                  />
+                </div>
+                <p className="font-bold text-lg text-gray-700 mb-1 mt-3">
+                  Maxwell Doe
+                </p>
+                <p className="font-bold text-lg text-blue-700 mb-5">CEO</p>
+                <div className="flex justify-between w-28">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <FaTwitter />
+                  </a>
+                  <a href="http://www.facebook.com/" target="_blank">
+                    <FaFacebook />
+                  </a>
+                  <a href="http://www.instagram.com/" target="_blank">
+                    <FaInstagram />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <FaEnvelope />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="w-72 mb-10 mx-4 p-4 shadow-gray-100 shadow-lg">
+              <div className="flex flex-col items-center">
+                <div className="w-full h-28 flex justify-center items-center">
+                  <img
+                    className="w-28 h-28 rounded-full"
+                    src={art}
+                    alt="Instructor"
+                  />
+                </div>
+                <p className="font-bold text-lg text-gray-700 mb-1 mt-3">
+                  Maxwell Doe
+                </p>
+                <p className="font-bold text-lg text-blue-700 mb-5">Manager</p>
+                <div className="flex justify-between w-28">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <FaTwitter />
+                  </a>
+                  <a href="http://www.facebook.com/" target="_blank">
+                    <FaFacebook />
+                  </a>
+                  <a href="http://www.instagram.com/" target="_blank">
+                    <FaInstagram />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <FaEnvelope />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="w-72 mb-10 mx-4 p-4 shadow-gray-100 shadow-lg">
+              <div className="flex flex-col items-center">
+                <div className="w-full h-28 flex justify-center items-center">
+                  <img
+                    className="w-28 h-28 rounded-full"
+                    src={art}
+                    alt="Instructor"
+                  />
+                </div>
+                <p className="font-bold text-lg text-gray-700 mb-1 mt-3">
+                  Maxwell Doe
+                </p>
+                <p className="font-bold text-lg text-blue-700 mb-5">
+                  Architect
+                </p>
+                <div className="flex justify-between w-28">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <FaTwitter />
+                  </a>
+                  <a href="http://www.facebook.com/" target="_blank">
+                    <FaFacebook />
+                  </a>
+                  <a href="http://www.instagram.com/" target="_blank">
+                    <FaInstagram />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <FaEnvelope />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="w-72 mb-10 mx-4 p-4 shadow-gray-100 shadow-lg">
+              <div className="flex flex-col items-center">
+                <div className="w-full h-28 flex justify-center items-center">
+                  <img
+                    className="w-28 h-28 rounded-full"
+                    src={art}
+                    alt="Instructor"
+                  />
+                </div>
+                <p className="font-bold text-lg text-gray-700 mb-1 mt-3">
+                  Maxwell Doe
+                </p>
+                <p className="font-bold text-lg text-blue-700 mb-5">Engineer</p>
+                <div className="flex justify-between w-28">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <FaTwitter />
+                  </a>
+                  <a href="http://www.facebook.com/" target="_blank">
+                    <FaFacebook />
+                  </a>
+                  <a href="http://www.instagram.com/" target="_blank">
+                    <FaInstagram />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <FaEnvelope />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <h2 className="text-center text-3xl mt-12 mb-8 font-bold">
-        Meet our Team
-      </h2>
-
-      <div className="flex flex-wrap justify-center">
-        <div className="w-full sm:w-1/3 p-4">
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <img src={art} alt="Jane" className="w-full" />
-            <div className="p-6">
-              <h2 className="text-xl font-bold">Jane Doe</h2>
-              <p className="text-gray-600">CEO & Founder</p>
-              <p className="text-gray-700 mt-2">
-                Some text that describes me lorem ipsum ipsum lorem.
-              </p>
-              <p className="text-gray-700">jane@example.com</p>
-              <button className="bg-black text-white px-4 py-2 mt-4 w-full">
-                Contact
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full sm:w-1/3 p-4">
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <img src={art} alt="Mike" className="w-full" />
-            <div className="p-6">
-              <h2 className="text-xl font-bold">Mike Ross</h2>
-              <p className="text-gray-600">Art Director</p>
-              <p className="text-gray-700 mt-2">
-                Some text that describes me lorem ipsum ipsum lorem.
-              </p>
-              <p className="text-gray-700">mike@example.com</p>
-              <button className="bg-black text-white px-4 py-2 mt-4 w-full">
-                Contact
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full sm:w-1/3 p-4">
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <img src={art} alt="John" className="w-full" />
-            <div className="p-6">
-              <h2 className="text-xl font-bold">John Doe</h2>
-              <p className="text-gray-600">Designer</p>
-              <p className="text-gray-700 mt-2">
-                Some text that describes me lorem ipsum ipsum lorem.
-              </p>
-              <p className="text-gray-700">john@example.com</p>
-              <button className="bg-black text-white px-4 py-2 mt-4 w-full">
-                Contact
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <AboutSection />
     </MainLayout>
   );
 };
