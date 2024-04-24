@@ -5,137 +5,91 @@ import { FaTwitter, FaFacebook, FaInstagram, FaEnvelope } from "react-icons/fa";
 import AboutSection from "./component/AboutSection";
 
 const AboutUs = () => {
+  const people = [
+    {
+      id: 1,
+      name: "Leslie Alexander",
+      role: "Co-Founder / CEO",
+      imageUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    },
+    {
+      id: 2,
+      name: "Leslie Alexander",
+      role: "Co-Founder / CEO",
+      imageUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    },
+    {
+      id: 3,
+      name: "Leslie Alexander",
+      role: "Co-Founder / CEO",
+      imageUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    },
+    {
+      id: 4,
+      name: "Leslie Alexander",
+      role: "Co-Founder / CEO",
+      imageUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    },
+    {
+      id: 5,
+      name: "Leslie Alexander",
+      role: "Co-Founder / CEO",
+      imageUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    },
+    {
+      id: 6,
+      name: "Leslie Alexander",
+      role: "Co-Founder / CEO",
+      imageUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    },
+  ];
+
   return (
     <MainLayout>
-      <div className="min-h-75 flex flex-wrap justify-center">
-        <div className="max-w-1320 flex flex-col items-center my-20">
-          <p className="font-bold text-3xl text-blue-700 mb-5">Meet Our team</p>
-          <p className="text-lg text-gray-600 max-w-md text-center mb-12">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </p>
-          <div className="flex flex-wrap justify-center">
-            <div className="w-72 mb-10 mx-4 p-4 shadow-gray-100 shadow-lg">
-              <div className="flex flex-col items-center">
-                <div className="w-full h-28 flex justify-center items-center">
-                  <img
-                    className="w-28 h-28 rounded-full"
-                    src={art}
-                    alt="Instructor"
-                  />
-                </div>
-                <p className="font-bold text-lg text-gray-700 mb-1 mt-3">
-                  Maxwell Doe
-                </p>
-                <p className="font-bold text-lg text-blue-700 mb-5">CEO</p>
-                <div className="flex justify-between w-28">
-                  <a href="http://www.twitter.com/" target="_blank">
-                    <FaTwitter />
-                  </a>
-                  <a href="http://www.facebook.com/" target="_blank">
-                    <FaFacebook />
-                  </a>
-                  <a href="http://www.instagram.com/" target="_blank">
-                    <FaInstagram />
-                  </a>
-                  <a href="http://www.gmail.com/" target="_blank">
-                    <FaEnvelope />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="w-72 mb-10 mx-4 p-4 shadow-gray-100 shadow-lg">
-              <div className="flex flex-col items-center">
-                <div className="w-full h-28 flex justify-center items-center">
-                  <img
-                    className="w-28 h-28 rounded-full"
-                    src={art}
-                    alt="Instructor"
-                  />
-                </div>
-                <p className="font-bold text-lg text-gray-700 mb-1 mt-3">
-                  Maxwell Doe
-                </p>
-                <p className="font-bold text-lg text-blue-700 mb-5">Manager</p>
-                <div className="flex justify-between w-28">
-                  <a href="http://www.twitter.com/" target="_blank">
-                    <FaTwitter />
-                  </a>
-                  <a href="http://www.facebook.com/" target="_blank">
-                    <FaFacebook />
-                  </a>
-                  <a href="http://www.instagram.com/" target="_blank">
-                    <FaInstagram />
-                  </a>
-                  <a href="http://www.gmail.com/" target="_blank">
-                    <FaEnvelope />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="w-72 mb-10 mx-4 p-4 shadow-gray-100 shadow-lg">
-              <div className="flex flex-col items-center">
-                <div className="w-full h-28 flex justify-center items-center">
-                  <img
-                    className="w-28 h-28 rounded-full"
-                    src={art}
-                    alt="Instructor"
-                  />
-                </div>
-                <p className="font-bold text-lg text-gray-700 mb-1 mt-3">
-                  Maxwell Doe
-                </p>
-                <p className="font-bold text-lg text-blue-700 mb-5">
-                  Architect
-                </p>
-                <div className="flex justify-between w-28">
-                  <a href="http://www.twitter.com/" target="_blank">
-                    <FaTwitter />
-                  </a>
-                  <a href="http://www.facebook.com/" target="_blank">
-                    <FaFacebook />
-                  </a>
-                  <a href="http://www.instagram.com/" target="_blank">
-                    <FaInstagram />
-                  </a>
-                  <a href="http://www.gmail.com/" target="_blank">
-                    <FaEnvelope />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="w-72 mb-10 mx-4 p-4 shadow-gray-100 shadow-lg">
-              <div className="flex flex-col items-center">
-                <div className="w-full h-28 flex justify-center items-center">
-                  <img
-                    className="w-28 h-28 rounded-full"
-                    src={art}
-                    alt="Instructor"
-                  />
-                </div>
-                <p className="font-bold text-lg text-gray-700 mb-1 mt-3">
-                  Maxwell Doe
-                </p>
-                <p className="font-bold text-lg text-blue-700 mb-5">Engineer</p>
-                <div className="flex justify-between w-28">
-                  <a href="http://www.twitter.com/" target="_blank">
-                    <FaTwitter />
-                  </a>
-                  <a href="http://www.facebook.com/" target="_blank">
-                    <FaFacebook />
-                  </a>
-                  <a href="http://www.instagram.com/" target="_blank">
-                    <FaInstagram />
-                  </a>
-                  <a href="http://www.gmail.com/" target="_blank">
-                    <FaEnvelope />
-                  </a>
-                </div>
-              </div>
-            </div>
+      <AboutSection />
+      <div className="bg-white py-24 sm:py-32">
+        <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Meet our leadership
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Libero fames augue nisl porttitor nisi, quis. Id ac elit odio
+              vitae elementum enim vitae ullamcorper suspendisse.
+            </p>
           </div>
+          <ul
+            role="list"
+            className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+          >
+            {people.map((person) => (
+              <li key={person.id}>
+                <div className="flex items-center gap-x-6">
+                  <img
+                    className="h-16 w-16 rounded-full"
+                    src={person.imageUrl}
+                    alt=""
+                  />
+                  <div>
+                    <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                      {person.name}
+                    </h3>
+                    <p className="text-sm font-semibold leading-6 text-indigo-600">
+                      {person.role}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-      <AboutSection />
     </MainLayout>
   );
 };

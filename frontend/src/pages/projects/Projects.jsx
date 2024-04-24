@@ -50,7 +50,7 @@ const Projects = () => {
     <MainLayout>
       <section className="flex flex-col container mx-auto px-5 py-10">
         <div>
-          <h1 className="text-3xl font-semibold bg-gray-100 text-gray-600 rounded-md mb-5 p-3">
+          <h1 className="text-3xl font-bold bg-gray-50 text-gray-600 rounded-md mb-5 p-3">
             {categoryTitle}
           </h1>
         </div>

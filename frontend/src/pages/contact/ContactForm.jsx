@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import art from "../../assets/art.jpg";
+import art from "../../assets/contact.jpg";
 import MainLayout from "../../components/MainLayout";
 import { submitMessage } from "../../services/index/messages";
 
@@ -28,27 +28,27 @@ const ContactForm = () => {
         subject: "",
         message: "",
       });
-      toast.success("Message submitted successfully!"); // Display success message
+      toast.success("Message submitted successfully!");
     } catch (error) {
       console.error("Error submitting message:", error);
-      toast.error("Failed to submit message. Please try again."); // Display error message
+      toast.error("Failed to submit message. Please try again.");
     }
   };
 
   return (
     <MainLayout>
+      <div className="text-center mt-10">
+        <h2 className="text-2xl font-semibold mb-2">Contact Us</h2>
+        <p className="text-gray-600">
+          Swing by for a Consultation, or leave us a message:
+        </p>
+      </div>
       <div className="container p-10">
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold mb-2">Contact Us</h2>
-          <p className="text-gray-600">
-            Swing by for a Consultation, or leave us a message:
-          </p>
-        </div>
-        <div className="flex flex-wrap mt-6">
-          <div className="w-full md:w-1/2">
+        <div className="flex flex-wrap mt-10">
+          <div className="w-full md:w-1/2 md:-mt-8 lg:-mt-20">
             <img src={art} alt="" />
           </div>
-          <div className="w-full md:w-1/2 mt-6 md:mt-0 md:pl-4">
+          <div className="w-full md:w-1/2 md:-mt-8 lg:mt-8 md:pl-8">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="flex flex-col">
                 <label

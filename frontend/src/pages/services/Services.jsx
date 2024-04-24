@@ -11,66 +11,33 @@ import {
   FaShower,
   FaCog,
   FaMap,
-  FaLeaf,
-  FaCity,
-  FaTree,
-  FaGlobe,
-  FaBuilding,
-  FaMountain,
   FaWater,
-  FaClipboardList,
-  FaRulerCombined,
-  FaChalkboardTeacher,
 } from "react-icons/fa";
+import back from "../../assets/back.jpg";
+import Drawer from "../../components/Drawer";
 
 const Services = () => {
   return (
     <MainLayout>
-      <div className="container mx-auto px-4 py-8 mb-40">
-        <h2 className="text-3xl font-bold text-center mb-8">Our Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
-          <ServiceItem title="Design" icon={<FaDraftingCompass />} />
-          <ServiceItem title="Road Design" icon={<FaRoad />} />
-          <ServiceItem
-            title="Preliminary Investigation and Feasibility studies"
-            icon={<FaTools />}
-          />
-          <ServiceItem title="Structural Engineering" icon={<FaSitemap />} />
-          <ServiceItem title="Electrical Engineering" icon={<FaBolt />} />
-          <ServiceItem
-            title="ICT Infrastructure Design"
-            icon={<FaNetworkWired />}
-          />
-          <ServiceItem
-            title="IT and Communication System"
-            icon={<FaDesktop />}
-          />
-          <ServiceItem title="Sanitary Engineering" icon={<FaShower />} />
-          <ServiceItem title="Mechanical Engineering" icon={<FaCog />} />
-          <ServiceItem title="Master planning" icon={<FaMap />} />
-          <ServiceItem title="Landscape Architecture" icon={<FaLeaf />} />
-          <ServiceItem
-            title="Settlement and Urban Development"
-            icon={<FaCity />}
-          />
-          <ServiceItem title="Environmental management" icon={<FaTree />} />
-          <ServiceItem title="Infrastructure Design" icon={<FaGlobe />} />
-          <ServiceItem title="Earthquake engineering" icon={<FaBuilding />} />
-          <ServiceItem title="Geotechnical Engineering" icon={<FaMountain />} />
-          <ServiceItem
-            title="Hydrology, drainage and water supply"
-            icon={<FaWater />}
-          />
-          <ServiceItem
-            title="Supervision, Contract Administration & Project Management"
-            icon={<FaClipboardList />}
-          />
-          <ServiceItem title="Surveying" icon={<FaRulerCombined />} />
-          <ServiceItem title="Quantity Surveying" icon={<FaRulerCombined />} />
-          <ServiceItem
-            title="Training and Technical Assistance"
-            icon={<FaChalkboardTeacher />}
-          />
+      <div
+        className="relative bg-cover bg-center"
+        style={{ backgroundImage: `url(${back})`, height: "100vh" }}
+      >
+        <div className="absolute flex flex-col justify-center items-center md:justify-start md:items-start mt-16 text-white">
+          <h2 className="text-3xl font-bold text-center md:text-start md:ml-10 border-b">
+            Our Services
+          </h2>
+          <div className="flex flex-row px-4 py-8 mb-40 w-full justify-center">
+            <ul className="w-full flex flex-col pl-5">
+              {services.map((service, index) => (
+                <ServiceItem
+                  key={index}
+                  title={service.title}
+                  icon={service.icon}
+                />
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </MainLayout>
@@ -79,11 +46,28 @@ const Services = () => {
 
 const ServiceItem = ({ title, icon }) => {
   return (
-    <div className="border border-gray-200 p-4 rounded-md flex items-center bg-white shadow-md transition duration-300 hover:shadow-lg hover:bg-gray-100">
-      <div className="mr-4">{icon}</div>{" "}
-      <h3 className="text-lg font-semibold">{title}</h3>
-    </div>
+    <li className="flex items-center p-1">
+      <div className="mr-4 text-xl">{icon}</div>{" "}
+      <h3 className="text-md font-semibold">{title}</h3>
+    </li>
   );
 };
+
+const services = [
+  { title: "Design", icon: <FaDraftingCompass /> },
+  { title: "Road Design", icon: <FaRoad /> },
+  {
+    title: "Preliminary Investigation and Feasibility",
+    icon: <FaTools />,
+  },
+  { title: "Structural Engineering", icon: <FaSitemap /> },
+  { title: "Electrical Engineering", icon: <FaBolt /> },
+  { title: "ICT Infrastructure Design", icon: <FaNetworkWired /> },
+  { title: "IT and Communication System", icon: <FaDesktop /> },
+  { title: "Sanitary Engineering", icon: <FaShower /> },
+  { title: "Mechanical Engineering", icon: <FaCog /> },
+  { title: "Master planning", icon: <FaMap /> },
+  { title: "Hydrology, drainage", icon: <FaWater /> },
+];
 
 export default Services;

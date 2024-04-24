@@ -6,21 +6,6 @@ import { BsTelegram } from "react-icons/bs";
 const Footer = () => {
   return (
     <>
-      <svg
-        className="w-full h-auto max-h-40 translate-y-[1px]"
-        preserveAspectRatio="none"
-        viewBox="0 0 2160 263"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          id="Wave"
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M2160 262.5H0V0C360 80 720 120 1080 120C1440 120 1800 80 2160 0V262.5Z"
-          fill="#0D2436"
-        />
-      </svg>
       <section className="bg-cta py-12">
         <footer className="container mx-auto grid grid-cols-10 px-5 gap-y-10 gap-x-8 md:grid-cols-12 lg:grid-cols-10 lg:gap-x-12">
           <div className="col-span-5 md:col-span-4 lg:col-span-2">
