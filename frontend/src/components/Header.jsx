@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/actions/user";
 import logo from "../assets/logo.jpg";
@@ -10,6 +10,7 @@ import logo from "../assets/logo.jpg";
 const NavItem = ({ item }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -40,7 +41,11 @@ const NavItem = ({ item }) => {
       {item.type === "link" && (
         <a
           href={item.href}
-          className="py-2 px-4 hover:border-b-2 hover:text-blue-500 hover:border-blue-500"
+          className={`py-2 px-4 hover:border-b-2 hover:text-blue-500 hover:border-blue-500  ${
+            location.pathname === item.href
+              ? "text-blue-700 md:bg-transparent dark:text-blue-500 dark:bg-transparent"
+              : ""
+          }`}
         >
           {item.name}
         </a>
@@ -215,7 +220,7 @@ const Header = () => {
           ) : (
             <button
               onClick={() => navigate("/login")}
-              className="border-l-2 border-l-gray-500 pl-1 text-lg font-semibold hover:border-b-2 hover:text-blue-500 hover:border-blue-500 "
+              className="lg:border-l-2 mt-4 lg:mt-0 text-white lg:text-cta lg:border-l-gray-500 lg:pl-1 text-lg font-semibold hover:border-b-2 hover:text-blue-500 hover:border-blue-500 "
             >
               Login
             </button>

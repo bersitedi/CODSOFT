@@ -2,113 +2,102 @@ import React from "react";
 import { AiOutlineTwitter, AiFillInstagram } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
 import { BsTelegram } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import logo from "../assets/logo.jpg";
 
 const Footer = () => {
   return (
-    <>
-      <section className="bg-cta py-12">
-        <footer className="container mx-auto grid grid-cols-10 px-5 gap-y-10 gap-x-8 md:grid-cols-12 lg:grid-cols-10 lg:gap-x-12">
-          <div className="col-span-5 md:col-span-4 lg:col-span-2">
-            <h3 className="text-white font-semibold md:text-lg">Services</h3>
-            <ul className="text-gray-300 text-sm mt-4 space-y-3 md:text-base">
-              <li>
-                <a href="/">Architectural Design</a>
-              </li>
-              <li>
-                <a href="/">Interior Design</a>
-              </li>
-              <li>
-                <a href="/">Project Management</a>
-              </li>
-              <li>
-                <a href="/">Renovation & Remodeling</a>
-              </li>
-            </ul>
+    <footer className="bg-cta dark:bg-gray-900">
+      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <div className="md:flex md:justify-between md:mb-20 md:mt-10">
+          <div className="mb-6 md:mb-0">
+            <Link to="/" className="flex items-center">
+              <img src={logo} className="h-8 me-3" alt="FlowBite Logo" />
+              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
+                Spring
+              </span>
+            </Link>
+            <div className="text-white flex flex-row items-center justify-between mt-8 text-2xl gap-x-8 cursor-pointer">
+              <Link to="#">
+                <AiOutlineTwitter />
+              </Link>
+              <Link to="#">
+                <FaFacebook />
+              </Link>
+              <Link to="#">
+                <BsTelegram />
+              </Link>
+              <Link to="#">
+                <AiFillInstagram />
+              </Link>
+            </div>
           </div>
-          <div className="col-span-5 md:col-span-4 lg:col-span-2">
-            <h3 className="text-white font-semibold md:text-lg">About Us</h3>
-            <ul className="text-gray-300 text-sm mt-4 space-y-3 md:text-base">
-              <li>
-                <a href="/">Our Story</a>
-              </li>
-              <li>
-                <a href="/">Meet the Team</a>
-              </li>
-              <li>
-                <a href="/">Contact Us</a>
-              </li>
-            </ul>
+          <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+            <div>
+              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+                Resources
+              </h2>
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-4">
+                  <Link to="#" className="hover:underline">
+                    Flowbite
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:underline">
+                    Tailwind CSS
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+                Follow us
+              </h2>
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-4">
+                  <Link to="#" className="hover:underline ">
+                    Github
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:underline">
+                    Discord
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+                Legal
+              </h2>
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-4">
+                  <Link to="#" className="hover:underline">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:underline">
+                    Terms &amp; Conditions
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="col-span-5 md:col-span-4 md:col-start-5 lg:col-start-auto lg:col-span-2">
-            <h3 className="text-white font-semibold md:text-lg">Connect</h3>
-            <ul className="text-gray-300 text-sm mt-4 space-y-3 md:text-base">
-              <li>
-                <a href="/">Twitter</a>
-              </li>
-              <li>
-                <a href="/">Instagram</a>
-              </li>
-              <li>
-                <a href="/">Facebook</a>
-              </li>
-              <li>
-                <a href="/">YouTube</a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-span-5 md:col-span-4 md:col-start-5 lg:col-span-2">
-            <h3 className="text-white font-semibold md:text-lg">More</h3>
-            <ul className="text-gray-300 text-sm mt-4 space-y-3 md:text-base">
-              <li>
-                <a href="/">Privacy Policy</a>
-              </li>
-              <li>
-                <a href="/">Terms of Service</a>
-              </li>
-              <li>
-                <a href="/">FAQ</a>
-              </li>
-              <li>
-                <a href="/">Sitemap</a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-span-10 md:order-first md:col-span-4 lg:col-span-2 flex flex-col items-center justify-center">
-            <p className="text-gray-300 text-sm text-center md:text-left md:text-base lg:text-sm">
-              Transforming your dreams into reality with innovative designs and
-              expert construction solutions.
-            </p>
-            <ul className="flex justify-center items-center mt-4 space-x-6 text-gray-300">
-              <li>
-                <a href="/">
-                  <AiOutlineTwitter className="w-8 h-auto" />
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <AiFillInstagram className="w-8 h-auto" />
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <FaFacebook className="w-8 h-auto" />
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <BsTelegram className="w-8 h-auto" />
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-span-10 md:col-span-12 lg:col-span-10 flex flex-col items-center justify-center">
-            <p className="font-bold text-sm text-gray-300">
-              © 2024 Spring Consultancy and architect. All rights reserved.
-            </p>
-          </div>
-        </footer>
-      </section>
-    </>
+        </div>
+        <hr className="my-6 border-gray-100 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <div className="sm:flex sm:items-center sm:justify-between">
+          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+            © 2023{" "}
+            <Link to="#" className="hover:underline">
+              Spring™
+            </Link>
+            . All Rights Reserved.
+          </span>
+        </div>
+      </div>
+    </footer>
   );
 };
 

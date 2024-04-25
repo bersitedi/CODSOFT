@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 
 const ArticleCard = ({ post, className }) => {
   return (
-    <div
-      className={`${className} bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
-    >
+    <div className={`${className} bg-white`}>
       <Link to={`/project/${post.slug}`}>
         <img
           className="rounded-t-lg w-full"

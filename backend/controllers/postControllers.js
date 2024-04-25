@@ -201,7 +201,6 @@ const getAllPostsByCategory = async (req, res, next) => {
       ])
       .sort({ updatedAt: "desc" });
 
-    // Filter out posts that have empty categories
     const filteredResult = result.filter((post) => post.categories.length > 0);
 
     return res.json(filteredResult);
