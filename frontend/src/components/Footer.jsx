@@ -17,7 +17,7 @@ const Footer = () => {
                 Spring
               </span>
             </Link>
-            <div className="text-white flex flex-row items-center justify-between mt-8 text-2xl gap-x-8 cursor-pointer">
+            <div className="text-white flex flex-row items-center justify-center mt-8 text-2xl gap-x-8 cursor-pointer">
               <Link to="#">
                 <AiOutlineTwitter />
               </Link>
