@@ -1,8 +1,13 @@
 import axios from "axios";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export const submitMessage = async (messageData) => {
   try {
-    const { data } = await axios.post("/api/messages/submit", messageData);
+    const { data } = await axios.post(
+      `${backendUrl}/api/messages/submit`,
+      messageData
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -13,16 +18,18 @@ export const submitMessage = async (messageData) => {
 export const getAllMessages = async (
   searchKeyword = "",
   page = 1,
-  pageSize = 10 // change from limit to pageSize
+  pageSize = 10
 ) => {
   try {
     const params = {
       searchKeyword,
       page,
-      limit: pageSize, // change from pageSize to limit
+      limit: pageSize,
     };
 
-    const { data, headers } = await axios.get("/api/messages", { params });
+    const { data, headers } = await axios.get(`${backendUrl}/api/messages`, {
+      params,
+    });
     return { data, headers };
   } catch (error) {
     if (error.response && error.response.data.message) {
@@ -32,12 +39,9 @@ export const getAllMessages = async (
   }
 };
 
-
-const MESSAGE_API_URL = "/api/messages";
-
 export const getMessageById = async (messageId) => {
   try {
-    const response = await axios.get(`${MESSAGE_API_URL}/${messageId}`);
+    const response = await axios.get(`${backendUrl}/api/messages/${messageId}`);
 
     return response.data;
   } catch (error) {

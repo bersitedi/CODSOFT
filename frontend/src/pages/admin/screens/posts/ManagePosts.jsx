@@ -3,8 +3,6 @@ import { deletePost, getAllPosts } from "../../../../services/index/posts";
 import Pagination from "../../../../components/Pagination";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useDataTable } from "../../../../hooks/useDataTable";
-import DataTable from "../../components/DataTable";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -234,9 +232,11 @@ const ManagePosts = () => {
                 <Pagination
                   onPageChange={(page) => setCurrentPage(page)}
                   currentPage={currentPage}
-                  totalPageCount={JSON.parse(
+                  totalPageCount={
                     postsData?.headers?.["x-totalpagecount"]
-                  )}
+                      ? parseInt(postsData.headers["x-totalpagecount"])
+                      : 0
+                  }
                 />
               )}
             </div>

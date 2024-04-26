@@ -1,7 +1,5 @@
 import React from "react";
-import art from "../../assets/art.jpg";
 import MainLayout from "../../components/MainLayout";
-import { FaTwitter, FaFacebook, FaInstagram, FaEnvelope } from "react-icons/fa";
 import AboutSection from "./component/AboutSection";
 
 const AboutUs = () => {

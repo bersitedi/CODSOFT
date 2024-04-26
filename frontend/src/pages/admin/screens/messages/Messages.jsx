@@ -12,7 +12,6 @@ const Messages = () => {
     data,
     searchKeywordHandler,
     submitSearchKeywordHandler,
-    deleteDataHandler,
     setCurrentPage,
   } = useDataTable({
     dataQueryFn: () => getAllMessages(searchKeyword, currentPage),

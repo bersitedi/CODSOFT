@@ -6,7 +6,6 @@ import { fetchPostsByCategory } from "../../services/index/posts";
 import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
 import Pagination from "../../components/Pagination";
-import Search from "../../components/Search";
 
 const Projects = () => {
   const [posts, setPosts] = useState([]);

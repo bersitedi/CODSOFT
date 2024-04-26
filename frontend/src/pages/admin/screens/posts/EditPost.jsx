@@ -83,11 +83,12 @@ const EditPost = () => {
       updatedData.append("postPicture", photo);
     } else if (initialPhoto && !photo) {
       const urlToObject = async (url) => {
-        let reponse = await fetch(url);
-        let blob = await reponse.blob();
+        let response = await fetch(url);
+        let blob = await response.blob();
         const file = new File([blob], initialPhoto, { type: blob.type });
         return file;
       };
+
       const picture = await urlToObject(
         stables.UPLOAD_FOLDER_BASE_URL + data?.photo
       );

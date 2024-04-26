@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { getAllPosts } from "../../services/index/posts";
@@ -80,7 +80,11 @@ const ProjectsPage = () => {
           <Pagination
             onPageChange={(page) => handlePageChange(page)}
             currentPage={currentPage}
-            totalPageCount={JSON.parse(data?.headers?.["x-totalpagecount"])}
+            totalPageCount={
+              data && data.headers && data.headers["x-totalpagecount"]
+                ? parseInt(data.headers["x-totalpagecount"])
+                : 0
+            }
           />
         )}
       </section>

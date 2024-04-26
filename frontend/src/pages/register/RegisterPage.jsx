@@ -1,18 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import MainLayout from "../../components/MainLayout";
 import { signup } from "../../services/index/users";
 import { userActions } from "../../store/reducers/userReducers";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userState = useSelector((state) => state.user);
 
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ name, email, password }) => {

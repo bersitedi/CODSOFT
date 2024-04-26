@@ -31,9 +31,9 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/contact" element={<ContactForm />} />
-        <Route path="/services" element={<Services />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<ContactForm />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Admin />} />
           <Route path="posts/manage" element={<ManagePosts />} />

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/actions/user";
 import logo from "../assets/logo.jpg";
+import { getAllCategories } from "../services/index/postCategories";
 
 const NavItem = ({ item }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
 
   const toggleDropdown = () => {
@@ -110,7 +109,7 @@ const Header = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/api/post-categories");
+        const response = await getAllCategories();
         const categories = response.data;
         const updatedNavItems = navItems.map((item) => {
           if (item.name === "Projects") {
@@ -118,7 +117,7 @@ const Header = () => {
               ...item,
               items: categories.map((category) => ({
                 title: category.title,
-                category: category.title, // Pass category title here
+                category: category.title,
               })),
             };
           }
@@ -147,7 +146,7 @@ const Header = () => {
         <Link to="/" className="flex items-center space-x-3">
           <img className="w-10" src={logo} alt="logo" />
           <span className="hidden md:inline-block md:font-bold md:text-2xl">
-            Spring
+            Springyoo
           </span>
         </Link>
 
