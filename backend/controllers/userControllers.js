@@ -1,6 +1,6 @@
-import { uploadPicture } from "../middleware/uploadPictureMiddleware";
-import User from "../models/User";
-import { fileRemover } from "../utils/fileRemover";
+const { uploadPicture } = require("../middleware/uploadPictureMiddleware");
+const User = require("../models/User");
+const { fileRemover } = require("../utils/fileRemover");
 
 const registerUser = async (req, res, next) => {
   try {
@@ -127,6 +127,7 @@ const updateProfile = async (req, res, next) => {
     next(error);
   }
 };
+
 const getAllUsers = async (req, res, next) => {
   try {
     const filter = req.query.searchKeyword;
@@ -180,7 +181,7 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-export {
+module.exports = {
   registerUser,
   loginUser,
   userProfile,

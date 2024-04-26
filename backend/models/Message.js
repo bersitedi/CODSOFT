@@ -1,5 +1,4 @@
-// Import Mongoose
-import { Schema, model } from "mongoose";
+const { Schema, model } = require("mongoose");
 
 const messageSchema = new Schema({
   email: {
@@ -25,4 +24,4 @@ const messageSchema = new Schema({
 
 const Message = model("Message", messageSchema);
 
-export default Message;
+module.exports = Message;

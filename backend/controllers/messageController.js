@@ -1,4 +1,4 @@
-import Message from "../models/Message";
+const Message = require("../models/Message");
 
 const submitMessage = async (req, res) => {
   try {
@@ -73,4 +73,4 @@ const getMessageById = async (req, res) => {
   }
 };
 
-export { submitMessage, getAllMessages, getMessageById };
+module.exports = { submitMessage, getAllMessages, getMessageById };

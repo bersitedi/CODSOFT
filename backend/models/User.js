@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
-import { hash, compare } from "bcryptjs";
-import { sign } from "jsonwebtoken";
+const { Schema, model } = require("mongoose");
+const { hash, compare } = require("bcryptjs");
+const { sign } = require("jsonwebtoken");
 
 const UserSchema = new Schema(
   {
@@ -34,5 +34,4 @@ UserSchema.methods.comparePassword = async function (enteredPassword) {
 };
 
 const User = model("User", UserSchema);
-
-export default User;
+module.exports = User;

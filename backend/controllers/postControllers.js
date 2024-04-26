@@ -1,8 +1,7 @@
-import { uploadPicture } from "../middleware/uploadPictureMiddleware";
-import Post from "../models/Post";
-
-import { fileRemover } from "../utils/fileRemover";
-import { v4 as uuidv4 } from "uuid";
+const { uploadPicture } = require("../middleware/uploadPictureMiddleware");
+const Post = require("../models/Post");
+const { fileRemover } = require("../utils/fileRemover");
+const { v4: uuidv4 } = require("uuid");
 
 const createPost = async (req, res, next) => {
   try {
@@ -24,6 +23,7 @@ const createPost = async (req, res, next) => {
     next(error);
   }
 };
+
 const updatePost = async (req, res, next) => {
   try {
     const post = await Post.findOne({ slug: req.params.slug });
@@ -39,7 +39,6 @@ const updatePost = async (req, res, next) => {
     const handleUpdatePostData = async (data) => {
       try {
         if (!data) {
-          // If data is undefined, skip updating other fields and only update the post picture
           const error = new Error("Data is undefined");
           throw error;
         }
@@ -53,7 +52,6 @@ const updatePost = async (req, res, next) => {
         post.tags = tags || post.tags;
         post.categories = categories || post.categories;
 
-        // Save the updated post
         const updatedPost = await post.save();
         return res.json(updatedPost);
       } catch (error) {
@@ -61,7 +59,6 @@ const updatePost = async (req, res, next) => {
       }
     };
 
-    // Upload the post picture
     upload(req, res, async function (err) {
       if (err) {
         const error = new Error(
@@ -69,7 +66,6 @@ const updatePost = async (req, res, next) => {
         );
         next(error);
       } else {
-        // If the request contains a file, update the post picture
         if (req.file) {
           let filename;
           filename = post.photo;
@@ -79,7 +75,6 @@ const updatePost = async (req, res, next) => {
           post.photo = req.file.filename;
         }
 
-        // Update other post data
         handleUpdatePostData(req.body.document);
       }
     });
@@ -172,6 +167,7 @@ const getAllPosts = async (req, res, next) => {
     next(error);
   }
 };
+
 const getAllPostsByCategory = async (req, res, next) => {
   try {
     const filter = req.query.searchKeyword;
@@ -205,7 +201,7 @@ const getAllPostsByCategory = async (req, res, next) => {
       .populate([
         {
           path: "categories",
-          match: { title: categoryTitle }, // Filter categories by title
+          match: { title: categoryTitle },
           select: "title",
         },
       ])
@@ -219,7 +215,7 @@ const getAllPostsByCategory = async (req, res, next) => {
   }
 };
 
-export {
+module.exports = {
   createPost,
   updatePost,
   deletePost,

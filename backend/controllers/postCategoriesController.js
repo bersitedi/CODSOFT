@@ -1,5 +1,5 @@
-import PostCategories from "../models/PostCategories";
-import Post from "../models/Post";
+const PostCategories = require("../models/PostCategories");
+const Post = require("../models/Post");
 
 const createPostCategory = async (req, res, next) => {
   try {
@@ -122,7 +122,7 @@ const deletePostCategory = async (req, res, next) => {
   }
 };
 
-export {
+module.exports = {
   createPostCategory,
   getAllPostCategories,
   updatePostCategory,

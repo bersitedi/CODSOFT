@@ -1,16 +1,14 @@
-import express from "express";
-
+const express = require("express");
 const router = express.Router();
-
-import {
+const {
   registerUser,
   loginUser,
   userProfile,
   updateProfile,
   getAllUsers,
   deleteUser,
-} from "../controllers/userControllers";
-import { adminGuard, authGuard } from "../middleware/authMiddleware";
+} = require("../controllers/userControllers");
+const { adminGuard, authGuard } = require("../middleware/authMiddleware");
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
@@ -19,4 +17,4 @@ router.put("/updateProfile/:userId", authGuard, updateProfile);
 router.get("/", authGuard, adminGuard, getAllUsers);
 router.delete("/:userId", authGuard, adminGuard, deleteUser);
 
-export default router;
+module.exports = router;
