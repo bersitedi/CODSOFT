@@ -61,12 +61,23 @@ export const updatePost = async ({ updatedData, slug, token }) => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data", // Ensure correct content type for file upload
       },
     };
 
+    // Create FormData object
+    const formData = new FormData();
+    formData.append("document", JSON.stringify(updatedData)); // Append updated data
+
+    // Check if image exists in updatedData and append it to formData
+    if (updatedData.image instanceof File) {
+      formData.append("image", updatedData.image); // Append image
+    }
+
+    // Make PUT request with formData
     const { data } = await axios.put(
       `${backendUrl}/api/posts/${slug}`,
-      updatedData,
+      formData,
       config
     );
     return data;

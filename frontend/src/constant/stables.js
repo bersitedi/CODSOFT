@@ -1,5 +1,10 @@
-const UPLOAD_FOLDER_BASE_URL = "http://localhost:5000/uploads/";
+const S3_BUCKET_URL = "";
 
-const stables = { UPLOAD_FOLDER_BASE_URL };
+function getImageUrl(imageKey) {
+  // Construct the complete image URL by concatenating the S3 bucket URL with the image key
+  return `${S3_BUCKET_URL}${imageKey}`;
+}
+
+const stables = { S3_BUCKET_URL, getImageUrl };
 
 export default stables;

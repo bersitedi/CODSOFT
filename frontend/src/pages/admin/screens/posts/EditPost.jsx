@@ -1,4 +1,3 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import CreatableSelect from "react-select/creatable";
 import { getSinglePost, updatePost } from "../../../../services/index/posts";
@@ -17,6 +16,7 @@ import {
   filterCategories,
 } from "../../../../utils/multiSelectTagUtils";
 import { FiArrowLeft } from "react-icons/fi";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const promiseOptions = async (inputValue) => {
   const { data: categoriesData } = await getAllCategories();
@@ -35,7 +35,6 @@ const EditPost = () => {
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState(null);
   const [postSlug, setPostSlug] = useState(slug);
-  const [caption, setCaption] = useState("");
 
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getSinglePost({ slug }),
@@ -77,35 +76,37 @@ const EditPost = () => {
   };
 
   const handleUpdatePost = async () => {
-    let updatedData = new FormData();
+    let updatedData = {};
 
+    // Append photo if it's updated or retained
     if (!initialPhoto && photo) {
-      updatedData.append("postPicture", photo);
+      updatedData.image = photo;
     } else if (initialPhoto && !photo) {
-      const urlToObject = async (url) => {
-        let response = await fetch(url);
-        let blob = await response.blob();
-        const file = new File([blob], initialPhoto, { type: blob.type });
-        return file;
-      };
-
-      const picture = await urlToObject(
-        stables.UPLOAD_FOLDER_BASE_URL + data?.photo
-      );
-
-      updatedData.append("postPicture", picture);
+      updatedData.image = stables.S3_BUCKET_URL + data?.photo;
     }
 
-    updatedData.append(
-      "document",
-      JSON.stringify({ body, categories, title, tags, slug: postSlug, caption })
-    );
+    updatedData.body = body;
+    updatedData.categories = categories;
+    updatedData.title = title;
+    updatedData.tags = tags;
+    updatedData.slug = postSlug;
 
-    mutateUpdatePostDetail({
-      updatedData,
-      slug,
-      token: userState.userInfo.token,
-    });
+    try {
+      const updatedPost = await updatePost({
+        updatedData,
+        slug,
+        token: userState.userInfo.token,
+      });
+
+      queryClient.invalidateQueries(["blog", slug]);
+      toast.success("Post is updated");
+      navigate(`/admin/posts/manage/edit/${updatedPost.slug}`, {
+        replace: true,
+      });
+    } catch (error) {
+      toast.error(error.message);
+      console.log(error);
+    }
   };
 
   const handleDeleteImage = () => {
@@ -143,7 +144,7 @@ const EditPost = () => {
                 />
               ) : initialPhoto ? (
                 <img
-                  src={stables.UPLOAD_FOLDER_BASE_URL + data?.photo}
+                  src={stables.S3_BUCKET_URL + data?.photo}
                   alt={data?.title}
                   className="rounded-xl w-full"
                 />
@@ -186,18 +187,6 @@ const EditPost = () => {
                 className="d-input d-input-bordered border-slate-300 !outline-slate-300 text-xl font-medium font-roboto text-dark-hard"
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="title"
-              />
-            </div>
-            <div className="d-form-control w-full">
-              <label className="d-label" htmlFor="caption">
-                <span className="d-label-text">caption</span>
-              </label>
-              <input
-                id="caption"
-                value={caption}
-                className="d-input d-input-bordered border-slate-300 !outline-slate-300 text-xl font-medium font-roboto text-dark-hard"
-                onChange={(e) => setCaption(e.target.value)}
-                placeholder="caption"
               />
             </div>
             <div className="d-form-control w-full">

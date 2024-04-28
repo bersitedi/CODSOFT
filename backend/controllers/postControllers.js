@@ -1,4 +1,7 @@
-const { uploadPicture } = require("../middleware/uploadPictureMiddleware");
+const {
+  uploadPicture,
+  uploadFile,
+} = require("../middleware/uploadPictureMiddleware");
 const Post = require("../models/Post");
 const { fileRemover } = require("../utils/fileRemover");
 const { v4: uuidv4 } = require("uuid");
@@ -34,16 +37,14 @@ const updatePost = async (req, res, next) => {
       return;
     }
 
-    const upload = uploadPicture.single("postPicture");
-
-    const handleUpdatePostData = async (data) => {
+    const handleUpdatePostData = async (data, file) => {
       try {
         if (!data) {
           const error = new Error("Data is undefined");
           throw error;
         }
 
-        const { title, caption, slug, body, tags, categories } =
+        const { title, caption, slug, body, tags, categories, currentImage } =
           JSON.parse(data);
         post.title = title || post.title;
         post.caption = caption || post.caption;
@@ -52,6 +53,13 @@ const updatePost = async (req, res, next) => {
         post.tags = tags || post.tags;
         post.categories = categories || post.categories;
 
+        if (file) {
+          const imagePath = await uploadFile(file);
+          post.photo = imagePath;
+        } else if (currentImage) {
+          post.photo = currentImage;
+        }
+
         const updatedPost = await post.save();
         return res.json(updatedPost);
       } catch (error) {
@@ -59,25 +67,7 @@ const updatePost = async (req, res, next) => {
       }
     };
 
-    upload(req, res, async function (err) {
-      if (err) {
-        const error = new Error(
-          "An unknown error occurred when uploading " + err.message
-        );
-        next(error);
-      } else {
-        if (req.file) {
-          let filename;
-          filename = post.photo;
-          if (filename) {
-            fileRemover(filename);
-          }
-          post.photo = req.file.filename;
-        }
-
-        handleUpdatePostData(req.body.document);
-      }
-    });
+    handleUpdatePostData(req.body.document, req.file);
   } catch (error) {
     next(error);
   }

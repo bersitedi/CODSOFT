@@ -47,7 +47,7 @@ const ArticleDetailPage = ({ post }) => {
               className="rounded-xl w-full"
               src={
                 data?.photo
-                  ? stables.UPLOAD_FOLDER_BASE_URL + data?.photo
+                  ? stables.S3_BUCKET_URL + data?.photo
                   : images.samplePostImage
               }
               alt={data?.title}

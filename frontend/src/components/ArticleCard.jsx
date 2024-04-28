@@ -10,7 +10,7 @@ const ArticleCard = ({ post, className }) => {
           className="rounded-t-lg w-full"
           src={
             post.photo
-              ? stables.UPLOAD_FOLDER_BASE_URL + post.photo
+              ? stables.S3_BUCKET_URL + post.photo
               : images.samplePostImage
           }
           alt=""
