@@ -1,6 +1,6 @@
 import React from "react";
-import MainLayout from "../../components/MainLayout";
-import AboutSection from "./component/AboutSection";
+import MainLayout from "../components/MainLayout";
+import AboutSection from "./AboutSection";
 
 const AboutUs = () => {
   const people = [

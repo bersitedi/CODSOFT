@@ -5,9 +5,9 @@ import RegisterPage from "./pages/register/RegisterPage";
 import { Toaster } from "react-hot-toast";
 import LoginPage from "./pages/login/LoginPage";
 import ProfilePage from "./pages/profile/ProfilePage";
-import ContactForm from "./pages/contact/ContactForm";
-import Services from "./pages/services/Services";
-import AboutUs from "./pages/about/AboutUs";
+import ContactForm from "./pages/ContactForm";
+import Services from "./pages/Services";
+import AboutUs from "./pages/AboutUs";
 import Projects from "./pages/projects/Projects";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Admin from "./pages/admin/screens/Admin";
@@ -24,16 +24,16 @@ function App() {
   return (
     <div className="App font-sans">
       <Routes>
-        <Route path="/project/:slug" element={<ArticleDetailPage />} />
-        <Route path="/project" element={<ProjectsPage />} />
-        <Route path="/projects" element={<Projects />} />
         <Route index path="/" element={<HomePage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<ContactForm />} />
+        <Route path="/project/:slug" element={<ArticleDetailPage />} />
+        <Route path="/project" element={<ProjectsPage />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Admin />} />
           <Route path="posts/manage" element={<ManagePosts />} />

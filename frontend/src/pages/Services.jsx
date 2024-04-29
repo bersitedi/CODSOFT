@@ -1,5 +1,5 @@
 import React from "react";
-import MainLayout from "../../components/MainLayout";
+import MainLayout from "../components/MainLayout";
 import { Link } from "react-router-dom";
 import {
   FaDraftingCompass,
@@ -14,7 +14,7 @@ import {
   FaMap,
   FaWater,
 } from "react-icons/fa";
-import back from "../../assets/build.jpg";
+import back from "../assets/build.jpg";
 
 const services = [
   { title: "Design", icon: <FaDraftingCompass /> },
@@ -37,7 +37,7 @@ const Services = () => {
         <div className="w-100 mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl xl:px-32">
           <div className="grid items-center lg:grid-cols-2">
             <div className="mb-12 md:mt-12 lg:mt-0 lg:mb-0">
-              <div className="block rounded-lg bg-[hsla(0,0%,100%,0.55)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,5%,0.55)] dark:shadow-black/20 md:px-12 lg:-mr-14 backdrop-blur-[30px]">
+              <div className="block rounded-lg bg-white lg:bg-[hsla(0,0%,100%,0.55)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  md:px-12 lg:-mr-14 backdrop-blur-[30px]">
                 <h1 className="mt-2 mb-10 text-3xl font-bold tracking-tight md:text-5xl">
                   The best offer <br />
                   <span className="text-primary">for your business</span>

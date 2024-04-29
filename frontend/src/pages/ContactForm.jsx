@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import art from "../../assets/contact.jpg";
-import MainLayout from "../../components/MainLayout";
-import { submitMessage } from "../../services/index/messages";
+import art from "../assets/contact.jpg";
+import MainLayout from "../components/MainLayout";
+import { submitMessage } from "../services/index/messages";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({

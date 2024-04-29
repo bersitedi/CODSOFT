@@ -1,6 +1,6 @@
 import React from "react";
-import art from "../../../assets/art.jpg";
-import wave from "../../../assets/wave.png";
+import art from "../assets/art.jpg";
+import wave from "../assets/wave.png";
 
 const AboutSection = () => {
   return (
@@ -13,7 +13,7 @@ const AboutSection = () => {
       />
 
       {/* Content */}
-      <div className="flex flex-wrap justify-center mb-10 mt-20 relative z-10">
+      <div className="flex flex-wrap justify-center mt-20 relative z-10">
         <div className="w-full lg:w-1/2 relative overflow-hidden">
           <img
             className="w-full h-full rounded-md object-cover"
