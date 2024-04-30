@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl =
+  process.env.REACT_APP_BACKEND_URL || "https://spring-97bs.onrender.com";
 
 export const submitMessage = async (messageData) => {
   try {
@@ -46,5 +47,16 @@ export const getMessageById = async (messageId) => {
     return response.data;
   } catch (error) {
     throw new Error(`Error fetching message details: ${error.message}`);
+  }
+};
+export const deleteMessage = async (messageId) => {
+  try {
+    const response = await axios.delete(
+      `${backendUrl}/api/messages/${messageId}`
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error deleting message: ${error.message}`);
   }
 };

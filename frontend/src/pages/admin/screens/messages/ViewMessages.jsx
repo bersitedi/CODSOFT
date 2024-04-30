@@ -44,6 +44,9 @@ const ViewMessages = () => {
           <p className="text-gray-700 text-lg mb-2">
             <span className="font-semibold">Message:</span> {message.message}
           </p>
+          <p className="text-gray-700 text-lg mb-2">
+            <span className="font-semibold">Date:</span> {message.createdAt}
+          </p>
         </div>
       ) : (
         <p>Loading message...</p>

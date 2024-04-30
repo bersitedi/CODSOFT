@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import art from "../assets/contact.jpg";
 import MainLayout from "../components/MainLayout";
 import { submitMessage } from "../services/index/messages";
+import { MdPhone } from "react-icons/md";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -37,11 +38,16 @@ const ContactForm = () => {
 
   return (
     <MainLayout>
-      <div className="text-center mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Contact Us</h2>
-        <p className="text-gray-600">
-          Swing by for a Consultation, or leave us a message:
-        </p>
+      <div className="absolute space-x-4 w-full py-3 px-4  shadow-gray-400 shadow-md">
+        <span className="flex items-center justify-center space-x-2">
+          <MdPhone />
+          <p className="font-semibold text-blue-600">
+            Welcome to Lorem ipsum,
+            <span className="text-gray-600 text-sm ml-1">
+              dolor sit amet consectetur adipiscing elit.
+            </span>
+          </p>
+        </span>
       </div>
       <div className="container p-10">
         <div className="flex flex-wrap mt-10">

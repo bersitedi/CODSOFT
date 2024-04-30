@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl =
+  process.env.REACT_APP_BACKEND_URL || "https://spring-97bs.onrender.com";
 
 export const getAllCategories = async (
   searchKeyword = "",
