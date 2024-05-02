@@ -145,8 +145,8 @@ const Header = () => {
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <Link to="/" className="flex items-center space-x-3">
           <img className="w-10" src={logo} alt="logo" />
-          <span className="hidden md:inline-block md:font-bold md:text-2xl">
-            Springyoo
+          <span className="hidden md:inline-block md:font-bold md:text-3xl text-gray-600">
+            Spring
           </span>
         </Link>
 

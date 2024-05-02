@@ -35,51 +35,46 @@ const Footer = () => {
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
               <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
-                Resources
+                Services
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <Link to="#" className="hover:underline">
-                    Flowbite
+                    Architectural Design
                   </Link>
                 </li>
                 <li>
                   <Link to="#" className="hover:underline">
-                    Tailwind CSS
+                    Structural Engineering
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
               <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
-                Follow us
+                Contact Us
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <Link to="#" className="hover:underline ">
-                    Github
+                    Email: info@example.com
                   </Link>
                 </li>
                 <li>
                   <Link to="#" className="hover:underline">
-                    Discord
+                    Phone: +123-456-7890
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
               <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
-                Legal
+                Location
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <Link to="#" className="hover:underline">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:underline">
-                    Terms &amp; Conditions
+                    Ethiopia, Addis Ababa
                   </Link>
                 </li>
               </ul>

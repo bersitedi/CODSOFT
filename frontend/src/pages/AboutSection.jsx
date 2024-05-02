@@ -1,5 +1,5 @@
 import React from "react";
-import three from "../assets/three.jpg";
+import three from "../assets/image6.jpg";
 import { Link } from "react-router-dom";
 
 const AboutSection = () => {
@@ -13,7 +13,7 @@ const AboutSection = () => {
           <img src={three} alt="Company" className="rounded-lg shadow-lg" />
         </div>
         <div className="md:w-1/2 md:pl-8">
-          <p className="text-lg mb-4">
+          <p className="text-lg mb-4 pr-2">
             Welcome to <span className="font-semibold">Company Name</span>, your
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim

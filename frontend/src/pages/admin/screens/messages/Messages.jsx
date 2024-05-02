@@ -2,14 +2,11 @@ import { useNavigate } from "react-router-dom";
 import {
   getAllMessages,
   deleteMessage,
-} from "../../../../services/index/messages"; // Import your deleteMessage function
+} from "../../../../services/index/messages";
 import DataTable from "../../components/DataTable";
 import { useDataTable } from "../../../../hooks/useDataTable";
-import { useState } from "react";
 
 const Messages = () => {
-  const [message, setMessage] = useState(null);
-  const [initialMessage, setInitialMessage] = useState(null);
   const {
     searchKeyword,
     currentPage,
@@ -19,7 +16,7 @@ const Messages = () => {
     searchKeywordHandler,
     submitSearchKeywordHandler,
     setCurrentPage,
-    refetchData, // Add refetchData function from useDataTable hook
+    refetchData,
   } = useDataTable({
     dataQueryFn: () => getAllMessages(searchKeyword, currentPage),
     dataQueryKey: "messages",
@@ -38,8 +35,7 @@ const Messages = () => {
   const handleDeleteMessage = async (id) => {
     if (window.confirm("Do you want to delete this message?")) {
       try {
-        await deleteMessage(id); // Call the deleteMessage function with the message ID
-        // Optionally, you can also refetch data to update the message list
+        await deleteMessage(id);
         await refetchData();
       } catch (error) {
         console.error("Error deleting message:", error);
@@ -83,11 +79,11 @@ const Messages = () => {
               })}
             </p>
           </td>
-          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-5">
             <button
               type="button"
-              onClick={() => handleDeleteMessage(message._id)} // Pass message ID to handleDeleteMessage function
-              className="text-green-600 hover:text-green-900"
+              onClick={() => handleDeleteMessage(message._id)}
+              className="text-red-600 hover:text-green-900"
             >
               Delete
             </button>

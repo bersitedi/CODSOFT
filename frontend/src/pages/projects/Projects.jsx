@@ -6,6 +6,7 @@ import { fetchPostsByCategory } from "../../services/index/posts";
 import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
 import Pagination from "../../components/Pagination";
+import { FaProjectDiagram } from "react-icons/fa";
 
 const Projects = () => {
   const [posts, setPosts] = useState([]);
@@ -47,12 +48,13 @@ const Projects = () => {
 
   return (
     <MainLayout>
-      <section className="flex flex-col container mx-auto px-5 py-10">
-        <div>
-          <h1 className="text-3xl font-bold bg-gray-50 text-gray-600 rounded-md mb-5 p-3">
-            {categoryTitle}
-          </h1>
-        </div>
+      <div className="absolute space-x-4 w-full py-3 px-4  shadow-gray-400 shadow-md">
+        <span className="flex items-center justify-center space-x-3">
+          <FaProjectDiagram className="text-2xl text-blue-500" />
+          <p className="font-bold text-blue-500 text-xl">{categoryTitle}</p>
+        </span>
+      </div>
+      <section className="flex flex-col container mt-10 mx-auto px-5 py-10">
         <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
           {isLoading || isFetching ? (
             [...Array(3)].map((item, index) => (

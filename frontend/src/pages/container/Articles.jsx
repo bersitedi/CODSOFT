@@ -20,12 +20,12 @@ const Articles = () => {
   });
 
   return (
-    <section className="lg:-mt-10">
+    <section className="lg:-mt-16">
       <div className="flex flex-col justify-start items-start space-x-4 w-full py-3 px-4  shadow-gray-400 shadow-md">
         <span className="flex items-center justify-center space-x-2">
           <IoMdPin />
           <p className="font-semibold text-blue-600">
-            Welcome to Lorem ipsum,
+            Welcome to Spring Consulting Architects and Engineers,
             <span className="text-gray-600 text-sm ml-1">
               dolor sit amet consectetur adipiscing elit.
             </span>

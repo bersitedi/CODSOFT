@@ -59,6 +59,10 @@ export const useDataTable = ({
     }
   };
 
+  const refetchData = () => {
+    refetch();
+  };
+
   return {
     userState,
     currentPage,
@@ -72,5 +76,6 @@ export const useDataTable = ({
     submitSearchKeywordHandler,
     deleteDataHandler,
     setCurrentPage,
+    refetchData,
   };
 };
