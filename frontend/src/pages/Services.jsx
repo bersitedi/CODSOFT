@@ -2,8 +2,7 @@ import React from "react";
 import MainLayout from "../components/MainLayout";
 import { Link } from "react-router-dom";
 import {
-  FaDraftingCompass,
-  FaRoad,
+  FaBuilding,
   FaTools,
   FaSitemap,
   FaBolt,
@@ -17,17 +16,16 @@ import {
 import back from "../assets/build.jpg";
 
 const services = [
-  { title: "Design", icon: <FaDraftingCompass /> },
-  { title: "Road Design", icon: <FaRoad /> },
-  { title: "Preliminary Investigation and Feasibility", icon: <FaTools /> },
+  { title: "Architectural Design", icon: <FaBuilding /> },
   { title: "Structural Engineering", icon: <FaSitemap /> },
   { title: "Electrical Engineering", icon: <FaBolt /> },
+  { title: "MEP Engineering", icon: <FaCog /> },
   { title: "ICT Infrastructure Design", icon: <FaNetworkWired /> },
   { title: "IT and Communication System", icon: <FaDesktop /> },
   { title: "Sanitary Engineering", icon: <FaShower /> },
   { title: "Mechanical Engineering", icon: <FaCog /> },
   { title: "Master planning", icon: <FaMap /> },
-  { title: "Hydrology, drainage", icon: <FaWater /> },
+  { title: "Hydrology and Drainage", icon: <FaWater /> },
 ];
 
 const Services = () => {

@@ -48,9 +48,9 @@ const Projects = () => {
 
   return (
     <MainLayout>
-      <div className="absolute space-x-4 w-full py-3 px-4  shadow-gray-400 shadow-md">
+      <div className="absolute space-x-4 w-full py-3 px-4">
         <span className="flex items-center justify-center space-x-3">
-          <FaProjectDiagram className="text-2xl text-blue-500" />
+          <FaProjectDiagram className="md:text-2xl text-blue-500" />
           <p className="font-bold text-blue-500 text-xl">{categoryTitle}</p>
         </span>
       </div>

@@ -3,7 +3,7 @@ import { AiOutlineTwitter, AiFillInstagram } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
 import { BsTelegram } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/springbigscreenlogo-footer.jpg";
 
 const Footer = () => {
   return (
@@ -11,13 +11,10 @@ const Footer = () => {
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between md:mb-20 md:mt-10">
           <div className="mb-6 md:mb-0">
-            <Link to="/" className="flex items-center">
-              <img src={logo} className="h-8 me-3" alt="FlowBite Logo" />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-                Spring
-              </span>
+            <Link to="/" className="hidden md:flex items-center">
+              <img src={logo} className="w-[200px] me-3" alt="FlowBite Logo" />
             </Link>
-            <div className="text-white flex flex-row items-center justify-center mt-8 text-2xl gap-x-8 cursor-pointer">
+            <div className="text-white flex flex-row items-center justify-center mt-3 md:mt-8 text-xl md:text-2xl gap-x-8 cursor-pointer">
               <Link to="#">
                 <AiOutlineTwitter />
               </Link>

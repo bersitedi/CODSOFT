@@ -4,7 +4,8 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/actions/user";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/springbigscreenlogo2.jpg";
+import logo2 from "../assets/springlogo.jpg";
 import { getAllCategories } from "../services/index/postCategories";
 
 const NavItem = ({ item }) => {
@@ -144,20 +145,21 @@ const Header = () => {
     <section className="sticky top-0 left-0 right-0 z-50 bg-gray-50">
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <Link to="/" className="flex items-center space-x-3">
-          <img className="w-10" src={logo} alt="logo" />
-          <span className="hidden md:inline-block md:font-bold md:text-3xl text-gray-600">
-            Spring
-          </span>
+          <img className="hidden md:block w-[200px]" src={logo} alt="logo" />
+          <img src={logo2} className="md:hidden w-10" alt="" />
         </Link>
 
         <div className="lg:hidden z-50">
           {navIsVisible ? (
             <AiOutlineClose
-              className="w-6 h-6"
+              className="w-6 h-6 md:text-3xl"
               onClick={navVisibilityHandler}
             />
           ) : (
-            <AiOutlineMenu className="w-6 h-6" onClick={navVisibilityHandler} />
+            <AiOutlineMenu
+              className="w-6 h-6 md:text-3xl"
+              onClick={navVisibilityHandler}
+            />
           )}
         </div>
         <div
