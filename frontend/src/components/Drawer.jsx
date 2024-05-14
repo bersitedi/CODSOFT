@@ -46,18 +46,22 @@ const Drawer = () => {
 
   return (
     <div className="flex items-center h-full">
-      <div className="flex md:items-center">
-        <p className="hidden md:flex md:mt-5 md:mr-4 md:ml-16 md:text-gray-400">
-          Get a free consultation, visit our office
-        </p>
-        <button
-          className="text-blue-800 md:text-white mt-3 md:mt-5 md:bg-blue-700 md:hover:bg-blue-800 px-3 py-2 rounded-md flex items-center ml-3 md:ml-1"
-          type="button"
-          onClick={handleShowDrawer}
-        >
-          Contact us
-          <FaArrowRight className="w-4 h-4 ml-2" />
-        </button>
+      <div className="flex flex-col justify-start items-start">
+        <div className="flex flex-col text-primary">
+          <p className="text-sm font-merri font-semibold">
+            Get a free consultation, visit our office
+          </p>
+        </div>
+        <div className="mt-3">
+          <button
+            className="text-blue-800 md:text-white md:bg-blue-700 md:hover:bg-blue-800 px-3 py-2 rounded-md flex items-center"
+            type="button"
+            onClick={handleShowDrawer}
+          >
+            Contact us
+            <FaArrowRight className="text-xs ml-2" />
+          </button>
+        </div>
       </div>
 
       {isDrawerOpen && (

@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 let isFirstRun = true;
@@ -59,10 +59,6 @@ export const useDataTable = ({
     }
   };
 
-  const refetchData = () => {
-    refetch();
-  };
-
   return {
     userState,
     currentPage,
@@ -76,6 +72,5 @@ export const useDataTable = ({
     submitSearchKeywordHandler,
     deleteDataHandler,
     setCurrentPage,
-    refetchData,
   };
 };

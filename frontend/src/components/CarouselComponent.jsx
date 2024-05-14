@@ -4,14 +4,11 @@ import two from "../assets/slider2.jpg";
 import three from "../assets/slider6.jpg";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import Drawer from "./Drawer";
 
 const CarouselComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const carouselImages = [
-    "https://images.unsplash.com/photo-1504450075628-39777da238ed?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1605071062480-aa202435adf4?q=80&w=1488&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1576101063208-83850344332f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ];
+  const carouselImages = [one, two, three];
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
 
@@ -32,12 +29,12 @@ const CarouselComponent = () => {
 
   return (
     <>
-      <div className="relative w-full md:h-[400px] overflow-hidden">
+      <div className="relative w-full h-[400px] overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-[hsla(0,0%,0%,0.55)]">
-          <div>
-            <h1 className="px-2 mt-5 ml-2 text-xl md:text-3xl font-bold tracking-tight xl:text-4xl text-white  md:text-gray-300 mb-3 md:mb-8">
+          <div className="font-merri">
+            <h1 className="px-2 mt-5 ml-2 text-xl md:text-3xl font-bold tracking-tight xl:text-4xl text-gray-100  md:text-gray-200 mb-3 md:mb-8">
               The best place <br />
-              <span className="md:text-gray-400 font-bold">
+              <span className="text-gray-300 font-bold text-2xl">
                 for Crafting Your Vision, Building Your Future
               </span>
             </h1>
@@ -66,7 +63,7 @@ const CarouselComponent = () => {
         </div>
 
         <img
-          className="w-full h-auto"
+          className="w-full h-full object-cover"
           src={carouselImages[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
         />

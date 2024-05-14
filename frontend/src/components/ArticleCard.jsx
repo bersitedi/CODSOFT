@@ -7,7 +7,7 @@ const ArticleCard = ({ post, className }) => {
     <div className={`${className} bg-white`}>
       <Link to={`/project/${post.slug}`}>
         <img
-          className="rounded-t-lg w-full"
+          className="rounded-md w-full"
           src={
             post.photo
               ? stables.S3_BUCKET_URL + post.photo
@@ -17,11 +17,11 @@ const ArticleCard = ({ post, className }) => {
         />
       </Link>
       <Link to={`/project/${post.slug}`}>
-        <h2 className="font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-xl p-3">
+        <h2 className="font-mono font-bold text-xl text-dark-soft md:text-2xl lg:text-lg py-2">
           {post.title}
         </h2>
         <p
-          className="inline-flex items-center px-3 py-2 text-sm font-medium
+          className="inline-flex items-center  text-sm font-medium
         text-center text-blue-600 rounded-lg  hover:text-cta gap-x-2"
         >
           Read more

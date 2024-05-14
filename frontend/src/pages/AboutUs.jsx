@@ -51,13 +51,13 @@ const AboutUs = () => {
   return (
     <MainLayout>
       <AboutSection />
-      <div className="bg-white py-10 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
+      <div className="bg-white container mx-auto px-5 pb-8 md:py-8">
+        <div className="mx-auto grid gap-x-8 gap-y-8 md:gap-y-20 xl:grid-cols-3">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Meet our leadership
             </h2>
-            <p className="mt-4 text-md leading-8 text-gray-600">
+            <p className="mt-4 text-md font-lora leading-8 text-gray-600">
               At Spring Consulting Architects and Engineers, our leadership team
               embodies a wealth of experience, expertise, and passion for
               innovation. Meet the individuals driving our company forward:
@@ -76,10 +76,10 @@ const AboutUs = () => {
                     alt=""
                   />
                   <div>
-                    <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                    <h3 className="text-base font-mono font-semibold leading-7 tracking-tight text-gray-900">
                       {person.name}
                     </h3>
-                    <p className="text-sm font-semibold leading-6 text-indigo-600">
+                    <p className="text-sm font-lora font-semibold leading-6 text-indigo-600">
                       {person.role}
                     </p>
                   </div>

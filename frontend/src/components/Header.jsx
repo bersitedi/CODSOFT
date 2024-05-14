@@ -4,7 +4,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/actions/user";
-import logo from "../assets/springbigscreenlogo2.jpg";
+import logo from "../assets/spring.jpg";
 import logo2 from "../assets/springlogo.jpg";
 import { getAllCategories } from "../services/index/postCategories";
 
@@ -41,9 +41,9 @@ const NavItem = ({ item }) => {
       {item.type === "link" && (
         <a
           href={item.href}
-          className={`py-2 px-4 hover:border-b-2 hover:text-blue-500 hover:border-blue-500  ${
+          className={`py-2 px-4 text-white lg:text-gray-600 text-lg font-semibold hover:border-b-2 hover:text-blue-500 hover:border-blue-500  ${
             location.pathname === item.href
-              ? "text-blue-700 md:bg-transparent dark:text-blue-500 dark:bg-transparent"
+              ? "text-blue-500 md:bg-transparent dark:text-blue-500 dark:bg-transparent"
               : ""
           }`}
         >
@@ -57,7 +57,7 @@ const NavItem = ({ item }) => {
         >
           <button
             onClick={toggleDropdown}
-            className="flex items-center justify-between w-full px-4 py-2 text-left hover:border-b-2 hover:text-blue-500 hover:border-blue-500"
+            className="flex items-center text-white lg:text-gray-600 justify-between w-full px-4 py-2 font-semibold text-lg hover:border-b-2 hover:text-blue-500 hover:border-blue-500"
           >
             {item.name}
             {isDropdownOpen ? (
@@ -142,11 +142,11 @@ const Header = () => {
   };
 
   return (
-    <section className="sticky top-0 left-0 right-0 z-50 bg-gray-50">
+    <section className="sticky top-0 left-0 right-0 z-50 bg-white">
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <Link to="/" className="flex items-center space-x-3">
-          <img className="hidden md:block w-[200px]" src={logo} alt="logo" />
-          <img src={logo2} className="md:hidden w-10" alt="" />
+          <img className="hidden lg:block w-[240px]" src={logo} alt="logo" />
+          <img src={logo2} className="lg:hidden w-10" alt="" />
         </Link>
 
         <div className="lg:hidden z-50">
@@ -165,9 +165,9 @@ const Header = () => {
         <div
           className={`${
             navIsVisible ? "right-0" : "-right-full"
-          } transition-all duration-300 mt-[56px] lg:mt-0 bg-primary lg:bg-gray-50 z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center overflow-y-auto lg:overflow-y-visible`}
+          } transition-all duration-300 mt-[56px] lg:mt-0 bg-primary lg:bg-white z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center overflow-y-auto lg:overflow-y-visible`}
         >
-          <ul className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-5 font-semibold">
+          <ul className="text-white items-start lg:items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-5 font-semibold">
             {navItems.map((item) => (
               <NavItem key={item.name} item={item} />
             ))}

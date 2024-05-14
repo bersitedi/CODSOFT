@@ -50,8 +50,10 @@ const Projects = () => {
     <MainLayout>
       <div className="absolute space-x-4 w-full py-3 px-4">
         <span className="flex items-center justify-center space-x-3">
-          <FaProjectDiagram className="md:text-2xl text-blue-500" />
-          <p className="font-bold text-blue-500 text-xl">{categoryTitle}</p>
+          <FaProjectDiagram className="md:text-2xl text-gray-500" />
+          <p className="font-bold text-primary font-mono text-xl">
+            {categoryTitle}
+          </p>
         </span>
       </div>
       <section className="flex flex-col container mt-10 mx-auto px-5 py-10">

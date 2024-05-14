@@ -1,12 +1,13 @@
 import React from "react";
-import three from "../assets/image6.jpg";
 import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   return (
-    <div className="container mx-auto px-4 py-8 mt-10">
+    <div className="container mx-auto px-4 py-4 md:py-8 md:mt-10">
       <div className="w-full mb-3 pl-2">
-        <h1 className="text-2xl font-bold mb-4 text-gray-600">About Us</h1>
+        <h1 className="text-2xl font-bold font-mono mb-4 text-gray-600">
+          About Us
+        </h1>
       </div>
       <div className="flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 mb-4 md:mb-0">
@@ -20,7 +21,7 @@ const AboutSection = () => {
           <h3 className="text-2xl md:text-3xl font-bold mb-3 text-gray-800">
             Welcome to Spring Consulting Architects and Engineers
           </h3>
-          <p className="text-md text-gray-800 mb-3 pr-2">
+          <p className="text-md font-lora text-gray-800 mb-4 pr-2">
             At Spring Consulting Architects and Engineers, we are dedicated to
             providing innovative and sustainable architectural and engineering
             solutions tailored to meet the unique needs of our clients. Whether
@@ -48,17 +49,17 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
-      <div className="pt-20 px-10">
-        <h4 className="text-xl font-bold mb-3">Our Approach</h4>
-        <p className="text-md text-gray-700 mb-4 pr-2">
+      <div className="py-8 lg:pt-20 lg:px-10">
+        <h4 className="text-2xl font-mono font-bold mb-3">Our Approach</h4>
+        <p className="text-md font-lora text-gray-700 mb-4 pr-2">
           Our approach is rooted in collaboration, creativity, and technical
           excellence. We understand that each project is unique, with its own
           set of requirements and constraints. That's why we take the time to
           listen to our clients, understand their vision, and tailor our
           solutions to meet their specific needs.
         </p>
-        <h4 className="text-xl font-bold mb-3">Services</h4>
-        <ul className="list-disc pl-5 mb-2">
+        <h4 className="text-2xl font-mono font-bold mb-3">Services</h4>
+        <ul className="list-disc font-lora pl-5 mb-2">
           <li>
             Architectural Design: Our architects combine aesthetic vision with
             practical expertise to create spaces that are both beautiful and
@@ -83,25 +84,27 @@ const AboutSection = () => {
         <Link to="/services" className="text-sm font-bold text-blue-500">
           Read more
         </Link>
-        <h4 className="text-xl mt-3 font-bold mb-3">
+        <h4 className="text-2xl font-mono mt-3 font-bold mb-3">
           Commitment to Sustainability
         </h4>
-        <p className="text-md text-gray-700 mb-4 pr-2">
+        <p className="text-md font-lora text-gray-700 mb-4 pr-2">
           At Spring Consulting Architects and Engineers, we believe in
           responsible stewardship of the environment. That's why we integrate
           sustainable design principles into every project, seeking to minimize
           environmental impact while maximizing long-term value for our clients.
         </p>
-        <h4 className="text-xl font-bold mb-3">Experience and Expertise</h4>
-        <p className="text-md text-gray-700 mb-4 pr-2">
+        <h4 className="text-2xl font-mono font-bold mb-3">
+          Experience and Expertise
+        </h4>
+        <p className="text-md font-lora text-gray-700 mb-4 pr-2">
           With years of experience and a proven track record of success, our
           team brings a wealth of knowledge and expertise to every project.
           We've worked on projects of all sizes and complexities, from
           residential developments to commercial complexes to institutional
           facilities.
         </p>
-        <h4 className="text-xl font-bold mb-3">Get in Touch</h4>
-        <p className="text-md text-gray-700 mb-4 pr-2">
+        <h4 className="text-2xl font-mono font-bold mb-3">Get in Touch</h4>
+        <p className="text-md font-lora text-gray-700 mb-4 pr-2">
           Whether you're planning a new construction project, renovating an
           existing space, or seeking expert advice on architectural and
           engineering matters, we're here to help. Contact us today to learn
@@ -109,7 +112,7 @@ const AboutSection = () => {
         </p>
         <Link
           to="/contact"
-          className="bg-blue-500 px-4 py-2 rounded-md border-1 border-blue-400 hover:bg-blue-400 shadow-md shadow-gray-500 text-white"
+          className="bg-blue-500 px-4 py-2 rounded-md border-1 border-blue-400 hover:bg-blue-400 shadow-sm shadow-gray-500 text-white"
         >
           Contact us
         </Link>

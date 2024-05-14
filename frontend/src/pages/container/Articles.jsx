@@ -20,16 +20,17 @@ const Articles = () => {
   });
 
   return (
-    <section className="mt-2 lg:-mt-16">
-      <div className="flex flex-col justify-start items-start space-x-4 w-full py-3 px-4  shadow-gray-400 shadow-md">
-        <span className="flex items-center justify-center space-x-2">
-          <IoMdPin className="text-3xl text-blue-500" />
-          <p className="font-semibold text-blue-600">
-            Welcome to Spring Consulting Architects and Engineers.
-          </p>
-        </span>
-      </div>
+    <section className="mt-2">
       <div className="flex flex-col container mx-auto px-5 py-10">
+        <div className="flex flex-col justify-start items-start space-x-4 w-full py-3">
+          <span className="flex items-center justify-start space-x-2">
+            <IoMdPin className="text-3xl text-primary" />
+            <p className="font-semibold text-xl font-mono text-gray-600">
+              Welcome to Spring Consulting Architects and Engineers.
+            </p>
+          </span>
+        </div>
+        <hr className="border-2 border-green w-32 mb-10" />
         <div className=" flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
           {isLoading ? (
             [...Array(3)].map((item, index) => (

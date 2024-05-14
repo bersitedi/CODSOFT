@@ -8,7 +8,7 @@ import logo from "../assets/springbigscreenlogo-footer.jpg";
 const Footer = () => {
   return (
     <footer className="bg-cta dark:bg-gray-900">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+      <div className="container mx-auto px-4 py-8 w-full p-4 lg:py-8">
         <div className="md:flex md:justify-between md:mb-20 md:mt-10">
           <div className="mb-6 md:mb-0">
             <Link to="/" className="hidden md:flex items-center">

@@ -22,7 +22,7 @@ import ViewMessages from "./pages/admin/screens/messages/ViewMessages";
 
 function App() {
   return (
-    <div className="App font-sans">
+    <div className="App">
       <Routes>
         <Route index path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUs />} />

@@ -78,7 +78,7 @@ const Categories = () => {
             disabled={isLoadingCreateCategory}
             type="button"
             onClick={handleCreateCategory}
-            className="w-fit mt-3 bg-green-500 text-white font-semibold rounded-lg px-4 py-2 disabled:cursor-not-allowed disabled:opacity-70"
+            className="w-fit mt-3 bg-green text-white font-semibold rounded-lg px-4 py-2 disabled:cursor-not-allowed disabled:opacity-70"
           >
             Add Category
           </button>

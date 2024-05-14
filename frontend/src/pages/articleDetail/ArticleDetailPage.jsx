@@ -16,6 +16,7 @@ const ArticleDetailPage = ({ post }) => {
   const { slug } = useParams();
   const [breadCrumbsData, setBreadCrumbsData] = useState([]);
   const [body, setBody] = useState(null);
+  const [selectedPostIndex, setSelectedPostIndex] = useState(0);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["project", slug],
@@ -33,6 +34,11 @@ const ArticleDetailPage = ({ post }) => {
     queryFn: () => getAllPosts(),
     queryKey: ["posts"],
   });
+
+  const handleSelectPost = (index) => {
+    setSelectedPostIndex(index);
+  };
+
   return (
     <MainLayout>
       {isLoading ? (
@@ -63,7 +69,7 @@ const ArticleDetailPage = ({ post }) => {
               ))}
             </div>
 
-            <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
+            <h1 className="text-xl font-semibold font-mono mt-4 text-dark-hard md:text-[26px]">
               {data?.title}
             </h1>
             <div className="w-full">
@@ -75,9 +81,11 @@ const ArticleDetailPage = ({ post }) => {
           <div>
             <SimilarPosts
               header="Latest Article"
-              posts={postsData?.data}
+              posts={postsData?.data.slice(0, 5)}
               tags={data?.tags}
               className="mt-8 lg:mt-0 lg:max-w-xs"
+              selectedPostIndex={selectedPostIndex}
+              onSelectPost={handleSelectPost}
             />
             <div className="mt-7">
               <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">

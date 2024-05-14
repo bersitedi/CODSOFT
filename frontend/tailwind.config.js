@@ -7,7 +7,8 @@ module.exports = {
         primary: "#09344F",
         secondary: "#046E8F",
         cta: "#0D2436",
-        black: "#001928",
+        black: "#6076B4",
+        green: "#8EC63F",
         dark: {
           eerie: "#212323",
           light: "#7C7C7C",
@@ -16,8 +17,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        libre: ["'Libre Baskerville'", "serif"],
-        roboto: ["'Roboto'", "sans - serif"],
+        merri: ["'Merriweather'", "serif"],
+        fair: ["'Playfair Display'", "serif"],
+        lora: ["'Lora'", "serif"],
       },
     },
   },
