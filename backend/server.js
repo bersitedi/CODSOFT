@@ -11,6 +11,8 @@ const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 const postCategoriesRoutes = require("./routes/postCategoriesRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+const newsRoutes = require("./routes/newsRoutes");
+const newsCategoriesRoutes = require("./routes/newsCategoriesRoutes");
 
 const fs = require("fs");
 const util = require("util");
@@ -33,13 +35,13 @@ app.get("/", (req, res) => {
   res.send("server is running...");
 });
 
-// Define routes
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/post-categories", postCategoriesRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/news", newsRoutes);
+app.use("/api/news-categories", newsCategoriesRoutes);
 
-// Middleware for handling invalid paths and errors
 app.use(invalidPathHandler);
 app.use(errorResponseHandler);
 
@@ -50,7 +52,6 @@ app.get("/images/:key", (req, res) => {
   readStream.pipe(res);
 });
 
-// Route to upload images to S3 bucket
 app.post("/images", upload.single("image"), async (req, res) => {
   const file = req.file;
   const result = await uploadFile(file);
@@ -58,8 +59,8 @@ app.post("/images", upload.single("image"), async (req, res) => {
   res.send({ imagePath: `/images/${result.Key}` });
 });
 
-dotenv.config(); // Load environment variables from .env file
-connectDB(); // Connect to MongoDB database
+dotenv.config();
+connectDB();
 
 const PORT = process.env.PORT || 5000;
 

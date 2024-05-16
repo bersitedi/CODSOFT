@@ -1,6 +1,6 @@
 import React from "react";
 import logo1 from "../assets/buildinglogo.png";
-import logo2 from "../assets/innovationlogo.png";
+import logo2 from "../assets/team.png";
 import logo3 from "../assets/fast.png";
 import logo4 from "../assets/dependable.png";
 
@@ -8,43 +8,43 @@ const Card = () => {
   const generateCards = () => {
     const cardData = [
       {
-        title: "Creative & Natural",
-        icon: logo1,
-        description:
-          "Description for Card 1.Description for Card 1.Description for Card 1.",
-      },
-      {
-        title: "Innovative & Quality",
-        icon: logo2,
-        description:
-          "Description for Card 2. Description for Card 1.Description for Card 1.",
-      },
-      {
-        title: "Fast & Reliable",
+        title: "Quality & Reliability",
         icon: logo3,
         description:
-          "Description for Card 3. Description for Card 1.Description for Card 1.",
+          "At Spring, we prioritize precision and consistency in every service, ensuring steadfast performance and unwavering trust.",
       },
       {
         title: "Professional Service",
         icon: logo4,
         description:
-          "Description for Card 4. Description for Card 1.Description for Card 1.",
+          "Master Planning, Building, Landscaping & Furniture Design, Supervision & Quality Control Works & Contract Adminstration",
+      },
+      {
+        title: "Years in Business",
+        icon: logo1,
+        description:
+          "With over 15 years of dedicated service, Spring Architects and Engineers have established a proven track record of excellence.",
+      },
+      {
+        title: "Number of personnel",
+        icon: logo2,
+        description:
+          "Our team comprises 34 highly skilled technical professionals and 4 dedicated administrative staff members, ensuring comprehensive support for all projects.",
       },
     ];
 
     return cardData.map((card, index) => (
       <div
         key={index}
-        className="bg-gray-50 group hover:bg-primary rounded-xl hover:text-white hover:shadow-lg hover:scale-105 transition duration-300 ease-in-out p-6 text-center w-full md:w-[300px] h-full"
+        className="group bg-gray-50 rounded-xl text-primary hover:shadow-lg hover:scale-1:3 transition duration-300 ease-in-out p-6 text-center w-full md:w-[300px] h-full md:h-[280px]"
       >
-        <h2 className="text-xl font-semibold mb-4 group-hover:text-white">
-          {card.title}
-        </h2>
-        <div className="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-blue-300 mb-4">
+        <div className="animate-fadeIn mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-blue-400 mb-4">
           <img src={card.icon} alt={card.title} className="w-8 h-8" />
         </div>
-        <p className="text-gray-700 font-lora text-sm group-hover:text-gray-300">
+        <h2 className="animate-fadeIn text-xl font-semibold mb-4 font-mono text-gray-800">
+          {card.title}
+        </h2>
+        <p className="animate-fadeIn font-lora text-sm group-hover:text-primary text-gray-600">
           {card.description}
         </p>
       </div>
@@ -52,8 +52,8 @@ const Card = () => {
   };
 
   return (
-    <div className="mt-5 md:mt-0">
-      <div className="container mx-auto flex flex-wrap justify-center lg:justify-between gap-4 sm:gap-6 md:gap-8 lg:gap-4">
+    <div className="bg-gray-50">
+      <div className="container mx-auto px-4 flex flex-wrap justify-center gap-2 sm:gap-6 md:gap-8 lg:gap-4">
         {generateCards()}
       </div>
     </div>

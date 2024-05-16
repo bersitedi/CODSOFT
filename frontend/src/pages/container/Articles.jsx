@@ -8,6 +8,7 @@ import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
 import { Link } from "react-router-dom";
 import { IoMdPin } from "react-icons/io";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
 const Articles = () => {
   const { data, isLoading, isError } = useQuery({
@@ -19,11 +20,20 @@ const Articles = () => {
     },
   });
 
+  const [ref, isIntersecting] = useIntersectionObserver({
+    threshold: 0.1,
+  });
+
   return (
     <section className="mt-2">
-      <div className="flex flex-col container mx-auto px-5 py-10">
+      <div
+        ref={ref}
+        className={`flex flex-col container mx-auto px-5 py-4 md:py-8 transition-opacity duration-1000 ${
+          isIntersecting ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <div className="flex flex-col justify-start items-start space-x-4 w-full py-3">
-          <span className="flex items-center justify-start space-x-2">
+          <span className="flex items-start md:items-center justify-start space-x-2">
             <IoMdPin className="text-3xl text-primary" />
             <p className="font-semibold text-xl font-mono text-gray-600">
               Welcome to Spring Consulting Architects and Engineers.
@@ -31,7 +41,7 @@ const Articles = () => {
           </span>
         </div>
         <hr className="border-2 border-green w-32 mb-10" />
-        <div className=" flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
+        <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
           {isLoading ? (
             [...Array(3)].map((item, index) => (
               <ArticleCardSkeleton

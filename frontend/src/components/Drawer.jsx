@@ -52,9 +52,9 @@ const Drawer = () => {
             Get a free consultation, visit our office
           </p>
         </div>
-        <div className="mt-3">
+        <div className="md:mt-3">
           <button
-            className="text-blue-800 md:text-white md:bg-blue-700 md:hover:bg-blue-800 px-3 py-2 rounded-md flex items-center"
+            className="text-blue-800 md:text-white md:bg-blue-700 md:hover:bg-blue-800 md:px-3 py-2 rounded-md flex items-center"
             type="button"
             onClick={handleShowDrawer}
           >

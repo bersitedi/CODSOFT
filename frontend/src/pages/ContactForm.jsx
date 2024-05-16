@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import art from "../assets/contact.jpg";
+import location from "../assets/location.svg";
 import MainLayout from "../components/MainLayout";
 import { submitMessage } from "../services/index/messages";
-import { FaPhoneAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Map from "../components/Map";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -44,9 +47,10 @@ const ContactForm = () => {
             <img src={art} alt="" />
           </div>
           <div className="w-full md:w-1/2 md:-mt-8 lg:mt-8 md:pl-8">
-            <h3 className="text-2xl font-bold mb-5 text-primary">
+            <h3 className="text-2xl font-bold font-mono mb-1 text-gray-600">
               Contact us for more Information!
             </h3>
+            <hr className="border-2 border-green w-32 mb-3" />
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="flex flex-col">
                 <label
@@ -108,6 +112,30 @@ const ContactForm = () => {
                 Send message
               </button>
             </form>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col space-y-6">
+          <div className="grid grid-cols-2 gap-4 mt-5">
+            <div className="flex items-center">
+              <FaPhoneAlt className="mr-2 text-2xl text-buttons" />
+              <p className="font-bold text-sm">(123) 456-7890</p>
+            </div>
+            <div className="flex items-center">
+              <FaEnvelope className="mr-2 text-xl text-buttons" />
+              <p className="font-bold text-sm">mikegriffin@example.com</p>
+            </div>
+            <div className="flex items-center">
+              <FaMapMarkerAlt className="mr-2 text-xl text-buttons" />
+              <p className="font-bold text-sm">
+                11 North Street, Baltimore, MD 49706
+              </p>
+            </div>
+          </div>
+          <div className="w-full pb-8 flex justify-center">
+            <Map />
           </div>
         </div>
       </div>

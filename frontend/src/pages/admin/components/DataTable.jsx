@@ -1,4 +1,4 @@
-import Pagination from "../../../components/Pagination";
+import Pagination from "../../../components/Pagination"; // Import Pagination component
 
 const DataTable = ({
   pageTitle,
@@ -16,6 +16,10 @@ const DataTable = ({
   currentPage,
   headers,
 }) => {
+  const totalPages = headers?.["x-totalpagecount"]
+    ? JSON.parse(headers["x-totalpagecount"])
+    : null;
+
   return (
     <div>
       <h1 className="text-2xl font-semibold">{pageTitle}</h1>
@@ -67,13 +71,19 @@ const DataTable = ({
                 <tbody>
                   {isLoading || isFetching ? (
                     <tr>
-                      <td colSpan={5} className="text-center py-10 w-full">
+                      <td
+                        colSpan={tableHeaderTitleList.length}
+                        className="text-center py-10 w-full"
+                      >
                         Loading...
                       </td>
                     </tr>
                   ) : data?.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="text-center py-10 w-full">
+                      <td
+                        colSpan={tableHeaderTitleList.length}
+                        className="text-center py-10 w-full"
+                      >
                         No records found
                       </td>
                     </tr>
@@ -82,15 +92,12 @@ const DataTable = ({
                   )}
                 </tbody>
               </table>
-              {!isLoading && (
+
+              {!isLoading && totalPages && (
                 <Pagination
                   onPageChange={(page) => setCurrentPage(page)}
                   currentPage={currentPage}
-                  totalPageCount={
-                    headers && headers["x-totalpagecount"]
-                      ? JSON.parse(headers["x-totalpagecount"])
-                      : 0
-                  }
+                  totalPages={totalPages}
                 />
               )}
             </div>

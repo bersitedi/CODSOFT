@@ -7,7 +7,6 @@ module.exports = {
         primary: "#09344F",
         secondary: "#046E8F",
         cta: "#0D2436",
-        black: "#6076B4",
         green: "#8EC63F",
         dark: {
           eerie: "#212323",
@@ -20,6 +19,15 @@ module.exports = {
         merri: ["'Merriweather'", "serif"],
         fair: ["'Playfair Display'", "serif"],
         lora: ["'Lora'", "serif"],
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 1s ease-in-out",
       },
     },
   },

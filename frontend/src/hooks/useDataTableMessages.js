@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 let isFirstRun = true;
 
-export const useDataTable = ({
+export const useDataTableMessages = ({
   dataQueryFn,
   dataQueryKey,
   mutateDeleteFn,
@@ -17,7 +17,7 @@ export const useDataTable = ({
   const [searchKeyword, setSearchKeyword] = useState("");
   const [currentPage, setCurrentPage] = useState(
     parseInt(localStorage.getItem("currentPage")) || 1
-  ); 
+  );
   const [totalPages, setTotalPages] = useState(0); // Track total pages
 
   const { data, isLoading, isFetching, refetch } = useQuery({
@@ -25,12 +25,12 @@ export const useDataTable = ({
     queryKey: [dataQueryKey],
   });
 
-  const { mutate: mutateDeletePost, isLoading: isLoadingDeleteData } =
+  const { mutate: mutateDeleteMessage, isLoading: isLoadingDeleteMessage } =
     useMutation({
-      mutationFn: mutateDeleteFn,
+      mutationFn: mutateDeleteFn, // Use the provided mutation function
       onSuccess: (data) => {
         queryClient.invalidateQueries([dataQueryKey]);
-        toast.success(deleteDataMessage);
+        toast.success("Message deleted successfully");
       },
       onError: (error) => {
         toast.error(error.message);
@@ -77,9 +77,9 @@ export const useDataTable = ({
     refetch();
   };
 
-  const deleteDataHandler = ({ slug, token }) => {
-    if (window.confirm("Do you want to delete this record?")) {
-      mutateDeletePost({ slug, token });
+  const deleteMessageHandler = (id) => {
+    if (window.confirm("Do you want to delete this message?")) {
+      mutateDeleteMessage(id); // Call the mutation function with message ID
     }
   };
 
@@ -90,12 +90,12 @@ export const useDataTable = ({
     data,
     isLoading,
     isFetching,
-    isLoadingDeleteData,
     queryClient,
     searchKeywordHandler,
     submitSearchKeywordHandler,
-    deleteDataHandler,
+    deleteMessageHandler,
     setCurrentPage,
-    totalPages, // Pass totalPages to the component
+    totalPages,
+    isLoadingDeleteMessage,
   };
 };

@@ -1,50 +1,70 @@
-import React, { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import axios from "axios"; // Import Axios for making HTTP requests
 import { toast } from "react-hot-toast";
-import { getAllPosts } from "../../services/index/posts";
-import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
-import ErrorMessage from "../../components/ErrorMessage";
-import ArticleCard from "../../components/ArticleCard";
 import MainLayout from "../../components/MainLayout";
 import Pagination from "../../components/Pagination";
 import { useSearchParams } from "react-router-dom";
 import Search from "../../components/Search";
-
-let isFirstRun = true;
+import ArticleCard from "../../components/ArticleCard";
+import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const ProjectsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const searchParamsValue = Object.fromEntries([...searchParams]);
-
-  const currentPage = parseInt(searchParamsValue?.page) || 1;
-  const searchKeyword = searchParamsValue?.search || "";
-
-  const { data, isLoading, isError, isFetching, refetch } = useQuery({
-    queryFn: () => getAllPosts(searchKeyword, currentPage, 12),
-    queryKey: ["posts"],
-    onError: (error) => {
-      toast.error(error.message);
-      console.log(error);
-    },
-  });
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(localStorage.getItem("currentPage")) || 1
+  );
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalPostsCount, setTotalPostsCount] = useState(0);
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const postsPerPage = 9;
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    if (isFirstRun) {
-      isFirstRun = false;
-      return;
-    }
-    refetch();
-  }, [currentPage, searchKeyword, refetch]);
+    const fetchData = async () => {
+      setIsError(false);
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          `/api/posts?searchKeyword=${searchKeyword}&page=${currentPage}&limit=${postsPerPage}`
+        );
+
+        // Extract data and headers from the response
+        const { data, headers } = response;
+
+        // Set data state
+        setData(data);
+
+        // Extract and set headers
+        const totalCountHeader = headers["x-totalcount"];
+        const totalPageCountHeader = headers["x-totalpagecount"];
+        setTotalPostsCount(totalCountHeader || 0);
+        setTotalPages(
+          totalPageCountHeader || Math.ceil(totalCountHeader / postsPerPage)
+        );
+      } catch (error) {
+        setIsError(true);
+        toast.error(error.message);
+      }
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [currentPage, searchKeyword]);
+
+  useEffect(() => {
+    localStorage.setItem("currentPage", currentPage);
+  }, [currentPage]);
 
   const handlePageChange = (page) => {
-    // change the page's query string in the URL
-    setSearchParams({ page, search: searchKeyword });
+    setCurrentPage(page);
   };
 
   const handleSearch = ({ searchKeyword }) => {
-    setSearchParams({ page: 1, search: searchKeyword });
+    setSearchKeyword(searchKeyword);
+    setCurrentPage(1); // Reset page to 1 when searching
   };
 
   return (
@@ -54,9 +74,9 @@ const ProjectsPage = () => {
           className="w-full max-w-xl mb-10"
           onSearchKeyword={handleSearch}
         />
-        <div className=" flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
-          {isLoading || isFetching ? (
-            [...Array(3)].map((item, index) => (
+        <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
+          {isLoading || !data ? (
+            [...Array(postsPerPage)].map((_, index) => (
               <ArticleCardSkeleton
                 key={index}
                 className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
@@ -64,10 +84,10 @@ const ProjectsPage = () => {
             ))
           ) : isError ? (
             <ErrorMessage message="Couldn't fetch the posts data" />
-          ) : data?.data.length === 0 ? (
+          ) : data.length === 0 ? (
             <p className="text-orange-500">No Posts Found!</p>
           ) : (
-            data?.data.map((post) => (
+            data.map((post) => (
               <ArticleCard
                 key={post._id}
                 post={post}
@@ -80,11 +100,7 @@ const ProjectsPage = () => {
           <Pagination
             onPageChange={(page) => handlePageChange(page)}
             currentPage={currentPage}
-            totalPageCount={
-              data && data.headers && data.headers["x-totalpagecount"]
-                ? parseInt(data.headers["x-totalpagecount"])
-                : 0
-            }
+            totalPages={totalPages}
           />
         )}
       </section>

@@ -17,7 +17,7 @@ const ArticleCard = ({ post, className }) => {
         />
       </Link>
       <Link to={`/project/${post.slug}`}>
-        <h2 className="font-mono font-bold text-xl text-dark-soft md:text-2xl lg:text-lg py-2">
+        <h2 className="font-mono font-bold text-xl text-dark-soft lg:text-lg py-2">
           {post.title}
         </h2>
         <p

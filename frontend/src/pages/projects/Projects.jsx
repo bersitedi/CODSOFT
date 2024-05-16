@@ -7,6 +7,7 @@ import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
 import Pagination from "../../components/Pagination";
 import { FaProjectDiagram } from "react-icons/fa";
+import { getAllCategories } from "../../services/index/postCategories";
 
 const Projects = () => {
   const [posts, setPosts] = useState([]);
@@ -15,22 +16,40 @@ const Projects = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPageCount, setTotalPageCount] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategoryTitle, setSelectedCategoryTitle] = useState(null);
+  const [categoryTitle, setCategoryTitle] = useState(null);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const categoryTitle = queryParams.get("category");
 
   useEffect(() => {
+    setCategoryTitle(queryParams.get("category"));
+  }, [location]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getAllCategories();
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedCategoryTitle && !categoryTitle) return;
+
     const fetchPosts = async () => {
       setIsLoading(true);
       setIsError(false);
       try {
-        if (categoryTitle) {
-          const posts = await fetchPostsByCategory(categoryTitle);
-          setPosts(posts);
-        } else {
-          console.log("Category title is not provided.");
-        }
+        const categoryToFetch = selectedCategoryTitle || categoryTitle;
+        const posts = await fetchPostsByCategory(categoryToFetch);
+        setPosts(posts);
       } catch (error) {
         setIsError(true);
         console.error("Error fetching posts:", error);
@@ -40,50 +59,82 @@ const Projects = () => {
     };
 
     fetchPosts();
-  }, [categoryTitle]);
+  }, [categoryTitle, selectedCategoryTitle]);
+
+  const handleCategoryClick = async (categoryTitle) => {
+    setIsFetching(true);
+    try {
+      setSelectedCategoryTitle(categoryTitle);
+      setCategoryTitle(categoryTitle);
+    } catch (error) {
+      setIsError(true);
+      console.error("Error fetching posts:", error);
+    } finally {
+      setIsFetching(false);
+    }
+  };
+
+  const handleHeaderDropdownChange = (categoryTitle) => {
+    setSelectedCategoryTitle(categoryTitle);
+    setCategoryTitle(null);
+  };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   return (
-    <MainLayout>
-      <div className="absolute space-x-4 w-full py-3 px-4">
-        <span className="flex items-center justify-center space-x-3">
-          <FaProjectDiagram className="md:text-2xl text-gray-500" />
-          <p className="font-bold text-primary font-mono text-xl">
-            {categoryTitle}
-          </p>
-        </span>
-      </div>
-      <section className="flex flex-col container mt-10 mx-auto px-5 py-10">
-        <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
-          {isLoading || isFetching ? (
-            [...Array(3)].map((item, index) => (
-              <ArticleCardSkeleton
-                key={index}
-                className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
-              />
-            ))
-          ) : isError ? (
-            <ErrorMessage message="Couldn't fetch the posts data" />
-          ) : posts.length === 0 ? (
-            <p className="text-orange-500">No Posts Found!</p>
-          ) : (
-            posts.map((post) => (
-              <ArticleCard
-                key={post._id}
-                post={post}
-                className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
-              />
-            ))
-          )}
+    <MainLayout handleCategoryChange={handleHeaderDropdownChange}>
+      <section className="flex flex-col container mx-auto px-5 py-4 md:py-10 animate-fadeIn">
+        <div className="flex justify-between">
+          <div className="w-3/4">
+            <h2 className="text-2xl font-bold font-mono mb-1 text-gray-600">
+              {categoryTitle || selectedCategoryTitle}
+            </h2>
+            <hr className="border-2 border-green w-16 mb-5" />
+            <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
+              {isLoading || isFetching ? (
+                [...Array(3)].map((item, index) => (
+                  <ArticleCardSkeleton
+                    key={index}
+                    className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
+                  />
+                ))
+              ) : isError ? (
+                <ErrorMessage message="Couldn't fetch the posts data" />
+              ) : posts.length === 0 ? (
+                <p className="text-orange-500">No Posts Found!</p>
+              ) : (
+                posts.map((post) => (
+                  <ArticleCard
+                    key={post._id}
+                    post={post}
+                    className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
+                  />
+                ))
+              )}
+            </div>
+            <Pagination
+              onPageChange={(page) => handlePageChange(page)}
+              currentPage={currentPage}
+              totalPageCount={totalPageCount}
+            />
+          </div>
+          <div className="w-1/4">
+            <div className="bg-gray-100 p-4">
+              <h3 className="text-lg font-semibold mb-3">Categories</h3>
+              <ul>
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    <button onClick={() => handleCategoryClick(category.title)}>
+                      {category.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-        <Pagination
-          onPageChange={(page) => handlePageChange(page)}
-          currentPage={currentPage}
-          totalPageCount={totalPageCount}
-        />
       </section>
     </MainLayout>
   );

@@ -55,6 +55,9 @@ export const usePagination = ({
       let middleRange = range(leftSiblingIndex, rightSiblingIndex);
       return [firstPageIndex, DOTS, middleRange, DOTS, lastPageIndex];
     }
+
+    // Default state: return an empty array
+    return [];
   }, [siblingCount, currentPage, totalPageCount]);
 
   return paginationRange;

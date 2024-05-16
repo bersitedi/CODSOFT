@@ -5,18 +5,14 @@ const backendUrl =
 
 export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
   try {
-    const response = await axios.get(
+    const { data, headers } = await axios.get(
       `${backendUrl}/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
-    const { data, headers } = response;
-    if (!data) {
-      throw new Error("No data received from the server");
-    }
-    const totalPageCount = parseInt(headers["x-totalpagecount"]) || 1; // Default to 1 if header is not present
-    return { data, headers, totalPageCount };
+    return { data, headers };
   } catch (error) {
-    console.error("Error fetching posts:", error);
-    throw new Error("Failed to fetch posts. Please try again later.");
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
   }
 };
 

@@ -1,46 +1,68 @@
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  getAllMessages,
-  deleteMessage,
-} from "../../../../services/index/messages";
+import axios from "axios";
 import DataTable from "../../components/DataTable";
-import { useDataTable } from "../../../../hooks/useDataTable";
+import { useDataTableMessages } from "../../../../hooks/useDataTableMessages";
+import { deleteMessage } from "../../../../services/index/messages";
 
 const Messages = () => {
+  const itemsPerPage = 10; // Number of items per page
+
   const {
     searchKeyword,
     currentPage,
     isLoading,
     isFetching,
-    data,
+    data: messagesData,
     searchKeywordHandler,
     submitSearchKeywordHandler,
     setCurrentPage,
     refetchData,
-  } = useDataTable({
-    dataQueryFn: () => getAllMessages(searchKeyword, currentPage),
+    deleteMessageHandler,
+  } = useDataTableMessages({
+    // Pass the deleteMessage function as mutateDeleteFn
+    mutateDeleteFn: deleteMessage,
+    dataQueryFn: async () => {
+      try {
+        const response = await axios.get(
+          `/api/messages?searchKeyword=${searchKeyword}&page=${currentPage}&limit=${itemsPerPage}`
+        );
+        const { data, headers } = response;
+        return { data, headers };
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+        throw error;
+      }
+    },
     dataQueryKey: "messages",
-    mutateDeleteFn: null,
+    // Pass null as mutateDeleteFn to prevent mutation
     deleteDataMessage: null,
+    itemsPerPage,
   });
+  useEffect(() => {
+    // Check if there is a stored page number in localStorage
+    const storedPage = localStorage.getItem("messages_current_page");
+    if (storedPage) {
+      // Set the current page to the stored page
+      setCurrentPage(parseInt(storedPage));
+    }
+  }, [setCurrentPage]);
+
+  // Save the current page to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("messages_current_page", currentPage.toString());
+  }, [currentPage]);
 
   const navigate = useNavigate();
 
-  if (!data) {
+  if (!messagesData) {
     return <div>Loading...</div>;
   }
 
-  const messages = data.data || [];
+  const messages = messagesData.data || [];
 
-  const handleDeleteMessage = async (id) => {
-    if (window.confirm("Do you want to delete this message?")) {
-      try {
-        await deleteMessage(id);
-        await refetchData();
-      } catch (error) {
-        console.error("Error deleting message:", error);
-      }
-    }
+  const handleDeleteMessage = (id) => {
+    deleteMessageHandler(id); // Call the delete message handler with message ID
   };
 
   return (
@@ -57,7 +79,7 @@ const Messages = () => {
       data={messages}
       setCurrentPage={setCurrentPage}
       currentPage={currentPage}
-      headers={null}
+      headers={messagesData.headers} // Pass headers received from the backend
     >
       {messages.map((message) => (
         <tr key={message._id}>

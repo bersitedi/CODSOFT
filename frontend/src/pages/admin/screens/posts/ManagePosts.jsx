@@ -1,15 +1,9 @@
-import { images, stables } from "../../../../constant";
-import { deletePost, getAllPosts } from "../../../../services/index/posts";
-import Pagination from "../../../../components/Pagination";
-import { toast } from "react-hot-toast";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useDataTable } from "../../../../hooks/useDataTable";
 import DataTable from "../../components/DataTable";
-
-let isFirstRun = true;
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const ManagePosts = () => {
   const {
@@ -26,24 +20,28 @@ const ManagePosts = () => {
     deleteDataHandler,
     setCurrentPage,
   } = useDataTable({
-    dataQueryFn: () => getAllPosts(searchKeyword, currentPage),
+    dataQueryFn: async () => {
+      try {
+        const response = await axios.get(
+          `/api/posts?searchKeyword=${searchKeyword}&page=${currentPage}&limit=10`
+        );
+        const { data, headers } = response;
+        return { data, headers };
+      } catch (error) {
+        toast.error(error.message);
+        throw error;
+      }
+    },
     dataQueryKey: "posts",
     deleteDataMessage: "Post is deleted",
     mutateDeleteFn: ({ slug, token }) => {
-      return deletePost({
-        slug,
-        token,
+      return axios.delete(`/api/posts/${slug}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
     },
   });
-
-  useEffect(() => {
-    if (postsData?.headers) {
-      console.log(postsData.headers); // Log all headers
-      const totalPageCount = postsData.headers["x-totalpagecount"];
-      console.log("Total Page Count:", totalPageCount); // Log specific header
-    }
-  }, [postsData]);
 
   return (
     <DataTable
@@ -63,17 +61,13 @@ const ManagePosts = () => {
       userState={userState}
     >
       {postsData?.data.map((post) => (
-        <tr key={post.slug}>
+        <tr key={post._id}>
           <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <a href="/" className="relative block">
                   <img
-                    src={
-                      post?.photo
-                        ? stables.S3_BUCKET_URL + post?.photo
-                        : images.samplePostImage
-                    }
+                    src={post?.photo || "default_photo_url"}
                     alt={post.title}
                     className="mx-auto object-cover rounded-lg w-10 aspect-square"
                   />
@@ -113,7 +107,7 @@ const ManagePosts = () => {
             <div className="flex gap-x-2">
               {post.tags.length > 0
                 ? post.tags.map((tag, index) => (
-                    <p>
+                    <p key={index}>
                       {tag}
                       {post.tags.length - 1 !== index && ","}
                     </p>
