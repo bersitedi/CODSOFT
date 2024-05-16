@@ -98,6 +98,7 @@ const Header = () => {
     { name: "About", type: "link", href: "/about" },
     { name: "Projects", type: "dropdown", items: [] },
     { name: "Services", type: "link", href: "/services" },
+    { name: "News", type: "link", href: "/news" },
     { name: "Contact", type: "link", href: "/contact" },
   ]);
   const [navIsVisible, setNavIsVisible] = useState(false);

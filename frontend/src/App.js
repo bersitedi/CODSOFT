@@ -19,6 +19,12 @@ import Users from "./pages/admin/screens/users/Users";
 import ProjectsPage from "./pages/projects/ProjectsPage";
 import Messages from "./pages/admin/screens/messages/Messages";
 import ViewMessages from "./pages/admin/screens/messages/ViewMessages";
+import ManageNews from "./pages/admin/screens/news/ManageNews";
+import EditNews from "./pages/admin/screens/news/EditNews";
+import NewsCategories from "./pages/admin/screens/newscategories/NewsCategories";
+import EditNewsCategories from "./pages/admin/screens/newscategories/EditNewsCategories";
+import NewsPage from "./pages/news/NewsPage";
+import NewsDetailPage from "./pages/newsDetail/NewsDetailPage";
 
 function App() {
   return (
@@ -31,6 +37,8 @@ function App() {
         <Route path="/project/:slug" element={<ArticleDetailPage />} />
         <Route path="/project" element={<ProjectsPage />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/:slug" element={<NewsDetailPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
@@ -38,10 +46,17 @@ function App() {
           <Route index element={<Admin />} />
           <Route path="posts/manage" element={<ManagePosts />} />
           <Route path="posts/manage/edit/:slug" element={<EditPost />} />
+          <Route path="news/manage" element={<ManageNews />} />
+          <Route path="news/manage/edit/:slug" element={<EditNews />} />
           <Route path="categories/manage" element={<Categories />} />
           <Route
             path="categories/manage/edit/:slug"
             element={<EditCategories />}
+          />
+          <Route path="newscategories/manage" element={<NewsCategories />} />
+          <Route
+            path="newscategories/manage/edit/:slug"
+            element={<EditNewsCategories />}
           />
           <Route path="users/manage" element={<Users />} />
           <Route path="messages/manage" element={<Messages />} />

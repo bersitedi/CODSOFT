@@ -16,6 +16,7 @@ import { createPost } from "../../../../services/index/posts";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { FaUser } from "react-icons/fa";
+import { createNews } from "../../../../services/index/news";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -42,6 +43,23 @@ const Header = () => {
         console.log(error);
       },
     });
+  const { mutate: mutateCreateNews, isLoading: isLoadingCreateNews } =
+    useMutation({
+      mutationFn: ({ slug, token }) => {
+        return createNews({
+          token,
+        });
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["news"]);
+        toast.success("News is created");
+        navigate(`/admin/news/manage/edit/${data.slug}`);
+      },
+      onError: (error) => {
+        toast.error(error.message);
+        console.log(error);
+      },
+    });
 
   const toggleMenuHandler = () => {
     setIsMenuActive((prevState) => !prevState);
@@ -56,6 +74,9 @@ const Header = () => {
 
   const handleCreateNewPost = ({ token }) => {
     mutateCreatePost({ token });
+  };
+  const handleCreateNews = ({ token }) => {
+    mutateCreateNews({ token });
   };
 
   return (
@@ -110,6 +131,25 @@ const Header = () => {
                   Add New Post
                 </button>
                 <Link to="/admin/categories/manage">Categories</Link>
+              </NavItemCollapse>
+              <NavItemCollapse
+                title="News"
+                icon={<MdDashboard className="text-xl" />}
+                name="news"
+                activeNavName={activeNavName}
+                setActiveNavName={setActiveNavName}
+              >
+                <Link to="/admin/news/manage">Manage all news</Link>
+                <button
+                  disabled={isLoadingCreatePost}
+                  className="text-start disabled:opacity-60 disabled:cursor-not-allowed"
+                  onClick={() =>
+                    handleCreateNews({ token: userState.userInfo.token })
+                  }
+                >
+                  Add News
+                </button>
+                <Link to="/admin/newscategories/manage">Categories</Link>
               </NavItemCollapse>
               <NavItem
                 title="Users"
