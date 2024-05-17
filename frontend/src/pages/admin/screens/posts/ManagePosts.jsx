@@ -4,6 +4,8 @@ import { useDataTable } from "../../../../hooks/useDataTable";
 import DataTable from "../../components/DataTable";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { deletePost, getAllPosts } from "../../../../services/index/posts";
+import { images, stables } from "../../../../constant";
 
 const ManagePosts = () => {
   const {
@@ -20,25 +22,13 @@ const ManagePosts = () => {
     deleteDataHandler,
     setCurrentPage,
   } = useDataTable({
-    dataQueryFn: async () => {
-      try {
-        const response = await axios.get(
-          `/api/posts?searchKeyword=${searchKeyword}&page=${currentPage}&limit=10`
-        );
-        const { data, headers } = response;
-        return { data, headers };
-      } catch (error) {
-        toast.error(error.message);
-        throw error;
-      }
-    },
+    dataQueryFn: () => getAllPosts(searchKeyword, currentPage),
     dataQueryKey: "posts",
     deleteDataMessage: "Post is deleted",
     mutateDeleteFn: ({ slug, token }) => {
-      return axios.delete(`/api/posts/${slug}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      return deletePost({
+        slug,
+        token,
       });
     },
   });
@@ -61,13 +51,17 @@ const ManagePosts = () => {
       userState={userState}
     >
       {postsData?.data.map((post) => (
-        <tr key={post._id}>
+        <tr>
           <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <a href="/" className="relative block">
                   <img
-                    src={post?.photo || "default_photo_url"}
+                    src={
+                      post?.photo
+                        ? stables.S3_BUCKET_URL + post?.photo
+                        : images.samplePostImage
+                    }
                     alt={post.title}
                     className="mx-auto object-cover rounded-lg w-10 aspect-square"
                   />
@@ -107,7 +101,7 @@ const ManagePosts = () => {
             <div className="flex gap-x-2">
               {post.tags.length > 0
                 ? post.tags.map((tag, index) => (
-                    <p key={index}>
+                    <p>
                       {tag}
                       {post.tags.length - 1 !== index && ","}
                     </p>

@@ -77,22 +77,23 @@ const NavItem = ({ item }) => {
           </button>
           {isDropdownOpen && (
             <ul
-              className="absolute -left-20 lg:left-0 w-80 z-50 lg:bg-[#11536A] rounded-lg shadow-lg"
+              className="transition-all bg-[#11536A] duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full lg:group-hover:block w-max"
               onMouseEnter={handleDropdownMouseEnter}
               onMouseLeave={handleDropdownMouseLeave}
             >
-              <div className="flex flex-col w-full">
-                {item.items.map((subItem, index) => (
-                  <li key={index}>
-                    <button
-                      onClick={() => handleItemClick(subItem.category)}
-                      className="block px-4 py-2 text-sm text-white 
-                    hover:bg-blue-500 hover:text-white"
-                    >
-                      {subItem.title}
-                    </button>
-                  </li>
-                ))}
+              <div className="relative group">
+                <div className="mt-0 flex flex-col items-start">
+                  {item.items.map((subItem, index) => (
+                    <li key={index} className="w-full">
+                      <button
+                        onClick={() => handleItemClick(subItem.category)}
+                        className="lg:hover:bg-blue-500 w-full text-start text-sm lg:hover:text-white text-white hover:text-blue-500 px-4 py-2"
+                      >
+                        {subItem.title}
+                      </button>
+                    </li>
+                  ))}
+                </div>
               </div>
             </ul>
           )}
@@ -122,7 +123,7 @@ const Header = () => {
       try {
         const response = await getAllCategories();
         const categories = response.data;
-        const updatedNavItems = [...navItems]; // Create a copy of navItems
+        const updatedNavItems = [...navItems];
         updatedNavItems.forEach((item) => {
           if (item.name === "Projects") {
             item.items = categories.map((category) => ({
@@ -145,7 +146,7 @@ const Header = () => {
       try {
         const response = await getAllNewsCategories();
         const categoriesData = response.data;
-        const updatedNavItems = [...navItems]; // Create a copy of navItems
+        const updatedNavItems = [...navItems];
         updatedNavItems.forEach((item) => {
           if (item.name === "News") {
             item.items = categoriesData.map((category) => ({

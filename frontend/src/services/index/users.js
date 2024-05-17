@@ -1,11 +1,8 @@
 import axios from "axios";
 
-const backendUrl =
-  process.env.REACT_APP_BACKEND_URL || "https://spring-97bs.onrender.com";
-
 export const signup = async ({ name, email, password }) => {
   try {
-    const { data } = await axios.post(`${backendUrl}/api/users/register`, {
+    const { data } = await axios.post(`/api/users/register`, {
       name,
       email,
       password,
@@ -20,7 +17,7 @@ export const signup = async ({ name, email, password }) => {
 
 export const login = async ({ email, password }) => {
   try {
-    const { data } = await axios.post(`${backendUrl}/api/users/login`, {
+    const { data } = await axios.post(`/api/users/login`, {
       email,
       password,
     });
@@ -40,7 +37,7 @@ export const getUserProfile = async ({ token }) => {
       },
     };
 
-    const { data } = await axios.get(`${backendUrl}/api/users/profile`, config);
+    const { data } = await axios.get(`/api/users/profile`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -58,7 +55,7 @@ export const updateProfile = async ({ token, userData, userId }) => {
     };
 
     const { data } = await axios.put(
-      `${backendUrl}/api/users/updateProfile/${userId}`,
+      `/api/users/updateProfile/${userId}`,
       userData,
       config
     );
@@ -84,7 +81,7 @@ export const getAllUsers = async (
     };
 
     const { data, headers } = await axios.get(
-      `${backendUrl}/api/users?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`,
+      `/api/users?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`,
       config
     );
     return { data, headers };
@@ -103,10 +100,7 @@ export const deleteUser = async ({ slug, token }) => {
       },
     };
 
-    const { data } = await axios.delete(
-      `${backendUrl}/api/users/${slug}`,
-      config
-    );
+    const { data } = await axios.delete(`/api/users/${slug}`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

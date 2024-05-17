@@ -1,12 +1,9 @@
 import axios from "axios";
 
-const backendUrl =
-  process.env.REACT_APP_BACKEND_URL || "https://spring-97bs.onrender.com";
-
 export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
   try {
     const { data, headers } = await axios.get(
-      `${backendUrl}/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {
@@ -15,11 +12,10 @@ export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
     throw new Error(error.message);
   }
 };
-
 export const fetchPostsByCategory = async (categoryTitle) => {
   try {
     const response = await axios.get(
-      `${backendUrl}/api/posts/category?category=${categoryTitle}`
+      `/api/posts/category?category=${categoryTitle}`
     );
     return response.data;
   } catch (error) {
@@ -29,7 +25,7 @@ export const fetchPostsByCategory = async (categoryTitle) => {
 };
 export const getSinglePost = async ({ slug }) => {
   try {
-    const { data } = await axios.get(`${backendUrl}/api/posts/${slug}`);
+    const { data } = await axios.get(`/api/posts/${slug}`);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -46,10 +42,7 @@ export const deletePost = async ({ slug, token }) => {
       },
     };
 
-    const { data } = await axios.delete(
-      `${backendUrl}/api/posts/${slug}`,
-      config
-    );
+    const { data } = await axios.delete(`/api/posts/${slug}`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -77,11 +70,7 @@ export const updatePost = async ({ updatedData, slug, token }) => {
     }
 
     // Make PUT request with formData
-    const { data } = await axios.put(
-      `${backendUrl}/api/posts/${slug}`,
-      formData,
-      config
-    );
+    const { data } = await axios.put(`/api/posts/${slug}`, formData, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -98,7 +87,7 @@ export const createPost = async ({ token }) => {
       },
     };
 
-    const { data } = await axios.post(`${backendUrl}/api/posts`, {}, config);
+    const { data } = await axios.post(`/api/posts`, {}, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

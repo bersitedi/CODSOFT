@@ -5,6 +5,7 @@ import three from "../assets/slider6.jpg";
 import { FiSearch } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import CtaButton from "./CtaButton";
 
 const CarouselComponent = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -17,7 +18,7 @@ const CarouselComponent = () => {
 
   return (
     <>
-      <div className="relative w-full h-[560px] md:h-[530px] z-0 overflow-hidden">
+      <div className="relative w-full h-[560px] md:h-[570px] z-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full flex items-start md:items-center justify-center md:justify-between bg-[hsla(0,0%,0%,0.55)]">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row md:px-4 md:pb-10 py-3 lg:py-8">

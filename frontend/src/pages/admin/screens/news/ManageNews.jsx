@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDataTable } from "../../../../hooks/useDataTable";
 import DataTable from "../../components/DataTable";
-import axios from "axios";
-import { toast } from "react-hot-toast";
+import { images, stables } from "../../../../constant";
+import { deleteNews, getAllNews } from "../../../../services/index/news";
 
 const ManageNews = () => {
   const {
@@ -20,25 +20,13 @@ const ManageNews = () => {
     deleteDataHandler,
     setCurrentPage,
   } = useDataTable({
-    dataQueryFn: async () => {
-      try {
-        const response = await axios.get(
-          `/api/news?searchKeyword=${searchKeyword}&page=${currentPage}&limit=10`
-        );
-        const { data, headers } = response;
-        return { data, headers };
-      } catch (error) {
-        toast.error(error.message);
-        throw error;
-      }
-    },
+    dataQueryFn: () => getAllNews(searchKeyword, currentPage),
     dataQueryKey: "news",
     deleteDataMessage: "News is deleted",
     mutateDeleteFn: ({ slug, token }) => {
-      return axios.delete(`/api/news/${slug}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      return deleteNews({
+        slug,
+        token,
       });
     },
   });
@@ -61,13 +49,17 @@ const ManageNews = () => {
       userState={userState}
     >
       {newsData?.data.map((news) => (
-        <tr key={news._id}>
+        <tr>
           <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <a href="/" className="relative block">
                   <img
-                    src={news?.photo || "default_photo_url"}
+                    src={
+                      news?.photo
+                        ? stables.S3_BUCKET_URL + news?.photo
+                        : images.samplePostImage
+                    }
                     alt={news.title}
                     className="mx-auto object-cover rounded-lg w-10 aspect-square"
                   />
@@ -80,7 +72,7 @@ const ManageNews = () => {
           </td>
           <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
             <p className="text-gray-900 whitespace-no-wrap">
-              {news.categories && news.categories.length > 0
+              {news.categories.length > 0
                 ? news.categories
                     .slice(0, 3)
                     .map(
@@ -105,9 +97,9 @@ const ManageNews = () => {
           </td>
           <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
             <div className="flex gap-x-2">
-              {news.tags && news.tags.length > 0
+              {news.tags.length > 0
                 ? news.tags.map((tag, index) => (
-                    <p key={index}>
+                    <p>
                       {tag}
                       {news.tags.length - 1 !== index && ","}
                     </p>
