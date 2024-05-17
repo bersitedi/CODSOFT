@@ -141,7 +141,7 @@ const Header = () => {
               >
                 <Link to="/admin/news/manage">Manage all news</Link>
                 <button
-                  disabled={isLoadingCreatePost}
+                  disabled={isLoadingCreateNews}
                   className="text-start disabled:opacity-60 disabled:cursor-not-allowed"
                   onClick={() =>
                     handleCreateNews({ token: userState.userInfo.token })

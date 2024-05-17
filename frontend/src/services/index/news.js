@@ -6,7 +6,7 @@ const backendUrl =
 export const getAllNews = async (searchKeyword = "", page = 1, limit = 10) => {
   try {
     const { data, headers } = await axios.get(
-      `/api/news?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `${backendUrl}/api/news?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {
@@ -19,7 +19,7 @@ export const getAllNews = async (searchKeyword = "", page = 1, limit = 10) => {
 export const fetchNewsByCategory = async (categoryTitle) => {
   try {
     const response = await axios.get(
-      `/api/news/category?category=${categoryTitle}`
+      `${backendUrl}/api/news/category?category=${categoryTitle}`
     );
     return response.data;
   } catch (error) {
@@ -46,7 +46,10 @@ export const deleteNews = async ({ slug, token }) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/news/${slug}`, config);
+    const { data } = await axios.delete(
+      `${backendUrl}/api/news/${slug}`,
+      config
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -60,25 +63,33 @@ export const updateNews = async ({ updatedData, slug, token }) => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data", // Ensure correct content type for file upload
+        "Content-Type": "multipart/form-data",
       },
     };
 
-    // Create FormData object
     const formData = new FormData();
-    formData.append("document", JSON.stringify(updatedData)); // Append updated data
 
-    // Check if image exists in updatedData and append it to formData
-    if (updatedData.image instanceof File) {
-      formData.append("image", updatedData.image); // Append image
+    for (const key in updatedData) {
+      if (updatedData[key] !== null && updatedData[key] !== undefined) {
+        if (key === "image" && updatedData[key] instanceof File) {
+          formData.append(key, updatedData[key]);
+        } else {
+          formData.append(key, updatedData[key]);
+        }
+      }
     }
 
-    // Make PUT request with formData
-    const { data } = await axios.put(`/api/news/${slug}`, formData, config);
-    return data;
+    const response = await axios.put(
+      `http://localhost:5000/api/news/${slug}`,
+      formData,
+      config
+    );
+
+    return response.data;
   } catch (error) {
-    if (error.response && error.response.data.message)
+    if (error.response && error.response.data.message) {
       throw new Error(error.response.data.message);
+    }
     throw new Error(error.message);
   }
 };
@@ -91,7 +102,7 @@ export const createNews = async ({ token }) => {
       },
     };
 
-    const { data } = await axios.post(`/api/news`, {}, config);
+    const { data } = await axios.post(`${backendUrl}/api/news`, {}, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

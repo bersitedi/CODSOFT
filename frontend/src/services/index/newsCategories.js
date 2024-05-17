@@ -10,7 +10,7 @@ export const getAllNewsCategories = async (
 ) => {
   try {
     const { data, headers } = await axios.get(
-      `/api/news-categories?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `${backendUrl}/api/news-categories?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {
@@ -27,7 +27,10 @@ export const deleteNewsCategory = async ({ slug, token }) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/news-categories/${slug}`, config);
+    const { data } = await axios.delete(
+      `${backendUrl}/api/news-categories/${slug}`,
+      config
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -45,7 +48,7 @@ export const createNewsCategory = async ({ token, title }) => {
     };
 
     const { data } = await axios.post(
-      `/api/news-categories`,
+      `${backendUrl}/api/news-categories`,
       { title },
       config
     );
@@ -66,7 +69,7 @@ export const updateNewsCategory = async ({ token, title, slug }) => {
     };
 
     const { data } = await axios.put(
-      `/api/news-categories/${slug}`,
+      `${backendUrl}/api/news-categories/${slug}`,
       { title },
       config
     );
@@ -80,7 +83,9 @@ export const updateNewsCategory = async ({ token, title, slug }) => {
 
 export const getSingleNewsCategory = async ({ slug }) => {
   try {
-    const { data } = await axios.get(`/api/news-categories/${slug}`);
+    const { data } = await axios.get(
+      `${backendUrl}/api/news-categories/${slug}`
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

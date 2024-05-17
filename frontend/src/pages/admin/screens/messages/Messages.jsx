@@ -7,6 +7,8 @@ import { deleteMessage } from "../../../../services/index/messages";
 
 const Messages = () => {
   const itemsPerPage = 10; // Number of items per page
+  const backendUrl =
+    process.env.REACT_APP_BACKEND_URL || "https://spring-97bs.onrender.com";
 
   const {
     searchKeyword,
@@ -25,7 +27,7 @@ const Messages = () => {
     dataQueryFn: async () => {
       try {
         const response = await axios.get(
-          `/api/messages?searchKeyword=${searchKeyword}&page=${currentPage}&limit=${itemsPerPage}`
+          `${backendUrl}/api/messages?searchKeyword=${searchKeyword}&page=${currentPage}&limit=${itemsPerPage}`
         );
         const { data, headers } = response;
         return { data, headers };

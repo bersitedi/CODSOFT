@@ -33,9 +33,9 @@ const EditNews = () => {
   const [initialPhoto, setInitialPhoto] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [body, setBody] = useState(null);
-  const [categories, setCategories] = useState(null);
+  const [categories, setCategories] = useState([]);
   const [title, setTitle] = useState("");
-  const [tags, setTags] = useState(null);
+  const [tags, setTags] = useState([]);
   const [newsSlug, setNewsSlug] = useState(slug);
 
   const { data, isLoading, isError } = useQuery({
@@ -51,8 +51,8 @@ const EditNews = () => {
   });
 
   const {
-    mutate: mutateUpdatePostDetail,
-    isLoading: isLoadingUpdatePostDetail,
+    mutate: mutateUpdateNewsDetail,
+    isLoading: isLoadingUpdateNewsDetail,
   } = useMutation({
     mutationFn: ({ updatedData, slug, token }) => {
       return updateNews({
@@ -63,7 +63,7 @@ const EditNews = () => {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries(["news", slug]);
-      toast.success("Post is updated");
+      toast.success("News is updated");
       navigate(`/admin/news/manage/edit/${data.slug}`, { replace: true });
     },
     onError: (error) => {
@@ -77,33 +77,26 @@ const EditNews = () => {
     setPhoto(file);
   };
 
-  const handleUpdatePost = async () => {
-    let updatedData = {};
+  const handleUpdateNews = async () => {
+    let updatedData = {
+      body,
+      categories: JSON.stringify(categories),
+      title,
+      tags: JSON.stringify(tags),
+      slug: newsSlug,
+    };
 
-    // Append photo if it's updated or retained
-    if (!initialPhoto && photo) {
+    if (photo) {
       updatedData.image = photo;
-    } else if (initialPhoto && !photo) {
-      updatedData.image = stables.S3_BUCKET_URL + data?.photo;
+    } else if (initialPhoto) {
+      updatedData.image = initialPhoto;
     }
 
-    updatedData.body = body;
-    updatedData.categories = categories;
-    updatedData.title = title;
-    updatedData.tags = tags;
-    updatedData.slug = newsSlug;
-
     try {
-      const updatedNews = await updateNews({
+      mutateUpdateNewsDetail({
         updatedData,
         slug,
         token: userState.userInfo.token,
-      });
-
-      queryClient.invalidateQueries(["news", slug]);
-      toast.success("Post is updated");
-      navigate(`/admin/news/manage/edit/${updatedNews.slug}`, {
-        replace: true,
       });
     } catch (error) {
       toast.error(error.message);
@@ -118,7 +111,7 @@ const EditNews = () => {
     }
   };
 
-  let isPostDataLoaded = !isLoading && !isError;
+  let isNewsDataLoaded = !isLoading && !isError;
 
   return (
     <div>
@@ -210,7 +203,7 @@ const EditNews = () => {
               <label className="d-label">
                 <span className="d-label-text">categories</span>
               </label>
-              {isPostDataLoaded && (
+              {isNewsDataLoaded && (
                 <MultiSelectTagDropdown
                   loadOptions={promiseOptions}
                   defaultValue={data.categories.map(categoryToOption)}
@@ -224,7 +217,7 @@ const EditNews = () => {
               <label className="d-label">
                 <span className="d-label-text">tags</span>
               </label>
-              {isPostDataLoaded && (
+              {isNewsDataLoaded && (
                 <CreatableSelect
                   defaultValue={data.tags.map((tag, index) => ({
                     value: tag,
@@ -240,7 +233,7 @@ const EditNews = () => {
               )}
             </div>
             <div className="w-full">
-              {isPostDataLoaded && (
+              {isNewsDataLoaded && (
                 <Editor
                   content={data?.body}
                   editable={true}
@@ -251,9 +244,9 @@ const EditNews = () => {
               )}
             </div>
             <button
-              disabled={isLoadingUpdatePostDetail}
+              disabled={isLoadingUpdateNewsDetail}
               type="button"
-              onClick={handleUpdatePost}
+              onClick={handleUpdateNews}
               className="w-full bg-green text-white font-semibold rounded-lg px-4 py-2 disabled:cursor-not-allowed disabled:opacity-70"
             >
               Update Post
