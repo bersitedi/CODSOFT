@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   AiOutlineFundProjectionScreen,
@@ -9,11 +9,38 @@ import { FaUserFriends } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { BsTools } from "react-icons/bs";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import News from "./news/News";
+
+const categories = [
+  {
+    id: 1,
+    title: "News & Articles",
+    content: `
+     Stay informed and inspired with the latest updates from Spring Architects & Engineers on our News & Articles page. Here, we share insights into our ongoing and upcoming projects, industry trends, and expert opinions from our team of professionals. Whether you are interested in architectural innovations, engineering breakthroughs, or urban development strategies, our news page provides a wealth of information designed to keep you up-to-date.
+    `,
+    buttonText: "Read More",
+  },
+  {
+    id: 2,
+    title: "Services",
+    content: `
+     At Spring Architects & Engineers, we pride ourselves on delivering exceptional consulting services across a broad spectrum of infrastructure projects. Our expertise spans both the public and private sectors, ensuring that we meet the unique needs of each client with precision and dedication. From conceptual design to project completion, our team of skilled architects, engineers, and consultants work collaboratively to provide innovative solutions that are not only functional but also aesthetically pleasing.
+    `,
+    buttonText: "Read More",
+  },
+  {
+    id: 3,
+    title: "Our Vision",
+    content: `At Spring Architects & Engineers, our vision is to transform dreams into reality through excellence and innovation. We believe in creating spaces that not only meet the practical needs of our clients but also inspire and uplift the communities they serve. Our commitment to quality, sustainability, and forward-thinking design drives us to push the boundaries of what is possible in the built environment.`,
+    buttonText: "Read More",
+  },
+];
 
 const AboutSection = () => {
   const [ref, isIntersecting2] = useIntersectionObserver({
     threshold: 0.1,
   });
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
 
   return (
     <div className="container mx-auto md:px-4 lg:py-5 mt-5 animate-fadeIn">
@@ -35,7 +62,7 @@ const AboutSection = () => {
           <h3 className="text-2xl md:text-3xl font-bold mb-3 text-gray-800">
             Welcome to Spring Consulting Architects and Engineers
           </h3>
-          <p className="text-md font-lora text-gray-800 mb-4 pr-2">
+          <p className="font-lora text-gray-800 mb-4 pr-2">
             Formerly known as Theodros Tsegaye Consulting Architects &
             Engineers, we're a leading Category-I firm in Ethiopia, offering
             comprehensive Engineering, Architectural, and related services since
@@ -64,98 +91,69 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
+      <News />
       <div
         ref={ref}
         className={`mt-5 transition-opacity duration-1000 ${
           isIntersecting2 ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="py-4 lg:py-10 lg:px-10">
-          <div className="flex items-center mb-3">
-            <BsTools className="text-gray-100 bg-blue-700 bg-opacity-70 border-1 shadow-md border-blue-500 p-1 w-8 h-8 rounded-full mr-2" />
-            <h4 className="text-xl font-mono font-bold text-gray-800">
-              Our Approach
-            </h4>
+        <div className="container mx-auto px-4 lg:pb-10 lg:py-8">
+          <div className="relative z-10">
+            <div className="flex flex-col lg:flex-row justify-center  md:px-4 md:pb-10 py-3 lg:py-8">
+              <div className="w-full lg:w-2/3 lg:py-4 py-2 pb-8 md:pr-3 lg:pr-20">
+                <h2 className="font-bold text-2xl md:text-3xl text-gray-800 mb-2">
+                  {activeCategory.title}
+                </h2>
+                <hr className="border-2 border-green w-20 mb-3" />
+                <p className="font-lora">{activeCategory.content}</p>
+                <button className="mt-4 bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">
+                  {activeCategory.buttonText}
+                </button>
+              </div>
+              <div className="w-full lg:w-1/3 px-8 py-4 border-l border-l-gray-200 flex flex-col items-start space-y-4">
+                {categories.map((category) => (
+                  <div
+                    key={category.id}
+                    className="flex items-center cursor-pointer"
+                    onClick={() => setActiveCategory(category)}
+                  >
+                    <div
+                      className={`w-4 h-4 rounded-full flex items-center justify-center border-2 border-gray-400 ${
+                        activeCategory.id === category.id
+                          ? "bg-blue-500 border-blue-500"
+                          : "bg-white"
+                      }`}
+                    >
+                      {activeCategory.id === category.id && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-10 h-10 text-white"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 9a1 1 0 011-1h1a1 1 0 110 2H9a1 1 0 01-1-1zm2-1a1 1 0 00-1-1 1 1 0 00-1 1v3a1 1 0 002 0V8z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                    <h2
+                      className={`font-medium text-lg  text-gray-800 mb-2 ml-2 ${
+                        activeCategory.id === category.id
+                          ? "text-blue-500"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      {category.title}
+                    </h2>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <p className="text-md font-lora text-gray-700 mb-4 pr-2">
-            Our approach is rooted in collaboration, creativity, and technical
-            excellence. We understand that each project is unique, with its own
-            set of requirements and constraints. That's why we take the time to
-            listen to our clients, understand their vision, and tailor our
-            solutions to meet their specific needs.{" "}
-          </p>
-          <div className="flex items-center mb-3">
-            <AiOutlineFundProjectionScreen className="text-gray-100 bg-blue-700 bg-opacity-70 border-1 shadow-md border-blue-500 p-1 w-8 h-8 rounded-full mr-2" />
-            <h4 className="text-xl font-mono font-bold text-gray-800">
-              Services
-            </h4>
-          </div>
-          <ul className="list-disc font-lora text-gray-700 pl-5 mb-1 md:mb-2">
-            <li>Architectural Engineering</li>
-            <li>Structural Engineering</li>
-            <li>Supervision and Quality Control Works</li>
-            <li>Contract Administration</li>
-            <li>Building, Surveying, Neighborhood Design, and Site Designs</li>
-            <li>Sanitary and Electrical Building Designs</li>
-          </ul>
-          <Link to="/services" className="text-sm font-bold text-blue-500">
-            Read more
-          </Link>
-          <div className="flex items-center mt-2 lg:mt-0 mb-3">
-            <AiOutlineStar className="text-gray-100 bg-blue-700 bg-opacity-70 border-1 shadow-md border-blue-500 p-1 w-8 h-8 rounded-full mr-2" />
-            <h4 className="text-xl font-mono mt-3 font-bold text-gray-800">
-              Commitment to Excellence
-            </h4>
-          </div>
-          <p className="text-md font-lora text-gray-700 mb-4 pr-2">
-            At Spring Consulting Architects and Engineers, we are committed to
-            excellence in every aspect of our work. With a proven track record
-            and a team of dedicated professionals, we strive to exceed
-            expectations and deliver exceptional results on every project.
-          </p>
-          <div className="flex items-center mb-3">
-            <HiLocationMarker className="text-gray-100 bg-blue-700 bg-opacity-70 border-1 shadow-md border-blue-500 p-1 w-8 h-8 rounded-full mr-2" />
-            <h4 className="text-xl font-mono font-bold text-gray-800">
-              Office and Facilities
-            </h4>
-          </div>
-          <p className="text-md font-lora text-gray-700 mb-4 pr-2">
-            Located in Addis Ababa, our office is equipped with state-of-the-art
-            design and engineering facilities, including plotter, computers,
-            printers, and scanners. This ensures seamless project management and
-            delivery.
-          </p>
-          <div className="flex items-center mb-3">
-            <FaUserFriends className="text-gray-100 bg-blue-700 bg-opacity-70 border-1 shadow-md border-blue-500 p-1 w-8 h-8 rounded-full mr-2" />
-            <h4 className="text-xl font-mono font-bold text-gray-800">
-              Key Staff
-            </h4>
-          </div>
-          <p className="text-md font-lora text-gray-700 mb-4 pr-2">
-            Our team consists of experienced professional Engineers, Architects,
-            and sub-professional support staff, ensuring expertise and
-            efficiency in every project. When necessary, we engage additional
-            specialists to meet project requirements, ensuring quality and
-            timely delivery.
-          </p>
-          <div className="flex items-center mb-3">
-            <AiOutlinePhone className="text-gray-100 bg-blue-700 bg-opacity-70 border-1 shadow-md border-blue-500 p-1 w-8 h-8 rounded-full mr-2" />
-            <h4 className="text-xl font-mono font-bold text-gray-800">
-              Get in Touch
-            </h4>
-          </div>
-          <p className="text-md font-lora text-gray-700 mb-5 pr-2">
-            Whether you're planning a new construction project, renovating an
-            existing space, or seeking expert advice on architectural and
-            engineering matters, we're here to help. Contact us today to learn
-            more about how we can bring your vision to life.
-          </p>
-          <Link
-            to="/contact"
-            className="bg-blue-500 px-4 py-2 rounded-md border-1 border-blue-400 hover:bg-blue-400 shadow-sm shadow-gray-500 text-white"
-          >
-            Contact us
-          </Link>
         </div>
       </div>
     </div>

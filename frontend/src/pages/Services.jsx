@@ -162,7 +162,7 @@ const ServicesComponent = () => {
           </div>
         </div>
       </section>
-      <div></div>
+    
       <div className="relative">
         <div className="container mx-auto px-4 lg:pb-10 lg:py-8">
           <div className="relative z-10">
@@ -191,12 +191,30 @@ const ServicesComponent = () => {
                 {categories.map((category) => (
                   <div
                     key={category.id}
-                    className={`flex items-center cursor-pointer ${activeCategory.id === category.id ? "text-blue-500" : "text-gray-700"}`}
+                    className="flex items-center cursor-pointer"
                     onClick={() => setActiveCategory(category)}
                   >
-                    {category.icon}
+                    {/* Circle checkbox-like indicator */}
+                    <div
+                      className={`w-4 h-4 rounded-full flex items-center justify-center border-2 border-gray-400 ${activeCategory.id === category.id ? "bg-blue-500 border-blue-500" : "bg-white"}`}
+                    >
+                      {activeCategory.id === category.id && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-10 h-10 text-white"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 9a1 1 0 011-1h1a1 1 0 110 2H9a1 1 0 01-1-1zm2-1a1 1 0 00-1-1 1 1 0 00-1 1v3a1 1 0 002 0V8z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                    </div>
                     <strong
-                      className={`text-md font-medium ${activeCategory.id === category.id ? "text-blue-500" : "text-gray-700"}`}
+                      className={`text-md font-medium ml-2 ${activeCategory.id === category.id ? "text-blue-500" : "text-gray-700"}`}
                     >
                       {category.title}
                     </strong>
@@ -205,13 +223,6 @@ const ServicesComponent = () => {
               </div>
             </div>
           </div>
-          <div className="absolute inset-0 bg-white z-0"></div>
-          <div
-            className="absolute inset-x-0 bottom-0 z-0 h-1/2"
-            style={{
-              background: `linear-gradient(to bottom, #FFFFFF, #C7E3A0)`,
-            }}
-          ></div>
         </div>
       </div>
     </MainLayout>

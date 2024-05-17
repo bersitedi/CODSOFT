@@ -36,12 +36,12 @@ const Card = () => {
     return cardData.map((card, index) => (
       <div
         key={index}
-        className="group bg-gray-50 rounded-xl text-primary hover:shadow-lg hover:scale-1:3 transition duration-300 ease-in-out p-6 text-center w-full md:w-[300px] h-full md:h-[280px]"
+        className="group bg-gray-50 rounded-xl text-primary hover:shadow-md transition duration-300 ease-in-out p-6 text-center w-full md:w-[300px] h-full md:h-[280px]"
       >
         <div className="animate-fadeIn mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-blue-400 mb-4">
           <img src={card.icon} alt={card.title} className="w-8 h-8" />
         </div>
-        <h2 className="animate-fadeIn text-xl font-semibold mb-4 font-mono text-gray-800">
+        <h2 className="animate-fadeIn text-xl font-semibold mb-2 font-mono text-gray-800">
           {card.title}
         </h2>
         <p className="animate-fadeIn font-lora text-sm group-hover:text-primary text-gray-600">

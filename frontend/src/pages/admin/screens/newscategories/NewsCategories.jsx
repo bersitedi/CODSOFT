@@ -2,11 +2,6 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { useDataTable } from "../../../../hooks/useDataTable";
-import {
-  createCategory,
-  deleteCategory,
-  getAllCategories,
-} from "../../../../services/index/postCategories";
 import DataTable from "../../components/DataTable";
 import { useState } from "react";
 import {

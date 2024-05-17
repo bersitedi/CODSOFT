@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const backendUrl =
-  process.env.REACT_APP_BACKEND_URL || "https://spring-97bs.onrender.com";
+const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 export const getAllNewsCategories = async (
   searchKeyword = "",

@@ -120,9 +120,9 @@ const Projects = () => {
               totalPageCount={totalPageCount}
             />
           </div>
-          <div className="w-1/4">
-            <div className="bg-gray-100 p-4">
-              <h3 className="text-lg font-semibold mb-3">Categories</h3>
+          <div className="md:w-1/4 md:mt-10">
+            <div className="border-l-2 border-gray-300 p-4">
+              <h3 className="text-lg font-semibold mb-2">Categories</h3>
               <ul>
                 {categories.map((category) => (
                   <li key={category.id}>

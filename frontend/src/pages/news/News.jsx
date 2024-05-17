@@ -1,20 +1,18 @@
 import React from "react";
-import ArticleCard from "../../components/ArticleCard";
 import { FaArrowRight } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
-import { getAllPosts } from "../../services/index/posts";
 import { toast } from "react-hot-toast";
-import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
 import { Link } from "react-router-dom";
 import { IoMdPin } from "react-icons/io";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { getAllNews } from "../../services/index/news";
 import NewsCard from "../../components/NewsCard";
+import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
 
 const News = () => {
   const { data, isLoading, isError } = useQuery({
-    queryFn: () => getAllNews("", 1, 6),
+    queryFn: () => getAllNews("", 1, 3),
     queryKey: ["news"],
     onError: (error) => {
       toast.error(error.message);

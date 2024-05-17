@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const backendUrl =
-  process.env.REACT_APP_BACKEND_URL || "https://spring-97bs.onrender.com";
+  process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 export const getAllNews = async (searchKeyword = "", page = 1, limit = 10) => {
   try {
@@ -37,6 +37,7 @@ export const getSingleNews = async ({ slug }) => {
     throw new Error(error.message);
   }
 };
+
 export const deleteNews = async ({ slug, token }) => {
   try {
     const config = {

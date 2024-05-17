@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CreatableSelect from "react-select/creatable";
+import { getSinglePost, updatePost } from "../../../../services/index/posts";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import ArticleDetailSkeleton from "../../../articleDetail/component/ArticleDetailSkeleton";
 import ErrorMessage from "../../../../components/ErrorMessage";
@@ -9,6 +10,7 @@ import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import Editor from "../../../../components/editor/Editor";
 import MultiSelectTagDropdown from "../../components/select-dropdown/MultiSelectTagDropdown";
+import { getAllCategories } from "../../../../services/index/postCategories";
 import {
   categoryToOption,
   filterCategories,
@@ -19,8 +21,8 @@ import { getAllNewsCategories } from "../../../../services/index/newsCategories"
 import { getSingleNews, updateNews } from "../../../../services/index/news";
 
 const promiseOptions = async (inputValue) => {
-  const { data: newsCategoriesData } = await getAllNewsCategories();
-  return filterCategories(inputValue, newsCategoriesData);
+  const { data: categoriesData } = await getAllNewsCategories();
+  return filterCategories(inputValue, categoriesData);
 };
 
 const EditNews = () => {
@@ -49,8 +51,8 @@ const EditNews = () => {
   });
 
   const {
-    mutate: mutateUpdateNewsDetail,
-    isLoading: isLoadingUpdateNewsDetail,
+    mutate: mutateUpdatePostDetail,
+    isLoading: isLoadingUpdatePostDetail,
   } = useMutation({
     mutationFn: ({ updatedData, slug, token }) => {
       return updateNews({
@@ -61,7 +63,7 @@ const EditNews = () => {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries(["news", slug]);
-      toast.success("News is updated");
+      toast.success("Post is updated");
       navigate(`/admin/news/manage/edit/${data.slug}`, { replace: true });
     },
     onError: (error) => {
@@ -75,7 +77,7 @@ const EditNews = () => {
     setPhoto(file);
   };
 
-  const handleUpdateNews = async () => {
+  const handleUpdatePost = async () => {
     let updatedData = {};
 
     // Append photo if it's updated or retained
@@ -99,7 +101,7 @@ const EditNews = () => {
       });
 
       queryClient.invalidateQueries(["news", slug]);
-      toast.success("News is updated");
+      toast.success("Post is updated");
       navigate(`/admin/news/manage/edit/${updatedNews.slug}`, {
         replace: true,
       });
@@ -110,13 +112,13 @@ const EditNews = () => {
   };
 
   const handleDeleteImage = () => {
-    if (window.confirm("Do you want to delete your News picture?")) {
+    if (window.confirm("Do you want to delete your Post picture?")) {
       setInitialPhoto(null);
       setPhoto(null);
     }
   };
 
-  let isNewsDataLoaded = !isLoading && !isError;
+  let isPostDataLoaded = !isLoading && !isError;
 
   return (
     <div>
@@ -135,7 +137,7 @@ const EditNews = () => {
       ) : (
         <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
           <article className="flex-1">
-            <label htmlFor="image" className="w-full cursor-pointer">
+            <label htmlFor="postPicture" className="w-full cursor-pointer">
               {photo ? (
                 <img
                   src={URL.createObjectURL(photo)}
@@ -157,7 +159,7 @@ const EditNews = () => {
             <input
               type="file"
               className="sr-only"
-              id="image"
+              id="postPicture"
               onChange={handleFileChange}
             />
             <button
@@ -200,14 +202,14 @@ const EditNews = () => {
                 onChange={(e) =>
                   setNewsSlug(e.target.value.replace(/\s+/g, "-").toLowerCase())
                 }
-                placeholder="news slug"
+                placeholder="post slug"
               />
             </div>
             <div className="mb-5 mt-2">
               <label className="d-label">
                 <span className="d-label-text">categories</span>
               </label>
-              {isNewsDataLoaded && (
+              {isPostDataLoaded && (
                 <MultiSelectTagDropdown
                   loadOptions={promiseOptions}
                   defaultValue={data.categories.map(categoryToOption)}
@@ -221,7 +223,7 @@ const EditNews = () => {
               <label className="d-label">
                 <span className="d-label-text">tags</span>
               </label>
-              {isNewsDataLoaded && (
+              {isPostDataLoaded && (
                 <CreatableSelect
                   defaultValue={data.tags.map((tag) => ({
                     value: tag,
@@ -236,7 +238,7 @@ const EditNews = () => {
               )}
             </div>
             <div className="w-full">
-              {isNewsDataLoaded && (
+              {isPostDataLoaded && (
                 <Editor
                   content={data?.body}
                   editable={true}
@@ -247,9 +249,9 @@ const EditNews = () => {
               )}
             </div>
             <button
-              disabled={isLoadingUpdateNewsDetail}
+              disabled={isLoadingUpdatePostDetail}
               type="button"
-              onClick={handleUpdateNews}
+              onClick={handleUpdatePost}
               className="w-full bg-green text-white font-semibold rounded-lg px-4 py-2 disabled:cursor-not-allowed disabled:opacity-70"
             >
               Update Post

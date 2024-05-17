@@ -8,7 +8,7 @@ const createNewsCategory = async (req, res, next) => {
     const newsCategory = await NewsCategories.findOne({ title });
 
     if (newsCategory) {
-      const error = new Error("Category already exists!");
+      const error = new Error("Category is already exists!");
       return next(error);
     }
 
@@ -24,18 +24,18 @@ const createNewsCategory = async (req, res, next) => {
   }
 };
 
-const getSingleCategory = async (req, res, next) => {
+const getSingleNewsCategory = async (req, res, next) => {
   try {
     const newsCategory = await NewsCategories.findById(
       req.params.newsCategoryId
     );
 
     if (!newsCategory) {
-      const error = new Error("Category not found!");
+      const error = new Error("Category was not found!");
       return next(error);
     }
 
-    return res.json(newsCategory);
+    return res.json(postCategory);
   } catch (error) {
     next(error);
   }
@@ -93,7 +93,7 @@ const updateNewsCategory = async (req, res, next) => {
     );
 
     if (!newsCategory) {
-      const error = new Error("Category not found");
+      const error = new Error("Category was not found");
       return next(error);
     }
 
@@ -115,7 +115,7 @@ const deleteNewsCategory = async (req, res, next) => {
     await NewsCategories.deleteOne({ _id: categoryId });
 
     res.send({
-      message: "News category successfully deleted!",
+      message: "Post category is successfully deleted!",
     });
   } catch (error) {
     next(error);
@@ -127,5 +127,5 @@ module.exports = {
   getAllNewsCategories,
   updateNewsCategory,
   deleteNewsCategory,
-  getSingleCategory,
+  getSingleNewsCategory,
 };

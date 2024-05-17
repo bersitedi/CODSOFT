@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/actions/user";
 import logo2 from "../assets/springlogo.jpg";
 import { getAllCategories } from "../services/index/postCategories";
+import { getAllNewsCategories } from "../services/index/newsCategories";
 
 const NavItem = ({ item }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -29,6 +31,14 @@ const NavItem = ({ item }) => {
 
   const handleDropdownMouseLeave = () => {
     setIsDropdownOpen(false);
+  };
+
+  const handleItemClick = (category) => {
+    if (item.name === "Projects") {
+      navigate(`/projects?category=${category}`);
+    } else if (item.name === "News") {
+      navigate(`/news?category=${category}`);
+    }
   };
 
   return (
@@ -74,13 +84,13 @@ const NavItem = ({ item }) => {
               <div className="flex flex-col w-full">
                 {item.items.map((subItem, index) => (
                   <li key={index}>
-                    <Link
-                      to={`/projects?category=${subItem.category}`}
+                    <button
+                      onClick={() => handleItemClick(subItem.category)}
                       className="block px-4 py-2 text-sm text-white 
                     hover:bg-blue-500 hover:text-white"
                     >
                       {subItem.title}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </div>
@@ -98,7 +108,7 @@ const Header = () => {
     { name: "About", type: "link", href: "/about" },
     { name: "Projects", type: "dropdown", items: [] },
     { name: "Services", type: "link", href: "/services" },
-    { name: "News", type: "link", href: "/news" },
+    { name: "News", type: "dropdown", items: [] },
     { name: "Contact", type: "link", href: "/contact" },
   ]);
   const [navIsVisible, setNavIsVisible] = useState(false);
@@ -112,17 +122,14 @@ const Header = () => {
       try {
         const response = await getAllCategories();
         const categories = response.data;
-        const updatedNavItems = navItems.map((item) => {
+        const updatedNavItems = [...navItems]; // Create a copy of navItems
+        updatedNavItems.forEach((item) => {
           if (item.name === "Projects") {
-            return {
-              ...item,
-              items: categories.map((category) => ({
-                title: category.title,
-                category: category.title,
-              })),
-            };
+            item.items = categories.map((category) => ({
+              title: category.title,
+              category: category.title,
+            }));
           }
-          return item;
         });
         setNavItems(updatedNavItems);
       } catch (error) {
@@ -131,6 +138,29 @@ const Header = () => {
     };
 
     fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    const fetchNewsCategories = async () => {
+      try {
+        const response = await getAllNewsCategories();
+        const categoriesData = response.data;
+        const updatedNavItems = [...navItems]; // Create a copy of navItems
+        updatedNavItems.forEach((item) => {
+          if (item.name === "News") {
+            item.items = categoriesData.map((category) => ({
+              title: category.title,
+              category: category.title,
+            }));
+          }
+        });
+        setNavItems(updatedNavItems);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchNewsCategories();
   }, []);
 
   const navVisibilityHandler = () => {
@@ -193,8 +223,8 @@ const Header = () => {
            duration-300 mt-[56px] lg:mt-0 z-50 flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center overflow-y-auto lg:overflow-y-visible`}
         >
           <ul className="text-white lg:bg-[#11536A] lg:text-inherit items-start lg:items-center gap-y-5 flex flex-col lg:flex-row gap-x-5 font-semibold">
-            {navItems.map((item) => (
-              <NavItem key={item.name} item={item} />
+            {navItems.map((item, index) => (
+              <NavItem key={index} item={item} />
             ))}
           </ul>
           {userState.userInfo ? (

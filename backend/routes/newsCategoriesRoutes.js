@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
+
+const { adminGuard, authGuard } = require("../middleware/authMiddleware");
 const {
   createNewsCategory,
-  deleteNewsCategory,
   getAllNewsCategories,
+  deleteNewsCategory,
   updateNewsCategory,
-  getSingleCategory,
+  getSingleNewsCategory,
 } = require("../controllers/newsCategoriesControllers");
-const { adminGuard, authGuard } = require("../middleware/authMiddleware");
 
 router
   .route("/")
@@ -16,7 +17,7 @@ router
 
 router
   .route("/:newsCategoryId")
-  .get(getSingleCategory)
+  .get(getSingleNewsCategory)
   .put(authGuard, adminGuard, updateNewsCategory)
   .delete(authGuard, adminGuard, deleteNewsCategory);
 

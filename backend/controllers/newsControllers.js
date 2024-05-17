@@ -35,9 +35,9 @@ const updateNews = async (req, res, next) => {
     const news = await News.findOne({ slug: req.params.slug });
 
     if (!news) {
-      const error = new Error("News was not found");
-      error.status = 404;
-      return next(error);
+      const error = new Error("Post was not found");
+      next(error);
+      return;
     }
 
     const handleUpdateNewsData = async (data, file) => {
@@ -49,32 +49,18 @@ const updateNews = async (req, res, next) => {
 
         const { title, caption, slug, body, tags, categories, currentImage } =
           JSON.parse(data);
-
         news.title = title || news.title;
         news.caption = caption || news.caption;
         news.slug = slug || news.slug;
         news.body = body || news.body;
         news.tags = tags || news.tags;
-
-        if (categories && categories.length > 0) {
-          const categoryDocs = await Promise.all(
-            categories.map(async (catTitle) => {
-              let category = await NewsCategories.findOne({ title: catTitle });
-              if (!category) {
-                category = new NewsCategories({ title: catTitle });
-                await category.save();
-              }
-              return category._id;
-            })
-          );
-          news.categories = categoryDocs;
-        }
+        news.categories = categories || news.categories;
 
         if (file) {
           const imagePath = await uploadFile(file);
-          news.photo = imagePath;
+          post.photo = imagePath;
         } else if (currentImage) {
-          news.photo = currentImage;
+          post.photo = currentImage;
         }
 
         const updatedNews = await news.save();
@@ -84,7 +70,7 @@ const updateNews = async (req, res, next) => {
       }
     };
 
-    await handleUpdateNewsData(req.body.document, req.file);
+    handleUpdateNewsData(req.body.document, req.file);
   } catch (error) {
     next(error);
   }

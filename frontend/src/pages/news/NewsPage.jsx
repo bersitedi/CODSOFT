@@ -1,108 +1,143 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios"; // Import Axios for making HTTP requests
-import { toast } from "react-hot-toast";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import ArticleCard from "../../components/ArticleCard";
 import MainLayout from "../../components/MainLayout";
-import Pagination from "../../components/Pagination";
-import { useSearchParams } from "react-router-dom";
-import Search from "../../components/Search";
-import ErrorMessage from "../../components/ErrorMessage";
+import { fetchPostsByCategory } from "../../services/index/posts";
 import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
+import ErrorMessage from "../../components/ErrorMessage";
+import Pagination from "../../components/Pagination";
+import { FaProjectDiagram } from "react-icons/fa";
+import { getAllCategories } from "../../services/index/postCategories";
+import { getAllNewsCategories } from "../../services/index/newsCategories";
+import { fetchNewsByCategory } from "../../services/index/news";
 import NewsCard from "../../components/NewsCard";
 
 const NewsPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [news, setNews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(localStorage.getItem("currentPage")) || 1
-  );
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalPostsCount, setTotalPostsCount] = useState(0);
-  const [searchKeyword, setSearchKeyword] = useState("");
-  const postsPerPage = 9;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPageCount, setTotalPageCount] = useState(0);
+  const [isFetching, setIsFetching] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategoryTitle, setSelectedCategoryTitle] = useState(null);
+  const [categoryTitle, setCategoryTitle] = useState(null);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsError(false);
-      setIsLoading(true);
+    setCategoryTitle(queryParams.get("category"));
+  }, [location]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          `/api/news?searchKeyword=${searchKeyword}&page=${currentPage}&limit=${postsPerPage}`
-        );
-
-        // Extract data and headers from the response
-        const { data, headers } = response;
-
-        // Set data state
-        setData(data);
-
-        // Extract and set headers
-        const totalCountHeader = headers["x-totalcount"];
-        const totalPageCountHeader = headers["x-totalpagecount"];
-        setTotalPostsCount(totalCountHeader || 0);
-        setTotalPages(
-          totalPageCountHeader || Math.ceil(totalCountHeader / postsPerPage)
-        );
+        const response = await getAllNewsCategories();
+        setCategories(response.data);
       } catch (error) {
-        setIsError(true);
-        toast.error(error.message);
+        console.error("Error fetching categories:", error);
       }
-      setIsLoading(false);
     };
 
-    fetchData();
-  }, [currentPage, searchKeyword]);
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("currentPage", currentPage);
-  }, [currentPage]);
+    if (!selectedCategoryTitle && !categoryTitle) return;
+
+    const fetchPosts = async () => {
+      setIsLoading(true);
+      setIsError(false);
+      try {
+        const categoryToFetch = selectedCategoryTitle || categoryTitle;
+        const news = await fetchNewsByCategory(categoryToFetch);
+        setNews(news);
+      } catch (error) {
+        setIsError(true);
+        console.error("Error fetching posts:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, [categoryTitle, selectedCategoryTitle]);
+
+  const handleCategoryClick = async (categoryTitle) => {
+    setIsFetching(true);
+    try {
+      setSelectedCategoryTitle(categoryTitle);
+      setCategoryTitle(categoryTitle);
+    } catch (error) {
+      setIsError(true);
+      console.error("Error fetching posts:", error);
+    } finally {
+      setIsFetching(false);
+    }
+  };
+
+  const handleHeaderDropdownChange = (categoryTitle) => {
+    setSelectedCategoryTitle(categoryTitle);
+    setCategoryTitle(null);
+  };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  const handleSearch = ({ searchKeyword }) => {
-    setSearchKeyword(searchKeyword);
-    setCurrentPage(1); // Reset page to 1 when searching
-  };
-
   return (
-    <MainLayout>
-      <section className="flex flex-col container mx-auto px-5 py-10">
-        <Search
-          className="w-full max-w-xl mb-10"
-          onSearchKeyword={handleSearch}
-        />
-        <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
-          {isLoading || !data ? (
-            [...Array(postsPerPage)].map((_, index) => (
-              <ArticleCardSkeleton
-                key={index}
-                className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
-              />
-            ))
-          ) : isError ? (
-            <ErrorMessage message="Couldn't fetch the posts data" />
-          ) : data.length === 0 ? (
-            <p className="text-orange-500">No Posts Found!</p>
-          ) : (
-            data.map((news) => (
-              <NewsCard
-                key={news._id}
-                news={news}
-                className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
-              />
-            ))
-          )}
+    <MainLayout handleCategoryChange={handleHeaderDropdownChange}>
+      <section className="flex flex-col container mx-auto px-5 py-4 md:py-10 animate-fadeIn">
+        <div className="flex justify-between">
+          <div className="w-3/4">
+            <h2 className="text-2xl font-bold font-mono mb-1 text-gray-600">
+              {categoryTitle || selectedCategoryTitle}
+            </h2>
+            <hr className="border-2 border-green w-16 mb-5" />
+            <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
+              {isLoading || isFetching ? (
+                [...Array(3)].map((item, index) => (
+                  <ArticleCardSkeleton
+                    key={index}
+                    className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
+                  />
+                ))
+              ) : isError ? (
+                <ErrorMessage message="Couldn't fetch the posts data" />
+              ) : news.length === 0 ? (
+                <p className="text-orange-500">No Posts Found!</p>
+              ) : (
+                news.map((news) => (
+                  <NewsCard
+                    key={news._id}
+                    news={news}
+                    className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
+                  />
+                ))
+              )}
+            </div>
+            <Pagination
+              onPageChange={(page) => handlePageChange(page)}
+              currentPage={currentPage}
+              totalPageCount={totalPageCount}
+            />
+          </div>
+          <div className="md:w-1/4 md:mt-10">
+            <div className="border-l-2 border-gray-300 p-4">
+              <h3 className="text-lg font-semibold mb-2">Categories</h3>
+              <ul>
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    <button onClick={() => handleCategoryClick(category.title)}>
+                      {category.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-        {!isLoading && (
-          <Pagination
-            onPageChange={(page) => handlePageChange(page)}
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
-        )}
       </section>
     </MainLayout>
   );
