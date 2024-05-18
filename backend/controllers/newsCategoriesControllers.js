@@ -35,7 +35,7 @@ const getSingleNewsCategory = async (req, res, next) => {
       return next(error);
     }
 
-    return res.json(postCategory);
+    return res.json(newsCategory);
   } catch (error) {
     next(error);
   }
@@ -115,7 +115,7 @@ const deleteNewsCategory = async (req, res, next) => {
     await NewsCategories.deleteOne({ _id: categoryId });
 
     res.send({
-      message: "Post category is successfully deleted!",
+      message: "News category is successfully deleted!",
     });
   } catch (error) {
     next(error);

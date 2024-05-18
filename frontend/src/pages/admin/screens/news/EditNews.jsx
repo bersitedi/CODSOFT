@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CreatableSelect from "react-select/creatable";
-import { getSinglePost, updatePost } from "../../../../services/index/posts";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import ArticleDetailSkeleton from "../../../articleDetail/component/ArticleDetailSkeleton";
 import ErrorMessage from "../../../../components/ErrorMessage";
@@ -10,7 +9,6 @@ import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import Editor from "../../../../components/editor/Editor";
 import MultiSelectTagDropdown from "../../components/select-dropdown/MultiSelectTagDropdown";
-import { getAllCategories } from "../../../../services/index/postCategories";
 import {
   categoryToOption,
   filterCategories,
@@ -18,9 +16,10 @@ import {
 import { FiArrowLeft } from "react-icons/fi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSingleNews, updateNews } from "../../../../services/index/news";
+import { getAllNewsCategories } from "../../../../services/index/newsCategories";
 
 const promiseOptions = async (inputValue) => {
-  const { data: categoriesData } = await getAllCategories();
+  const { data: categoriesData } = await getAllNewsCategories();
   return filterCategories(inputValue, categoriesData);
 };
 
@@ -42,6 +41,7 @@ const EditNews = () => {
     queryKey: ["news", slug],
     onSuccess: (data) => {
       setInitialPhoto(data?.photo);
+      console.log("Categories:", data.categories);
       setCategories(data.categories.map((item) => item._id));
       setTitle(data.title);
       setTags(data.tags);
