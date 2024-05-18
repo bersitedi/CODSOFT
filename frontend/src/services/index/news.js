@@ -23,7 +23,7 @@ export const fetchNewsByCategory = async (categoryTitle) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error fetching posts by category:", error);
+    console.error("Error fetching news by category:", error);
     throw error;
   }
 };
@@ -63,33 +63,29 @@ export const updateNews = async ({ updatedData, slug, token }) => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data", // Ensure correct content type for file upload
       },
     };
 
+    // Create FormData object
     const formData = new FormData();
+    formData.append("document", JSON.stringify(updatedData)); // Append updated data
 
-    for (const key in updatedData) {
-      if (updatedData[key] !== null && updatedData[key] !== undefined) {
-        if (key === "image" && updatedData[key] instanceof File) {
-          formData.append(key, updatedData[key]);
-        } else {
-          formData.append(key, updatedData[key]);
-        }
-      }
+    // Check if image exists in updatedData and append it to formData
+    if (updatedData.image instanceof File) {
+      formData.append("image", updatedData.image); // Append image
     }
 
-    const response = await axios.put(
-      `http://localhost:5000/api/news/${slug}`,
+    // Make PUT request with formData
+    const { data } = await axios.put(
+      `${backendUrl}/api/news/${slug}`,
       formData,
       config
     );
-
-    return response.data;
+    return data;
   } catch (error) {
-    if (error.response && error.response.data.message) {
+    if (error.response && error.response.data.message)
       throw new Error(error.response.data.message);
-    }
     throw new Error(error.message);
   }
 };
@@ -102,7 +98,11 @@ export const createNews = async ({ token }) => {
       },
     };
 
-    const { data } = await axios.post(`${backendUrl}/api/news`, {}, config);
+    const { data } = await axios.post(
+      `https://spring-97bs.onrender.com/api/news`,
+      {},
+      config
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

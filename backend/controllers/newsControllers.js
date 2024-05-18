@@ -11,7 +11,6 @@ const NewsCategories = require("../models/NewsCategories");
 const createNews = async (req, res, next) => {
   try {
     const news = new News({
-      // Change Post to News
       title: "sample title",
       caption: "sample caption",
       slug: uuidv4(),
@@ -40,24 +39,37 @@ const updateNews = async (req, res, next) => {
       return;
     }
 
-    const { title, caption, slug, body, tags, categories, currentImage } =
-      req.body;
-    news.title = title || news.title;
-    news.caption = caption || news.caption;
-    news.slug = slug || news.slug;
-    news.body = body || news.body;
-    news.tags = tags ? JSON.parse(tags) : news.tags;
-    news.categories = categories ? JSON.parse(categories) : news.categories;
+    const handleUpdateNewsData = async (data, file) => {
+      try {
+        if (!data) {
+          const error = new Error("Data is undefined");
+          throw error;
+        }
 
-    if (req.file) {
-      const imagePath = await uploadFile(req.file);
-      news.photo = imagePath;
-    } else if (currentImage) {
-      news.photo = currentImage;
-    }
+        const { title, caption, slug, body, tags, categories, currentImage } =
+          JSON.parse(data);
+        news.title = title || news.title;
+        news.caption = caption || news.caption;
+        news.slug = slug || news.slug;
+        news.body = body || news.body;
+        news.tags = tags || news.tags;
+        news.categories = categories || news.categories;
 
-    const updatedNews = await news.save();
-    res.json(updatedNews);
+        if (file) {
+          const imagePath = await uploadFile(file);
+          news.photo = imagePath;
+        } else if (currentImage) {
+          news.photo = currentImage;
+        }
+
+        const updatedNews = await news.save();
+        return res.json(updatedNews);
+      } catch (error) {
+        next(error);
+      }
+    };
+
+    handleUpdateNewsData(req.body.document, req.file);
   } catch (error) {
     next(error);
   }

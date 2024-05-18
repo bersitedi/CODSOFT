@@ -17,11 +17,10 @@ import {
 } from "../../../../utils/multiSelectTagUtils";
 import { FiArrowLeft } from "react-icons/fi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAllNewsCategories } from "../../../../services/index/newsCategories";
 import { getSingleNews, updateNews } from "../../../../services/index/news";
 
 const promiseOptions = async (inputValue) => {
-  const { data: categoriesData } = await getAllNewsCategories();
+  const { data: categoriesData } = await getAllCategories();
   return filterCategories(inputValue, categoriesData);
 };
 
@@ -33,9 +32,9 @@ const EditNews = () => {
   const [initialPhoto, setInitialPhoto] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [body, setBody] = useState(null);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(null);
   const [title, setTitle] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(null);
   const [newsSlug, setNewsSlug] = useState(slug);
 
   const { data, isLoading, isError } = useQuery({
@@ -78,25 +77,32 @@ const EditNews = () => {
   };
 
   const handleUpdateNews = async () => {
-    let updatedData = {
-      body,
-      categories: JSON.stringify(categories),
-      title,
-      tags: JSON.stringify(tags),
-      slug: newsSlug,
-    };
+    let updatedData = {};
 
-    if (photo) {
+    // Append photo if it's updated or retained
+    if (!initialPhoto && photo) {
       updatedData.image = photo;
-    } else if (initialPhoto) {
-      updatedData.image = initialPhoto;
+    } else if (initialPhoto && !photo) {
+      updatedData.image = stables.S3_BUCKET_URL + data?.photo;
     }
 
+    updatedData.body = body;
+    updatedData.categories = categories;
+    updatedData.title = title;
+    updatedData.tags = tags;
+    updatedData.slug = newsSlug;
+
     try {
-      mutateUpdateNewsDetail({
+      const updatedNews = await updateNews({
         updatedData,
         slug,
         token: userState.userInfo.token,
+      });
+
+      queryClient.invalidateQueries(["news", slug]);
+      toast.success("News is updated");
+      navigate(`/admin/news/manage/edit/${updatedNews.slug}`, {
+        replace: true,
       });
     } catch (error) {
       toast.error(error.message);
@@ -105,7 +111,7 @@ const EditNews = () => {
   };
 
   const handleDeleteImage = () => {
-    if (window.confirm("Do you want to delete your Post picture?")) {
+    if (window.confirm("Do you want to delete your News picture?")) {
       setInitialPhoto(null);
       setPhoto(null);
     }
@@ -126,11 +132,11 @@ const EditNews = () => {
       {isLoading ? (
         <ArticleDetailSkeleton />
       ) : isError ? (
-        <ErrorMessage message="Couldn't fetch the post detail" />
+        <ErrorMessage message="Couldn't fetch the news detail" />
       ) : (
         <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
           <article className="flex-1">
-            <label htmlFor="postPicture" className="w-full cursor-pointer">
+            <label htmlFor="newsPicture" className="w-full cursor-pointer">
               {photo ? (
                 <img
                   src={URL.createObjectURL(photo)}
@@ -152,7 +158,7 @@ const EditNews = () => {
             <input
               type="file"
               className="sr-only"
-              id="postPicture"
+              id="newsPicture"
               onChange={handleFileChange}
             />
             <button
@@ -166,7 +172,7 @@ const EditNews = () => {
               {data?.categories.map((category, index) => (
                 <Link
                   key={index}
-                  to={`/news?category=${category.name}`}
+                  to={`/blog?category=${category.name}`}
                   className="text-primary text-sm font-roboto inline-block md:text-base"
                 >
                   {category.name}
@@ -196,7 +202,7 @@ const EditNews = () => {
                 onChange={(e) =>
                   setNewsSlug(e.target.value.replace(/\s+/g, "-").toLowerCase())
                 }
-                placeholder="post slug"
+                placeholder="news slug"
               />
             </div>
             <div className="mb-5 mt-2">
@@ -249,7 +255,7 @@ const EditNews = () => {
               onClick={handleUpdateNews}
               className="w-full bg-green text-white font-semibold rounded-lg px-4 py-2 disabled:cursor-not-allowed disabled:opacity-70"
             >
-              Update Post
+              Update News
             </button>
           </article>
         </section>
