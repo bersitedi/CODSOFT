@@ -16,8 +16,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        merri: ["'Merriweather'", "serif"],
-        fair: ["'Playfair Display'", "serif"],
+        primary: ["'Roboto Slab'", "serif"],
+        secondary: ["'Poppins'", "sans - serif"],
         lora: ["'Lora'", "serif"],
       },
       keyframes: {

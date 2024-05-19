@@ -35,7 +35,7 @@ const Articles = () => {
         <div className="flex flex-col justify-start items-start space-x-4 w-full py-3">
           <span className="flex items-start md:items-center justify-start space-x-2">
             <IoMdPin className="text-3xl text-primary" />
-            <p className="font-semibold text-xl font-mono text-gray-600">
+            <p className="font-semibold text-[17px] font-secondary text-gray-600">
               Welcome to Spring Consulting Architects and Engineers.
             </p>
           </span>

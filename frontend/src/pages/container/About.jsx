@@ -20,11 +20,11 @@ const About = () => {
           <h4 className="text-lg md:text-xl text-blue-600 font-bold md:mb-1 font-mono">
             About Us
           </h4>
-          <h2 className="text-3xl font-bold mb-2">
+          <h2 className="text-2xl md:text-3xl font-bold font-primary mb-2">
             Learn More About our Company
           </h2>
           <hr className="border-2 border-green w-20 md:w-40 mb-3" />
-          <p className="text-md mb-5 font-lora">
+          <p className="text-[15px] mb-5 font-lora">
             Spring Consulting Architects and Engineers, formerly known as
             Theodros Tsegaye Consulting Architects & Engineers, is an esteemed
             Category-I Ethiopian firm established in 2009. Specializing in a

@@ -6,7 +6,7 @@ const backendUrl =
 export const getAllNews = async (searchKeyword = "", page = 1, limit = 10) => {
   try {
     const { data, headers } = await axios.get(
-      `${backendUrl}/api/news?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `https://spring-97bs.onrender.com/api/news?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {
@@ -29,7 +29,7 @@ export const fetchNewsByCategory = async (categoryTitle) => {
 };
 export const getSingleNews = async ({ slug }) => {
   try {
-    const { data } = await axios.get(`/api/news/${slug}`);
+    const { data } = await axios.get(`${backendUrl}/api/news/${slug}`);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

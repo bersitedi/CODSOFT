@@ -6,7 +6,7 @@ const backendUrl =
 export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
   try {
     const { data, headers } = await axios.get(
-      `${backendUrl}/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `https://spring-97bs.onrender.com/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {
@@ -15,6 +15,7 @@ export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
     throw new Error(error.message);
   }
 };
+
 export const fetchPostsByCategory = async (categoryTitle) => {
   try {
     const response = await axios.get(

@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDataTable } from "../../../../hooks/useDataTable";
 import DataTable from "../../components/DataTable";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 import { deletePost, getAllPosts } from "../../../../services/index/posts";
 import { images, stables } from "../../../../constant";
 

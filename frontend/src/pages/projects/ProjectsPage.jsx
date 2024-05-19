@@ -28,11 +28,12 @@ const ProjectsPage = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `/api/posts?searchKeyword=${searchKeyword}&page=${currentPage}&limit=${postsPerPage}`
+          `https://spring-97bs.onrender.com/api/posts?searchKeyword=${searchKeyword}&page=${currentPage}&limit=${postsPerPage}`
         );
 
         // Extract data and headers from the response
         const { data, headers } = response;
+        console.log("Headers:", headers);
 
         // Set data state
         setData(data);
@@ -44,6 +45,8 @@ const ProjectsPage = () => {
         setTotalPages(
           totalPageCountHeader || Math.ceil(totalCountHeader / postsPerPage)
         );
+        console.log("Total Posts Count:", totalCountHeader);
+        console.log("Total Pages Count:", totalPageCountHeader);
       } catch (error) {
         setIsError(true);
         toast.error(error.message);

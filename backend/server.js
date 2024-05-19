@@ -29,7 +29,13 @@ const {
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "https://springconsultinget.com/",
+    exposedHeaders: ["x-totalcount", "x-totalpagecount"],
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("server is running...");

@@ -98,7 +98,7 @@ const ServicesComponent = () => {
               <h2 className="text-2xl font-bold font-mono mb-1 text-gray-600">
                 Services
               </h2>
-              <hr className="border-2 border-green w-20 mb-3" />
+              <hr className="border-2 border-green w-20 md:mb-3" />
             </div>
           </div>
           <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-start lg:-mt-16">
@@ -162,10 +162,47 @@ const ServicesComponent = () => {
           </div>
         </div>
       </section>
-    
+
       <div className="relative">
         <div className="container mx-auto px-4 lg:pb-10 lg:py-8">
           <div className="relative z-10">
+            <div className="w-full pb-4 flex flex-col items-start space-y-4 lg:hidden">
+              <h2 className="font-bold text-xl md:text-2xl text-gray-800 mb-2">
+                List Categories of our services
+              </h2>
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  className="flex items-center cursor-pointer"
+                  onClick={() => setActiveCategory(category)}
+                >
+                  {/* Circle checkbox-like indicator */}
+                  <div
+                    className={`w-4 h-4 rounded-full flex items-center justify-center border-2 border-gray-400 ${activeCategory.id === category.id ? "bg-blue-500 border-blue-500" : "bg-white"}`}
+                  >
+                    {activeCategory.id === category.id && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="w-10 h-10 text-white"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 9a1 1 0 011-1h1a1 1 0 110 2H9a1 1 0 01-1-1zm2-1a1 1 0 00-1-1 1 1 0 00-1 1v3a1 1 0 002 0V8z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    )}
+                  </div>
+                  <strong
+                    className={`text-md font-medium ml-2 ${activeCategory.id === category.id ? "text-blue-500" : "text-gray-700"}`}
+                  >
+                    {category.title}
+                  </strong>
+                </div>
+              ))}
+            </div>
             <div className="flex flex-col lg:flex-row md:px-4 md:pb-10 py-3 lg:py-8">
               <div className="w-full lg:w-2/3 lg:py-4 py-2 pb-8 md:pr-3 lg:pr-20">
                 <h2 className="font-bold text-xl md:text-2xl text-gray-800 mb-2">
@@ -184,7 +221,7 @@ const ServicesComponent = () => {
                   ))}
                 </ul>
               </div>
-              <div className="w-full pb-8 lg:w-1/2 px-8 py-4 border-l border-l-gray-200 flex flex-col items-start space-y-4">
+              <div className="hidden lg:flex flex-col pb-8 lg:w-1/2 px-8 py-4 border-l border-l-gray-200  items-start space-y-4">
                 <h2 className="font-bold text-xl md:text-2xl text-gray-800 mb-2">
                   List Categories of our services
                 </h2>

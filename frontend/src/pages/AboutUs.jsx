@@ -64,7 +64,7 @@ const AboutUs = () => {
           <div className="relative z-10">
             <div
               ref={leadershipRef}
-              className={`mt-3 md:mt-8 lg:mb-20 grid gap-x-8 gap-y-8 lg:gap-y-20 xl:grid-cols-3 transition-opacity duration-1000 ${
+              className={`mb-5 md:mt-8 lg:mb-20 grid gap-x-8 gap-y-8 lg:gap-y-20 xl:grid-cols-3 transition-opacity duration-1000 ${
                 isLeadershipVisible ? "opacity-100" : "opacity-0"
               }`}
             >

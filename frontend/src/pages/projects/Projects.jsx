@@ -85,9 +85,23 @@ const Projects = () => {
 
   return (
     <MainLayout handleCategoryChange={handleHeaderDropdownChange}>
-      <section className="flex flex-col container mx-auto px-5 py-4 md:py-10 animate-fadeIn">
-        <div className="flex justify-between">
-          <div className="w-3/4">
+      <section className="flex flex-col lg:flex-row justify-center lg:justify-between items-center container mx-auto px-5 py-4 md:py-10 animate-fadeIn">
+        <div className="flex flex-col lg:flex-row justify-between">
+          <div className="w-full mb-2 lg:hidden">
+            <div className="">
+              <h3 className="text-lg font-semibold mb-2">Categories</h3>
+              <ul>
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    <button onClick={() => handleCategoryClick(category.title)}>
+                      {category.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="w-full lg:w-3/4">
             <h2 className="text-2xl font-bold font-mono mb-1 text-gray-600">
               {categoryTitle || selectedCategoryTitle}
             </h2>
@@ -120,7 +134,7 @@ const Projects = () => {
               totalPageCount={totalPageCount}
             />
           </div>
-          <div className="md:w-1/4 md:mt-10">
+          <div className="hidden lg:flex w-full lg:w-1/4 md:mt-10">
             <div className="border-l-2 border-gray-300 p-4">
               <h3 className="text-lg font-semibold mb-2">Categories</h3>
               <ul>

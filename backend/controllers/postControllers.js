@@ -126,18 +126,18 @@ const getAllPosts = async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * pageSize;
-    const total = await Post.find(where).countDocuments();
-    const pages = Math.ceil(total / pageSize);
+    const total = await Post.countDocuments(where);
+    const totalPages = Math.ceil(total / pageSize);
 
-    res.header({
-      "x-filter": filter,
-      "x-totalcount": JSON.stringify(total),
-      "x-currentpage": JSON.stringify(page),
-      "x-pagesize": JSON.stringify(pageSize),
-      "x-totalpagecount": JSON.stringify(pages),
+    res.set({
+      "x-filter": filter || "",
+      "x-totalcount": total.toString(),
+      "x-currentpage": page.toString(),
+      "x-pagesize": pageSize.toString(),
+      "x-totalpagecount": totalPages.toString(),
     });
 
-    if (page > pages) {
+    if (page > totalPages) {
       return res.json([]);
     }
 

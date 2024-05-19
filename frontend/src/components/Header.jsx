@@ -176,11 +176,14 @@ const Header = () => {
     <section className="sticky top-0 left-0 right-0 z-50 bg-[#11536A]">
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <Link to="/" className="flex items-center space-x-3">
-          <div className="flex flex-col lg:flex-row space-x-2 items-center justify-center">
+          <div className="flex flex-col lg:flex-row space-x-2 xl:pt-2 items-center justify-center">
             <img src={logo2} className="w-10" alt="" />
-            <span className="hidden lg:block text-2xl font-bold text-green">
-              SPRING <span className="text-sm">Architects & Engineers</span>
-            </span>
+            <h1 className="hidden lg:block text-2xl font-bold text-green">
+              SPRING{" "}
+              <span className="hidden xl:flex text-sm">
+                Architects & Engineers
+              </span>
+            </h1>
           </div>
         </Link>
 

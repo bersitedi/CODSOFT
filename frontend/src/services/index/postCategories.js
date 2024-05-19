@@ -10,7 +10,7 @@ export const getAllCategories = async (
 ) => {
   try {
     const { data, headers } = await axios.get(
-      `${backendUrl}/api/post-categories?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `https://spring-97bs.onrender.com/api/post-categories?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {

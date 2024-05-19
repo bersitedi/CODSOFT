@@ -43,7 +43,7 @@ const AboutSection = () => {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
 
   return (
-    <div className="container mx-auto md:px-4 lg:py-5 mt-5 animate-fadeIn">
+    <div className="container mx-auto px-4 lg:py-5 mt-5 animate-fadeIn">
       <div className="w-full mb-3">
         <h4 className="text-lg md:text-xl text-blue-600 font-bold md:mb-1 font-mono">
           About Us
@@ -98,9 +98,50 @@ const AboutSection = () => {
           isIntersecting2 ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="container mx-auto px-4 lg:pb-10 lg:py-8">
+        <div className="container mx-auto md:px-4 lg:pb-10 lg:py-8">
           <div className="relative z-10">
             <div className="flex flex-col lg:flex-row justify-center  md:px-4 md:pb-10 py-3 lg:py-8">
+              <div className="flex flex-col w-full lg:w-1/3 px-8 py-4 border-l border-l-gray-200   items-start space-y-4 lg:hidden">
+                {categories.map((category) => (
+                  <div
+                    key={category.id}
+                    className="flex items-center cursor-pointer"
+                    onClick={() => setActiveCategory(category)}
+                  >
+                    <div
+                      className={`w-4 h-4 rounded-full flex items-center justify-center border-2 border-gray-400 ${
+                        activeCategory.id === category.id
+                          ? "bg-blue-500 border-blue-500"
+                          : "bg-white"
+                      }`}
+                    >
+                      {activeCategory.id === category.id && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-10 h-10 text-white"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 9a1 1 0 011-1h1a1 1 0 110 2H9a1 1 0 01-1-1zm2-1a1 1 0 00-1-1 1 1 0 00-1 1v3a1 1 0 002 0V8z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                    <h2
+                      className={`font-medium text-lg  text-gray-800 mb-2 ml-2 ${
+                        activeCategory.id === category.id
+                          ? "text-blue-500"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      {category.title}
+                    </h2>
+                  </div>
+                ))}
+              </div>
               <div className="w-full lg:w-2/3 lg:py-4 py-2 pb-8 md:pr-3 lg:pr-20">
                 <h2 className="font-bold text-2xl md:text-3xl text-gray-800 mb-2">
                   {activeCategory.title}
@@ -111,7 +152,7 @@ const AboutSection = () => {
                   {activeCategory.buttonText}
                 </button>
               </div>
-              <div className="w-full lg:w-1/3 px-8 py-4 border-l border-l-gray-200 flex flex-col items-start space-y-4">
+              <div className="hidden lg:flex flex-col w-full lg:w-1/3 px-8 py-4 border-l border-l-gray-200   items-start space-y-4">
                 {categories.map((category) => (
                   <div
                     key={category.id}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
@@ -9,8 +9,10 @@ import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { getAllNews } from "../../services/index/news";
 import NewsCard from "../../components/NewsCard";
 import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
+import { getAllNewsCategories } from "../../services/index/newsCategories";
 
 const News = () => {
+  const [categories, setCategories] = useState([]);
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getAllNews("", 1, 3),
     queryKey: ["news"],
@@ -23,6 +25,27 @@ const News = () => {
   const [ref, isIntersecting] = useIntersectionObserver({
     threshold: 0.1,
   });
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getAllNewsCategories();
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // Function to get the first category title
+  const getFirstCategory = () => {
+    if (categories.length > 0) {
+      return categories[0].title;
+    }
+    return "default"; // Use a default category if no categories are available
+  };
 
   return (
     <section className="mt-2">
@@ -62,7 +85,7 @@ const News = () => {
           )}
         </div>
         <Link
-          to="/news"
+          to={`/news?category=${getFirstCategory()}`}
           className="mx-auto flex items-center gap-x-2 font-bold text-primary border-2 border-primary px-6 py-1 rounded-lg hover:bg-cta hover:text-white"
         >
           <span>More articles</span>
