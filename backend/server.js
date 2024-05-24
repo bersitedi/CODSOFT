@@ -23,7 +23,7 @@ const upload = multer({ dest: "uploads/" });
 
 const {
   uploadFile,
-  getFileStream,
+  getFileStream
 } = require("./middleware/uploadPictureMiddleware");
 
 const app = express();
@@ -32,7 +32,7 @@ app.use(express.json());
 
 const allowedOrigins = [
   "https://springconsultinget.com",
-  "http://localhost:3000",
+  "http://localhost:5000"
 ];
 
 app.use(
