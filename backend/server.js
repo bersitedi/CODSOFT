@@ -35,18 +35,23 @@ const allowedOrigins = [
   "http://localhost:3000",
 ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    exposedHeaders: ["x-totalcount", "x-totalpagecount"],
-  })
-);
+// CORS middleware function
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (
+      !origin ||
+      allowedOrigins.some((allowedOrigin) => origin.match(allowedOrigin))
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  exposedHeaders: ["x-totalcount", "x-totalpagecount"],
+};
+
+// Use CORS middleware
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("server is running...");
