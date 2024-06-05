@@ -45,7 +45,7 @@ const News = () => {
   };
 
   const navigateToProjectsPageTop = () => {
-    window.location.href = `/news?category=${getFirstCategory()}#top`;
+    window.location.href = `/media?category=${getFirstCategory()}#top`;
   };
 
   return (

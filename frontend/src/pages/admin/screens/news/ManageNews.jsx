@@ -122,7 +122,7 @@ const ManageNews = () => {
               Delete
             </button>
             <Link
-              to={`/admin/news/manage/edit/${news?.slug}`}
+              to={`/admin/media/manage/edit/${news?.slug}`}
               className="text-green-600 hover:text-green-900"
             >
               Edit

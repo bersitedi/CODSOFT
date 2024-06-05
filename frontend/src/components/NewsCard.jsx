@@ -14,8 +14,8 @@ const NewsCard = ({ news, className }) => {
   return (
     <div className={`${className} bg-white`}>
       <Link
-        to={`/news/${news?.slug}`}
-        onClick={() => navigateToPageTop(`/news/${news?.slug}`)}
+        to={`/media/${news?.slug}`}
+        onClick={() => navigateToPageTop(`/media/${news?.slug}`)}
       >
         <img
           className="rounded-md w-full"
@@ -28,8 +28,8 @@ const NewsCard = ({ news, className }) => {
         />
       </Link>
       <Link
-        to={`/news/${news?.slug}`}
-        onClick={() => navigateToPageTop(`/news/${news?.slug}`)}
+        to={`/media/${news?.slug}`}
+        onClick={() => navigateToPageTop(`/media/${news?.slug}`)}
       >
         <h2 className="font-primary font-bold text-xl text-dark-soft pt-2 pb-1">
           {news.title}

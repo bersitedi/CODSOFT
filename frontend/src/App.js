@@ -37,8 +37,8 @@ function App() {
         <Route path="/project/:slug" element={<ArticleDetailPage />} />
         <Route path="/project" element={<ProjectsPage />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/news" element={<NewsPage />} />
-        <Route path="/news/:slug" element={<NewsDetailPage />} />
+        <Route path="/media" element={<NewsPage />} />
+        <Route path="/media/:slug" element={<NewsDetailPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
@@ -46,16 +46,16 @@ function App() {
           <Route index element={<Admin />} />
           <Route path="posts/manage" element={<ManagePosts />} />
           <Route path="posts/manage/edit/:slug" element={<EditPost />} />
-          <Route path="news/manage" element={<ManageNews />} />
-          <Route path="news/manage/edit/:slug" element={<EditNews />} />
+          <Route path="media/manage" element={<ManageNews />} />
+          <Route path="media/manage/edit/:slug" element={<EditNews />} />
           <Route path="categories/manage" element={<Categories />} />
           <Route
             path="categories/manage/edit/:slug"
             element={<EditCategories />}
           />
-          <Route path="newscategories/manage" element={<NewsCategories />} />
+          <Route path="mediacategories/manage" element={<NewsCategories />} />
           <Route
-            path="newscategories/manage/edit/:slug"
+            path="mediacategories/manage/edit/:slug"
             element={<EditNewsCategories />}
           />
           <Route path="users/manage" element={<Users />} />

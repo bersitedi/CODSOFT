@@ -2,19 +2,23 @@ import React from "react";
 import { AiOutlineTwitter, AiFillInstagram } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
 import { BsTelegram } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/springbigscreenlogo-footer.jpg";
 
 const Footer = () => {
+  const navigateToServicessPageTop = () => {
+    window.location.href = "/services#top";
+  };
+
   return (
     <footer className="bg-cta">
       <div className="container mx-auto px-4 py-8 w-full p-4 lg:py-8">
-        <div className="md:flex md:justify-between md:mb-20 md:mt-10">
-          <div className="mb-6 md:mb-0">
-            <Link to="/" className="hidden md:flex items-center">
+        <div className="lg:flex md:justify-between md:mb-20 md:mt-10">
+          <div className="mb-6 lg:mb-0 lg:mr-10">
+            <Link to="/" className="hidden lg:flex items-center">
               <img src={logo} className="w-[200px] me-3" alt="FlowBite Logo" />
             </Link>
-            <div className="text-white flex flex-row items-center justify-center mt-3 md:mt-8 text-xl md:text-2xl gap-x-8 cursor-pointer">
+            <div className="text-white flex flex-row items-center justify-center mt-3 lg:mt-8 text-xl lg:text-2xl gap-x-8 cursor-pointer">
               <Link to="#">
                 <AiOutlineTwitter />
               </Link>
@@ -29,21 +33,28 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-2">
             <div>
               <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
                 Services
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <Link to="#" className="hover:underline">
+                  <button
+                    onClick={navigateToServicessPageTop}
+                    className="hover:underline"
+                  >
                     Architectural Design
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="#" className="hover:underline">
-                    Structural Engineering
-                  </Link>
+                  <button
+                    onClick={navigateToServicessPageTop}
+                    Construction
+                    Supervision
+                  >
+                    Construction Supervision
+                  </button>
                 </li>
               </ul>
             </div>
@@ -54,12 +65,12 @@ const Footer = () => {
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <Link to="#" className="hover:underline ">
-                    Email: info@example.com
+                    Email: springconae@gmail.com
                   </Link>
                 </li>
                 <li>
                   <Link to="#" className="hover:underline">
-                    Phone: +123-456-7890
+                    Phone: +251 116 675 115
                   </Link>
                 </li>
               </ul>
@@ -71,7 +82,8 @@ const Footer = () => {
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <Link to="#" className="hover:underline">
-                    Ethiopia, Addis Ababa
+                    Spring Architects & Engineers, 10th floor, Mercy Plaza,
+                    Addis Ababa, Ethiopia
                   </Link>
                 </li>
               </ul>

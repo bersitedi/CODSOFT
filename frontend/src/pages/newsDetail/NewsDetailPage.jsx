@@ -26,8 +26,8 @@ const NewsDetailPage = () => {
     onSuccess: (data) => {
       setBreadCrumbsData([
         { name: "Home", link: "/" },
-        { name: "News", link: "/news" },
-        { name: data.title, link: `/news/${data.slug}` },
+        { name: "News", link: "/media" },
+        { name: data.title, link: `/media/${data.slug}` },
       ]);
       setBody(data.body);
     },
@@ -84,7 +84,7 @@ const NewsDetailPage = () => {
                   data.categories.map((category, index) => (
                     <Link
                       key={index}
-                      to={`/news?category=${category.name}`}
+                      to={`/media?category=${category.name}`}
                       className="text-primary text-sm font-roboto inline-block md:text-base"
                     >
                       {category.name}

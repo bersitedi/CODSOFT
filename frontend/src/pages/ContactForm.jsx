@@ -118,19 +118,19 @@ const ContactForm = () => {
 
       <div className="container mx-auto px-4">
         <div className="flex flex-col space-y-6">
-          <div className="grid grid-cols-2 gap-4 mt-5">
+          <div className="grid grid-cols-2 gap-4 mt-5 text-gray-600">
             <div className="flex items-center">
               <FaPhoneAlt className="mr-2 text-2xl text-buttons" />
-              <p className="font-bold text-sm">(123) 456-7890</p>
+              <p className="font-bold text-sm"> Phone: +251 116 675 115</p>
             </div>
             <div className="flex items-center">
               <FaEnvelope className="mr-2 text-xl text-buttons" />
-              <p className="font-bold text-sm">mikegriffin@example.com</p>
+              <p className="font-bold text-sm">Email: springconae@gmail.com</p>
             </div>
             <div className="flex items-center">
               <FaMapMarkerAlt className="mr-2 text-xl text-buttons" />
               <p className="font-bold text-sm">
-                11 North Street, Baltimore, MD 49706
+                Mercy plaza, 10th floor office No 003
               </p>
             </div>
           </div>

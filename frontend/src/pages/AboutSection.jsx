@@ -11,7 +11,7 @@ const categories = [
      Stay informed and inspired with the latest updates from Spring Architects & Engineers on our News & Articles page. Here, we share insights into our ongoing and upcoming projects, industry trends, and expert opinions from our team of professionals. Whether you are interested in architectural innovations, engineering breakthroughs, or urban development strategies, our news page provides a wealth of information designed to keep you up-to-date.
     `,
     buttonText: "Read More",
-    link: "/news#top",
+    link: "/media#top",
   },
   {
     id: 2,

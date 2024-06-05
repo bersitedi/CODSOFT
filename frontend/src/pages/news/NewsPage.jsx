@@ -45,7 +45,7 @@ const NewsPage = () => {
           setCategoryTitle(defaultCategory);
           setSelectedCategoryTitle(defaultCategory);
           setActiveCategory(defaultCategory);
-          navigate(`/news?category=${defaultCategory}`, { replace: true });
+          navigate(`/media?category=${defaultCategory}`, { replace: true });
         }
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -82,7 +82,7 @@ const NewsPage = () => {
       setSelectedCategoryTitle(categoryTitle);
       setCategoryTitle(categoryTitle);
       setActiveCategory(categoryTitle);
-      navigate(`/news?category=${categoryTitle}`, { replace: true });
+      navigate(`/media?category=${categoryTitle}`, { replace: true });
     } catch (error) {
       setIsError(true);
       console.error("Error fetching posts:", error);

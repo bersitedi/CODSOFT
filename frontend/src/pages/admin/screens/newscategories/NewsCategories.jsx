@@ -136,7 +136,7 @@ const NewsCategories = () => {
                   Delete
                 </button>
                 <Link
-                  to={`/admin/newscategories/manage/edit/${category?._id}`}
+                  to={`/admin/mediacategories/manage/edit/${category?._id}`}
                   className="text-green-600 hover:text-green-900"
                 >
                   Edit

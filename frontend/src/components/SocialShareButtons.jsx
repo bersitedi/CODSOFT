@@ -2,7 +2,7 @@ import React from "react";
 import {
   FaFacebookSquare,
   FaTwitterSquare,
-  FaRedditSquare,
+  FaTelegramPlane,
   FaWhatsappSquare,
 } from "react-icons/fa";
 
@@ -26,9 +26,9 @@ const SocialShareButtons = ({ url, title }) => {
       <a
         target="_blank"
         rel="noreferrer"
-        href={`http://www.reddit.com/submit?url=${url}&title=${title}`}
+        href={`https://t.me/share/url?url=${url}&text=${title}`}
       >
-        <FaRedditSquare className="text-[#ff4500] w-12 h-auto" />
+        <FaTelegramPlane className="text-[#0088cc] w-12 h-auto" />
       </a>
       <a
         target="_blank"

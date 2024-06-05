@@ -41,7 +41,7 @@ const EditNewsCategories = () => {
       onSuccess: (data) => {
         queryClient.invalidateQueries(["categories", slug]);
         toast.success("Category is updated");
-        navigate(`/admin/newscategories/manage/edit/${data._id}`, {
+        navigate(`/admin/mediacategories/manage/edit/${data._id}`, {
           replace: true,
         });
       },
@@ -64,7 +64,7 @@ const EditNewsCategories = () => {
     <>
       <div className="flex items-center ">
         <Link
-          to="/admin/newscategories/manage"
+          to="/admin/mediacategories/manage"
           className="text-gray-600 hover:text-gray-900 p-1 rounded-full text-2xl border border-green-400 "
         >
           <FiArrowLeft className="mr-2 text-green-500 pl-1" />

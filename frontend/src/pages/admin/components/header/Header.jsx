@@ -53,7 +53,7 @@ const Header = () => {
       onSuccess: (data) => {
         queryClient.invalidateQueries(["news"]);
         toast.success("News is created");
-        navigate(`/admin/news/manage/edit/${data.slug}`);
+        navigate(`/admin/media/manage/edit/${data.slug}`);
       },
       onError: (error) => {
         toast.error(error.message);
@@ -139,7 +139,7 @@ const Header = () => {
                 activeNavName={activeNavName}
                 setActiveNavName={setActiveNavName}
               >
-                <Link to="/admin/news/manage">Manage all news</Link>
+                <Link to="/admin/media/manage">Manage all news</Link>
                 <button
                   disabled={isLoadingCreateNews}
                   className="text-start disabled:opacity-60 disabled:cursor-not-allowed"
@@ -149,7 +149,7 @@ const Header = () => {
                 >
                   Add News
                 </button>
-                <Link to="/admin/newscategories/manage">Categories</Link>
+                <Link to="/admin/mediacategories/manage">Categories</Link>
               </NavItemCollapse>
               <NavItem
                 title="Users"

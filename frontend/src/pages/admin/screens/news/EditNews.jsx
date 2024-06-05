@@ -62,7 +62,7 @@ const EditNews = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries(["news", slug]);
       toast.success("News is updated");
-      navigate(`/admin/news/manage/edit/${data.slug}`, { replace: true });
+      navigate(`/admin/media/manage/edit/${data.slug}`, { replace: true });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -100,7 +100,7 @@ const EditNews = () => {
 
       queryClient.invalidateQueries(["news", slug]);
       toast.success("News is updated");
-      navigate(`/admin/news/manage/edit/${updatedNews.slug}`, {
+      navigate(`/admin/media/manage/edit/${updatedNews.slug}`, {
         replace: true,
       });
     } catch (error) {
@@ -122,7 +122,7 @@ const EditNews = () => {
     <div>
       <div className="flex items-center mb-4">
         <Link
-          to="/admin/news/manage"
+          to="/admin/media/manage"
           className="text-gray-600 hover:text-gray-900 p-1 rounded-full text-2xl border border-green-400"
         >
           <FiArrowLeft className="mr-2 text-green-500 pl-1" />

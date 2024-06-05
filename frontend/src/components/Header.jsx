@@ -36,8 +36,8 @@ const NavItem = ({ item }) => {
   const handleItemClick = (category) => {
     if (item.name === "Projects") {
       navigate(`/projects?category=${category}`);
-    } else if (item.name === "News") {
-      navigate(`/news?category=${category}`);
+    } else if (item.name === "Media") {
+      navigate(`/media?category=${category}`);
     }
   };
 
@@ -82,7 +82,7 @@ const NavItem = ({ item }) => {
               onMouseLeave={handleDropdownMouseLeave}
             >
               <div className="relative group">
-                <div className="mt-0 flex flex-col items-start">
+                <div className="mt-0 flex flex-col p-4 items-start">
                   {item.items.map((subItem, index) => (
                     <li key={index} className="w-full">
                       <button
@@ -109,7 +109,7 @@ const Header = () => {
     { name: "About", type: "link", href: "/about" },
     { name: "Projects", type: "dropdown", items: [] },
     { name: "Services", type: "link", href: "/services" },
-    { name: "News", type: "dropdown", items: [] },
+    { name: "Media", type: "dropdown", items: [] },
     { name: "Contact", type: "link", href: "/contact" },
   ]);
   const [navIsVisible, setNavIsVisible] = useState(false);
@@ -148,7 +148,7 @@ const Header = () => {
         const categoriesData = response.data;
         const updatedNavItems = [...navItems];
         updatedNavItems.forEach((item) => {
-          if (item.name === "News") {
+          if (item.name === "Media") {
             item.items = categoriesData.map((category) => ({
               title: category.title,
               category: category.title,
