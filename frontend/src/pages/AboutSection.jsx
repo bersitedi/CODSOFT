@@ -1,13 +1,5 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  AiOutlineFundProjectionScreen,
-  AiOutlinePhone,
-  AiOutlineStar,
-} from "react-icons/ai";
-import { FaUserFriends } from "react-icons/fa";
-import { HiLocationMarker } from "react-icons/hi";
-import { BsTools } from "react-icons/bs";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import News from "./news/News";
 
@@ -19,6 +11,7 @@ const categories = [
      Stay informed and inspired with the latest updates from Spring Architects & Engineers on our News & Articles page. Here, we share insights into our ongoing and upcoming projects, industry trends, and expert opinions from our team of professionals. Whether you are interested in architectural innovations, engineering breakthroughs, or urban development strategies, our news page provides a wealth of information designed to keep you up-to-date.
     `,
     buttonText: "Read More",
+    link: "/news#top",
   },
   {
     id: 2,
@@ -27,12 +20,14 @@ const categories = [
      At Spring Architects & Engineers, we pride ourselves on delivering exceptional consulting services across a broad spectrum of infrastructure projects. Our expertise spans both the public and private sectors, ensuring that we meet the unique needs of each client with precision and dedication. From conceptual design to project completion, our team of skilled architects, engineers, and consultants work collaboratively to provide innovative solutions that are not only functional but also aesthetically pleasing.
     `,
     buttonText: "Read More",
+    link: "/services#top",
   },
   {
     id: 3,
     title: "Our Vision",
     content: `At Spring Architects & Engineers, our vision is to transform dreams into reality through excellence and innovation. We believe in creating spaces that not only meet the practical needs of our clients but also inspire and uplift the communities they serve. Our commitment to quality, sustainability, and forward-thinking design drives us to push the boundaries of what is possible in the built environment.`,
-    buttonText: "Read More",
+    buttonText: "Get Started",
+    link: "/project#top",
   },
 ];
 
@@ -42,10 +37,20 @@ const AboutSection = () => {
   });
   const [activeCategory, setActiveCategory] = useState(categories[0]);
 
+  const navigateToPageTop = (link) => {
+    window.location.href = link;
+  };
+  const navigateToProjectsPageTop = () => {
+    window.location.href = "/project#top";
+  };
+  const navigateToContactPageTop = () => {
+    window.location.href = "/contact#top";
+  };
+
   return (
     <div className="container mx-auto px-4 lg:py-5 mt-5 animate-fadeIn">
       <div className="w-full mb-3">
-        <h4 className="text-lg md:text-xl text-blue-600 font-bold md:mb-1 font-mono">
+        <h4 className="text-base md:text-2xl text-blue-600 font-bold md:mb-1 font-mono">
           About Us
         </h4>
         <hr className="border-2 border-green w-10 mb-3" />
@@ -62,7 +67,7 @@ const AboutSection = () => {
           <h3 className="text-2xl md:text-3xl font-bold mb-3 text-gray-800">
             Welcome to Spring Consulting Architects and Engineers
           </h3>
-          <p className="font-lora text-gray-800 mb-4 pr-2">
+          <p className="font-lora text-gray-800 text-base mb-4 pr-2">
             Formerly known as Theodros Tsegaye Consulting Architects &
             Engineers, we're a leading Category-I firm in Ethiopia, offering
             comprehensive Engineering, Architectural, and related services since
@@ -76,18 +81,18 @@ const AboutSection = () => {
           </p>
 
           <div className="flex gap-3">
-            <Link
-              to="/contact"
+            <button
+              onClick={navigateToContactPageTop}
               className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
             >
               Contact us
-            </Link>
-            <Link
-              to="/project"
+            </button>
+            <button
+              onClick={navigateToProjectsPageTop}
               className="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
             >
               Learn more
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -101,7 +106,7 @@ const AboutSection = () => {
         <div className="container mx-auto md:px-4 lg:pb-10 lg:py-8">
           <div className="relative z-10">
             <div className="flex flex-col lg:flex-row justify-center  md:px-4 md:pb-10 py-3 lg:py-8">
-              <div className="flex flex-col w-full lg:w-1/3 px-8 py-4 border-l border-l-gray-200   items-start space-y-4 lg:hidden">
+              <div className="flex flex-col w-full lg:w-1/3 px-8 py-4 border-l border-l-gray-200  items-start space-y-4 lg:hidden">
                 {categories.map((category) => (
                   <div
                     key={category.id}
@@ -131,7 +136,7 @@ const AboutSection = () => {
                       )}
                     </div>
                     <h2
-                      className={`font-medium text-lg  text-gray-800 mb-2 ml-2 ${
+                      className={`font-medium text-base text-gray-800 mb-2 ml-2 ${
                         activeCategory.id === category.id
                           ? "text-blue-500"
                           : "text-gray-700"
@@ -147,8 +152,11 @@ const AboutSection = () => {
                   {activeCategory.title}
                 </h2>
                 <hr className="border-2 border-green w-20 mb-3" />
-                <p className="font-lora">{activeCategory.content}</p>
-                <button className="mt-4 bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">
+                <p className="font-lora text-base">{activeCategory.content}</p>
+                <button
+                  onClick={() => navigateToPageTop(activeCategory.link)}
+                  className="mt-4 bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600"
+                >
                   {activeCategory.buttonText}
                 </button>
               </div>

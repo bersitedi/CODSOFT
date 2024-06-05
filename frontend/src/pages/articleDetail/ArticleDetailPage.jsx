@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainLayout from "../../components/MainLayout";
 import BreadCrumbs from "../../components/BreadCrumbs";
 import { Link, useParams } from "react-router-dom";
@@ -9,14 +9,15 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllPosts, getSinglePost } from "../../services/index/posts";
 import ArticleDetailSkeleton from "./component/ArticleDetailSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
-import parseJsonToHtml from "../../utils/parseJsonToHtml";
 import Editor from "../../components/editor/Editor";
 
 const ArticleDetailPage = ({ post }) => {
   const { slug } = useParams();
   const [breadCrumbsData, setBreadCrumbsData] = useState([]);
-  const [body, setBody] = useState(null);
+  const [visibleSimilarPosts, setVisibleSimilarPosts] = useState([]);
   const [selectedPostIndex, setSelectedPostIndex] = useState(0);
+  const [nextPostIndex, setNextPostIndex] = useState(0);
+  const [body, setBody] = useState(null);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["project", slug],
@@ -25,9 +26,9 @@ const ArticleDetailPage = ({ post }) => {
       setBreadCrumbsData([
         { name: "Home", link: "/" },
         { name: "Project", link: "/projects" },
-        { name: "Article title", link: `/project/${data.slug}` },
+        { name: data.title, link: `/project/${data.slug}` },
       ]);
-      setBody(parseJsonToHtml(data?.body));
+      setBody(data.body);
     },
   });
   const { data: postsData } = useQuery({
@@ -35,8 +36,25 @@ const ArticleDetailPage = ({ post }) => {
     queryKey: ["posts"],
   });
 
+  useEffect(() => {
+    if (postsData) {
+      setVisibleSimilarPosts(postsData.data.slice(0, 5));
+    }
+  }, [postsData]);
+
   const handleSelectPost = (index) => {
-    setSelectedPostIndex(index);
+    const newPostIndex = (nextPostIndex + 1) % postsData.data.length;
+    const newPost = postsData.data[newPostIndex];
+
+    const updatedVisiblePosts = [...visibleSimilarPosts];
+    const clickedPost = updatedVisiblePosts.splice(index, 1)[0];
+    updatedVisiblePosts.push(clickedPost);
+
+    updatedVisiblePosts[index] = newPost;
+
+    setVisibleSimilarPosts(updatedVisiblePosts);
+    setNextPostIndex(newPostIndex);
+    setSelectedPostIndex(updatedVisiblePosts.length - 1);
   };
 
   return (
@@ -81,7 +99,7 @@ const ArticleDetailPage = ({ post }) => {
           <div>
             <SimilarPosts
               header="Latest Article"
-              posts={postsData?.data.slice(0, 5)}
+              posts={visibleSimilarPosts}
               tags={data?.tags}
               className="mt-8 lg:mt-0 lg:max-w-xs"
               selectedPostIndex={selectedPostIndex}

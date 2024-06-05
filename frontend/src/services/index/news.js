@@ -6,7 +6,7 @@ const backendUrl =
 export const getAllNews = async (searchKeyword = "", page = 1, limit = 10) => {
   try {
     const { data, headers } = await axios.get(
-      `https://spring-97bs.onrender.com/api/news?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `${backendUrl}/api/news?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {
@@ -63,20 +63,20 @@ export const updateNews = async ({ updatedData, slug, token }) => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data", // Ensure correct content type for file upload
+        "Content-Type": "multipart/form-data", 
       },
     };
 
-    // Create FormData object
+   
     const formData = new FormData();
-    formData.append("document", JSON.stringify(updatedData)); // Append updated data
+    formData.append("document", JSON.stringify(updatedData)); 
 
-    // Check if image exists in updatedData and append it to formData
+   
     if (updatedData.image instanceof File) {
-      formData.append("image", updatedData.image); // Append image
+      formData.append("image", updatedData.image); 
     }
 
-    // Make PUT request with formData
+   
     const { data } = await axios.put(
       `${backendUrl}/api/news/${slug}`,
       formData,
@@ -98,11 +98,7 @@ export const createNews = async ({ token }) => {
       },
     };
 
-    const { data } = await axios.post(
-      `https://spring-97bs.onrender.com/api/news`,
-      {},
-      config
-    );
+    const { data } = await axios.post(`${backendUrl}/api/news`, {}, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

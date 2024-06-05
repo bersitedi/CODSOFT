@@ -41,7 +41,6 @@ const EditNews = () => {
     queryKey: ["news", slug],
     onSuccess: (data) => {
       setInitialPhoto(data?.photo);
-      console.log("Categories:", data.categories);
       setCategories(data.categories.map((item) => item._id));
       setTitle(data.title);
       setTags(data.tags);

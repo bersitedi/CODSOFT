@@ -10,7 +10,7 @@ export const getAllNewsCategories = async (
 ) => {
   try {
     const { data, headers } = await axios.get(
-      `https://spring-97bs.onrender.com/api/news-categories?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `${backendUrl}/api/news-categories?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {

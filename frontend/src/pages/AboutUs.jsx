@@ -1,51 +1,66 @@
-import React from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import MainLayout from "../components/MainLayout";
 import AboutSection from "./AboutSection";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import about from "../assets/about.jpg";
 
-const AboutUs = () => {
+const AboutUs = forwardRef((props, sectionRef) => {
+  const aboutSectionRef = useRef(null);
+
+  const scrollToAboutSection = () => {
+    if (aboutSectionRef.current) {
+      aboutSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const shouldScrollToAbout = window.location.hash === "#top";
+
+  if (shouldScrollToAbout) {
+    scrollToAboutSection();
+  }
+
   const people = [
     {
       id: 1,
-      name: "John Doe",
-      role: "Founder / CEO",
-      imageUrl:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      role: "Co-Founder / CTO",
-      imageUrl:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 3,
-      name: "Michael Johnson",
-      role: "Chief Architect",
-      imageUrl:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      role: "Lead Engineer",
-      imageUrl:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 5,
-      name: "Sarah Brown",
-      role: "Design Director",
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    {
-      id: 6,
       name: "James Wilson",
       role: "Project Manager",
       imageUrl:
         "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      id: 2,
+      name: "Desalegn Teshome",
+      role: "Supervision and Contract Administration Team Leader",
+      imageUrl:
+        "https://my-spring-blog-app.s3.eu-north-1.amazonaws.com/desu.jpg",
+    },
+    {
+      id: 3,
+      name: "Fikremaryam Negash",
+      role: "Design Team Leader & Sanitary Eng.",
+      imageUrl:
+        "https://my-spring-blog-app.s3.eu-north-1.amazonaws.com/fikre+3.jpg",
+    },
+    {
+      id: 4,
+      name: "biniyam wondem",
+      role: "Senior Architect",
+      imageUrl:
+        "https://my-spring-blog-app.s3.eu-north-1.amazonaws.com/biniyam.jpg",
+    },
+    {
+      id: 5,
+      name: "Fikradis Kifle",
+      role: "Office Engineer",
+      imageUrl:
+        "https://my-spring-blog-app.s3.eu-north-1.amazonaws.com/fikr+2.jpg",
+    },
+    {
+      id: 6,
+      name: "Moges Marye",
+      role: "Senior Electrical Eng.",
+      imageUrl:
+        "https://my-spring-blog-app.s3.eu-north-1.amazonaws.com/moges.jpg",
     },
   ];
   const [aboutRef, isAboutVisible] = useIntersectionObserver({
@@ -58,6 +73,19 @@ const AboutUs = () => {
 
   return (
     <MainLayout>
+      <div
+        ref={aboutSectionRef}
+        className="animate-fadeIn relative w-full h-[200px] bg-cover bg-center flex items-center justify-center"
+        style={{
+          backgroundImage: `url(${about})`,
+        }}
+      >
+        <div className="bg-primary bg-opacity-80 px-8 py-6 rounded-md">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-primary text-white">
+            Learn more about us
+          </h1>
+        </div>
+      </div>
       <AboutSection />
       <div className="relative">
         <div className="container mx-auto px-4 pb-8">
@@ -69,10 +97,10 @@ const AboutUs = () => {
               }`}
             >
               <div className="max-w-2xl">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-800">
+                <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-800">
                   Meet our leadership
                 </h2>
-                <p className="mt-2 md:mt-4 text-base font-lora leading-8 text-gray-600">
+                <p className="mt-2 text-base md:mt-4 font-lora leading-6 text-gray-600">
                   At Spring Consulting Architects and Engineers, our leadership
                   team embodies a wealth of experience, expertise, and passion
                   for innovation. Meet the individuals driving our company
@@ -87,7 +115,7 @@ const AboutUs = () => {
                   <li key={person.id}>
                     <div className="flex items-center gap-x-6">
                       <img
-                        className="h-16 w-16 rounded-full object-cover"
+                        className="h-16 w-16 md:h-[100px] md:w-[100px] rounded-full object-cover"
                         src={person.imageUrl}
                         alt=""
                       />
@@ -116,6 +144,6 @@ const AboutUs = () => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default AboutUs;

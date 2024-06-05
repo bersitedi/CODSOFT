@@ -3,9 +3,21 @@ import { images, stables } from "../constant";
 import { Link } from "react-router-dom";
 
 const ArticleCard = ({ post, className }) => {
+  const navigateToPageTop = (link) => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    window.location.href = link;
+  };
+
   return (
     <div className={`${className} bg-white`}>
-      <Link to={`/project/${post.slug}`}>
+      <Link
+        to={`/project/${post.slug}`}
+        onClick={() => navigateToPageTop(`/project/${post.slug}`)}
+      >
         <img
           className="rounded-md w-full"
           src={
@@ -16,12 +28,15 @@ const ArticleCard = ({ post, className }) => {
           alt=""
         />
       </Link>
-      <Link to={`/project/${post.slug}`}>
-        <h2 className="font-mono font-bold text-xl text-dark-soft lg:text-lg py-2">
+      <Link
+        to={`/project/${post.slug}`}
+        onClick={() => navigateToPageTop(`/project/${post.slug}`)}
+      >
+        <h2 className="font-primary font-bold text-xl text-dark-soft pt-2 pb-1">
           {post.title}
         </h2>
         <p
-          className="inline-flex items-center  text-sm font-medium
+          className="inline-flex items-center  text-base font-medium
         text-center text-blue-600 rounded-lg  hover:text-cta gap-x-2"
         >
           Read more

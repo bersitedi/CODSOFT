@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/actions/user";
-import logo2 from "../assets/springlogo.jpg";
+import logo2 from "../assets/logo.jpg";
 import { getAllCategories } from "../services/index/postCategories";
 import { getAllNewsCategories } from "../services/index/newsCategories";
 
@@ -50,7 +50,7 @@ const NavItem = ({ item }) => {
       {item.type === "link" && (
         <a
           href={item.href}
-          className={`py-2 px-4 text-white text-md font-medium hover:border-b-2 hover:text-blue-500 hover:border-blue-500 ${
+          className={`py-2 px-2 text-white text-xl font-medium hover:border-b-2 hover:text-blue-500 hover:border-blue-500 ${
             location.pathname === item.href
               ? "text-blue-500 dark:text-blue-500"
               : ""
@@ -66,7 +66,7 @@ const NavItem = ({ item }) => {
         >
           <button
             onClick={toggleDropdown}
-            className="flex items-center text-white justify-between w-full px-4 py-2 font-medium text-md hover:border-b-2 hover:text-blue-500 hover:border-blue-500"
+            className="flex items-center text-white justify-between w-full px-2 py-2 font-medium text-xl hover:border-b-2 hover:text-blue-500 hover:border-blue-500"
           >
             {item.name}
             {isDropdownOpen ? (
@@ -77,7 +77,7 @@ const NavItem = ({ item }) => {
           </button>
           {isDropdownOpen && (
             <ul
-              className="transition-all bg-[#11536A] duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full lg:group-hover:block w-max"
+              className="transition-all bg-[#1C3B49] duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full lg:group-hover:block w-max"
               onMouseEnter={handleDropdownMouseEnter}
               onMouseLeave={handleDropdownMouseLeave}
             >
@@ -87,7 +87,7 @@ const NavItem = ({ item }) => {
                     <li key={index} className="w-full">
                       <button
                         onClick={() => handleItemClick(subItem.category)}
-                        className="lg:hover:bg-blue-500 w-full text-start text-sm lg:hover:text-white text-white hover:text-blue-500 px-4 py-2"
+                        className="lg:hover:bg-blue-500 w-full text-start text-base lg:hover:text-white text-white hover:text-blue-500 px-4 py-2"
                       >
                         {subItem.title}
                       </button>
@@ -173,14 +173,14 @@ const Header = () => {
   };
 
   return (
-    <section className="sticky top-0 left-0 right-0 z-50 bg-[#11536A]">
+    <section className="sticky top-0 left-0 right-0 z-50 bg-[#1C3B49]">
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <Link to="/" className="flex items-center space-x-3">
           <div className="flex flex-col lg:flex-row space-x-2 xl:pt-2 items-center justify-center">
             <img src={logo2} className="w-10" alt="" />
             <h1 className="hidden lg:block text-2xl font-bold text-green">
               SPRING{" "}
-              <span className="hidden xl:flex text-sm">
+              <span className="hidden lg:flex text-sm">
                 Architects & Engineers
               </span>
             </h1>
@@ -223,16 +223,16 @@ const Header = () => {
         <div
           className={`${
             navIsVisible ? "right-0" : "-right-full"
-          } transition-all bg-cta lg:bg-[#11536A]
-           duration-300 mt-[56px] lg:mt-0 z-50 flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center overflow-y-auto lg:overflow-y-visible`}
+          } transition-all bg-cta lg:bg-[#1C3B49]
+           duration-300 mt-[56px] lg:mt-0 z-50 flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-4 items-center overflow-y-auto lg:overflow-y-visible`}
         >
-          <ul className="text-white lg:bg-[#11536A] lg:text-inherit items-start lg:items-center gap-y-5 flex flex-col lg:flex-row gap-x-5 font-semibold">
+          <ul className="text-white lg:bg-[#1C3B49] lg:text-inherit items-center lg:items-center gap-y-5 flex flex-col lg:flex-row lg:gap-x-5 font-semibold">
             {navItems.map((item, index) => (
               <NavItem key={index} item={item} />
             ))}
           </ul>
           {userState.userInfo ? (
-            <div className="items-center  gap-y-5text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold">
+            <div className="items-center  gap-y-5 text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold">
               <div className="relative group">
                 <div className="mt-5 lg:mt-0  flex flex-col items-center">
                   <button
@@ -247,7 +247,7 @@ const Header = () => {
                       profileDropdown ? "block" : "hidden"
                     } lg:hidden transition-all duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full lg:group-hover:block w-max`}
                   >
-                    <ul className="bg-[#11536A] text-start flex flex-col shadow-lg rounded-lg overflow-hidden">
+                    <ul className="bg-[#1C3B49] text-start flex flex-col shadow-lg rounded-lg overflow-hidden">
                       {userState?.userInfo?.admin && (
                         <button
                           onClick={() => navigate("/admin")}
@@ -280,7 +280,7 @@ const Header = () => {
           ) : (
             <button
               onClick={() => navigate("/login")}
-              className="lg:border-l-2 mt-4 lg:mt-0 text-white lg:text-cta lg:border-l-gray-500 lg:pl-1 text-lg font-semibold hover:border-b-2 hover:text-blue-500 hover:border-blue-500 "
+              className="border-l-2  mt-5 lg:mt-0 text-white border-l-gray-500 pl-1 text-md font-semibold hover:border-b-2 hover:text-blue-500 hover:border-blue-500 hover:scale-110"
             >
               Login
             </button>

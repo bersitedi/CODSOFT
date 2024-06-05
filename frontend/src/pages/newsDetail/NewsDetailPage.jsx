@@ -17,6 +17,8 @@ const NewsDetailPage = () => {
   const [breadCrumbsData, setBreadCrumbsData] = useState([]);
   const [body, setBody] = useState(null);
   const [selectedPostIndex, setSelectedPostIndex] = useState(0);
+  const [visibleSimilarPosts, setVisibleSimilarPosts] = useState([]);
+  const [nextPostIndex, setNextPostIndex] = useState(0);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["news", slug],
@@ -27,7 +29,7 @@ const NewsDetailPage = () => {
         { name: "News", link: "/news" },
         { name: data.title, link: `/news/${data.slug}` },
       ]);
-      setBody(parseJsonToHtml(data?.body));
+      setBody(data.body);
     },
   });
 
@@ -36,8 +38,25 @@ const NewsDetailPage = () => {
     queryKey: ["news"],
   });
 
+  useEffect(() => {
+    if (newsData) {
+      setVisibleSimilarPosts(newsData.data.slice(0, 5));
+    }
+  }, [newsData]);
+
   const handleSelectPost = (index) => {
-    setSelectedPostIndex(index);
+    const newPostIndex = (nextPostIndex + 1) % newsData.data.length;
+    const newPost = newsData.data[newPostIndex];
+
+    const updatedVisiblePosts = [...visibleSimilarPosts];
+    const clickedPost = updatedVisiblePosts.splice(index, 1)[0];
+    updatedVisiblePosts.push(clickedPost);
+
+    updatedVisiblePosts[index] = newPost;
+
+    setVisibleSimilarPosts(updatedVisiblePosts);
+    setNextPostIndex(newPostIndex);
+    setSelectedPostIndex(updatedVisiblePosts.length - 1);
   };
 
   return (
@@ -85,10 +104,9 @@ const NewsDetailPage = () => {
             <div>
               <SimilarNews
                 header="Latest Article"
-                news={newsData?.data?.slice(0, 5)}
+                news={visibleSimilarPosts}
                 tags={data.tags}
                 className="mt-8 lg:mt-0 lg:max-w-xs"
-                selectedPostIndex={selectedPostIndex}
                 onSelectPost={handleSelectPost}
               />
               <div className="mt-7">

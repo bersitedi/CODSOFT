@@ -6,7 +6,7 @@ import { useDataTableMessages } from "../../../../hooks/useDataTableMessages";
 import { deleteMessage } from "../../../../services/index/messages";
 
 const Messages = () => {
-  const itemsPerPage = 10; // Number of items per page
+  const itemsPerPage = 10;
   const backendUrl =
     process.env.REACT_APP_BACKEND_URL || "https://spring-97bs.onrender.com";
 
@@ -22,7 +22,6 @@ const Messages = () => {
     refetchData,
     deleteMessageHandler,
   } = useDataTableMessages({
-    // Pass the deleteMessage function as mutateDeleteFn
     mutateDeleteFn: deleteMessage,
     dataQueryFn: async () => {
       try {
@@ -37,20 +36,16 @@ const Messages = () => {
       }
     },
     dataQueryKey: "messages",
-    // Pass null as mutateDeleteFn to prevent mutation
     deleteDataMessage: null,
     itemsPerPage,
   });
   useEffect(() => {
-    // Check if there is a stored page number in localStorage
     const storedPage = localStorage.getItem("messages_current_page");
     if (storedPage) {
-      // Set the current page to the stored page
       setCurrentPage(parseInt(storedPage));
     }
   }, [setCurrentPage]);
 
-  // Save the current page to localStorage when it changes
   useEffect(() => {
     localStorage.setItem("messages_current_page", currentPage.toString());
   }, [currentPage]);
@@ -64,7 +59,7 @@ const Messages = () => {
   const messages = messagesData.data || [];
 
   const handleDeleteMessage = (id) => {
-    deleteMessageHandler(id); // Call the delete message handler with message ID
+    deleteMessageHandler(id);
   };
 
   return (
@@ -81,7 +76,7 @@ const Messages = () => {
       data={messages}
       setCurrentPage={setCurrentPage}
       currentPage={currentPage}
-      headers={messagesData.headers} // Pass headers received from the backend
+      headers={messagesData.headers}
     >
       {messages.map((message) => (
         <tr key={message._id}>

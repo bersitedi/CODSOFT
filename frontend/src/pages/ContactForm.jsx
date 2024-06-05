@@ -41,21 +41,21 @@ const ContactForm = () => {
 
   return (
     <MainLayout>
-      <div className="container p-10">
+      <div className="animate-fadeIn container p-10">
         <div className="flex flex-wrap mt-10">
           <div className="w-full md:w-1/2 md:-mt-8 lg:-mt-20">
             <img src={art} alt="" />
           </div>
           <div className="w-full md:w-1/2 md:-mt-8 lg:mt-8 md:pl-8">
-            <h3 className="text-2xl font-bold font-mono mb-1 text-gray-600">
+            <h3 className="text-[18px] md:text-2xl font-bold font-primary mb-1 text-gray-600">
               Contact us for more Information!
             </h3>
-            <hr className="border-2 border-green w-32 mb-3" />
+            <hr className="border-2 border-green w-20 md:w-32 mb-3" />
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="flex flex-col">
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-base font-medium text-gray-900 dark:text-white"
                 >
                   Your email
                 </label>
@@ -73,7 +73,7 @@ const ContactForm = () => {
               <div className="flex flex-col">
                 <label
                   htmlFor="subject"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-base font-medium text-gray-900 dark:text-white"
                 >
                   Subject
                 </label>
@@ -91,7 +91,7 @@ const ContactForm = () => {
               <div className="flex flex-col">
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-gray-900 dark:text-white"
+                  className="block text-base font-medium text-gray-900 dark:text-white"
                 >
                   Your message
                 </label>

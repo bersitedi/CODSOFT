@@ -1,65 +1,60 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"; // Import Axios for making HTTP requests
+import axios from "axios";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import MainLayout from "../../components/MainLayout";
 import Pagination from "../../components/Pagination";
-import { useSearchParams } from "react-router-dom";
 import Search from "../../components/Search";
 import ArticleCard from "../../components/ArticleCard";
 import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
 
 const ProjectsPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(localStorage.getItem("currentPage")) || 1
-  );
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalPostsCount, setTotalPostsCount] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState("");
-  const postsPerPage = 9;
+  const postsPerPage = 10;
+
+  const location = useLocation();
+  const locationSearchKeyword =
+    new URLSearchParams(location.search).get("search") || "";
 
   useEffect(() => {
     const fetchData = async () => {
       setIsError(false);
       setIsLoading(true);
+
       try {
         const response = await axios.get(
-          `https://spring-97bs.onrender.com/api/posts?searchKeyword=${searchKeyword}&page=${currentPage}&limit=${postsPerPage}`
+          `https://spring-97bs.onrender.com/api/posts?searchKeyword=${encodeURIComponent(
+            searchKeyword || locationSearchKeyword
+          )}&page=${currentPage}&limit=${postsPerPage}`
         );
 
-        // Extract data and headers from the response
         const { data, headers } = response;
-        console.log("Headers:", headers);
 
-        // Set data state
         setData(data);
-
-        // Extract and set headers
         const totalCountHeader = headers["x-totalcount"];
         const totalPageCountHeader = headers["x-totalpagecount"];
         setTotalPostsCount(totalCountHeader || 0);
         setTotalPages(
           totalPageCountHeader || Math.ceil(totalCountHeader / postsPerPage)
         );
-        console.log("Total Posts Count:", totalCountHeader);
-        console.log("Total Pages Count:", totalPageCountHeader);
       } catch (error) {
         setIsError(true);
-        toast.error(error.message);
+        toast.error("Failed to fetch posts. Please try again later.");
+        console.error("Error fetching posts:", error);
       }
       setIsLoading(false);
     };
 
     fetchData();
-  }, [currentPage, searchKeyword]);
-
-  useEffect(() => {
-    localStorage.setItem("currentPage", currentPage);
-  }, [currentPage]);
+  }, [currentPage, searchKeyword, locationSearchKeyword, location]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -67,14 +62,15 @@ const ProjectsPage = () => {
 
   const handleSearch = ({ searchKeyword }) => {
     setSearchKeyword(searchKeyword);
-    setCurrentPage(1); // Reset page to 1 when searching
+    setCurrentPage(1);
   };
 
   return (
     <MainLayout>
-      <section className="flex flex-col container mx-auto px-5 py-10">
+      <section className="animate-fadeIn flex flex-col container mx-auto px-5 py-10">
         <Search
           className="w-full max-w-xl mb-10"
+          initialValue={searchKeyword || locationSearchKeyword}
           onSearchKeyword={handleSearch}
         />
         <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">

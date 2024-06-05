@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Drawer from "../../components/Drawer";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver"; // Import the custom hook
@@ -11,20 +11,20 @@ const About = () => {
   return (
     <div
       ref={ref}
-      className={`container px-5 py-2 lg:py-10 mx-auto flex flex-col lg:flex-row items-center justify-center transition-opacity duration-1000 ${
+      className={`container px-5 py-3 lg:py-10 mx-auto flex flex-col lg:flex-row items-center justify-center transition-opacity duration-1000 ${
         isIntersecting ? "opacity-100" : "opacity-0"
       }`}
     >
       <div className="lg:w-1/2 lg:pr-8 mb-8 lg:mb-0">
         <div className="text-start">
-          <h4 className="text-lg md:text-xl text-blue-600 font-bold md:mb-1 font-mono">
+          <h4 className="text-base md:text-2xl text-blue-600 font-bold md:mb-1 font-mono">
             About Us
           </h4>
           <h2 className="text-2xl md:text-3xl font-bold font-primary mb-2">
             Learn More About our Company
           </h2>
           <hr className="border-2 border-green w-20 md:w-40 mb-3" />
-          <p className="text-[15px] mb-5 font-lora">
+          <p className="text-base mb-5 font-lora">
             Spring Consulting Architects and Engineers, formerly known as
             Theodros Tsegaye Consulting Architects & Engineers, is an esteemed
             Category-I Ethiopian firm established in 2009. Specializing in a
@@ -36,7 +36,7 @@ const About = () => {
             contract administration for buildings and infrastructure projects.
           </p>
           <Link
-            to="/about"
+            to="/about#top"
             className="bg-blue-600 py-2 px-4 rounded-md hover:bg-blue-500 text-white font-semibold"
           >
             Learn more
@@ -53,11 +53,11 @@ const About = () => {
           />
         </div>
         <div className="lg:mt-16 mb-6 md:mb-0 md:ml-8 lg:-ml-10">
-          <div className="bg-gray-100 w-full lg:w-[330px] p-6 rounded-lg shadow-md">
+          <div className="md:bg-gray-100 w-full lg:w-[330px] p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-mono mb-2 font-semibold">
               Spring Consulting Architects and Engineers
             </h2>
-            <p className="text-sm mb-5 font-lora">
+            <p className="text-base mb-5 font-lora">
               Driven by a commitment to excellence, we at Spring Consulting
               Architects and Engineers strive to exceed expectations in every
               project we undertake. With our proven track record of delivering

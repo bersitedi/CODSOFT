@@ -33,7 +33,7 @@ const Card = () => {
         <div className="animate-fadeIn mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-blue-400 mb-4">
           <img src={card.icon} alt={card.title} className="w-8 h-8" />
         </div>
-        <h2 className="animate-fadeIn text-xl font-semibold mb-2 font-secondary text-gray-600">
+        <h2 className="animate-fadeIn text-2xl font-semibold mb-2 font-secondary text-gray-600">
           {card.title}
         </h2>
       </div>
@@ -42,7 +42,7 @@ const Card = () => {
 
   return (
     <div className="hidden sm:block bg-gray-50 py-6">
-      <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
+      <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-10 justify-center">
         {generateCards()}
       </div>
     </div>

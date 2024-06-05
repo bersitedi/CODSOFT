@@ -2,7 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { images, stables } from "../../../constant";
 
-const SimilarPosts = ({ className, header, posts = [], tags }) => {
+const SimilarPosts = ({
+  className,
+  header,
+  posts = [],
+  tags,
+  onSelectPost,
+}) => {
   return (
     <div
       className={`w-full shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-lg p-4 ${className}`}
@@ -11,13 +17,14 @@ const SimilarPosts = ({ className, header, posts = [], tags }) => {
         {header}
       </h2>
       <div className="grid gap-y-5 mt-5 md:grid-cols-2 md:gap-x-5 lg:grid-cols-1">
-        {posts.map((item) => (
+        {posts.map((item, index) => (
           <div
             key={item._id}
             className="flex space-x-3 flex-nowrap items-center"
+            onClick={() => onSelectPost(index)}
           >
             <img
-              className="aspect-square object-cover rounded-lg w-1/5"
+              className="aspect-square object-cover rounded-lg w-1/5 cursor-pointer"
               src={
                 item?.photo
                   ? stables.S3_BUCKET_URL + item?.photo

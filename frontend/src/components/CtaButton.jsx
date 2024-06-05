@@ -4,7 +4,7 @@ const CtaButton = () => {
   return (
     <button className="cta relative mx-auto p-3 transition-all duration-200 ease-in-out border-none bg-none cursor-pointer">
       <div className="flex justify-center items-center">
-        <span className="relative font-ubuntu font-bold text-lg tracking-wider text-gray-200">
+        <span className="relative font-ubuntu font-bold text-base tracking-wider text-gray-200">
           Get <span className="text-gray-200">Started</span>
         </span>
         <svg

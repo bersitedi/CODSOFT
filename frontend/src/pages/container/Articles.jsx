@@ -19,6 +19,9 @@ const Articles = () => {
       console.log(error);
     },
   });
+  const navigateToProjectsPageTop = () => {
+    window.location.href = "/project#top";
+  };
 
   const [ref, isIntersecting] = useIntersectionObserver({
     threshold: 0.1,
@@ -35,13 +38,13 @@ const Articles = () => {
         <div className="flex flex-col justify-start items-start space-x-4 w-full py-3">
           <span className="flex items-start md:items-center justify-start space-x-2">
             <IoMdPin className="text-3xl text-primary" />
-            <p className="font-semibold text-[17px] font-secondary text-gray-600">
+            <p className="font-semibold text-base md:text-xl font-secondary text-gray-600">
               Welcome to Spring Consulting Architects and Engineers.
             </p>
           </span>
         </div>
         <hr className="border-2 border-green w-32 mb-10" />
-        <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
+        <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-6 md:pb-10">
           {isLoading ? (
             [...Array(3)].map((item, index) => (
               <ArticleCardSkeleton
@@ -61,13 +64,13 @@ const Articles = () => {
             ))
           )}
         </div>
-        <Link
-          to="/project"
+        <button
+          onClick={navigateToProjectsPageTop}
           className="mx-auto flex items-center gap-x-2 font-bold text-primary border-2 border-primary px-6 py-1 rounded-lg hover:bg-cta hover:text-white"
         >
           <span>More articles</span>
           <FaArrowRight className="w-3 h-3" />
-        </Link>
+        </button>
       </div>
     </section>
   );
