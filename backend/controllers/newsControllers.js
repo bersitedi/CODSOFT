@@ -166,44 +166,18 @@ const getAllNews = async (req, res, next) => {
 
 const getNewsByCategory = async (req, res, next) => {
   try {
-    const filter = req.query.searchKeyword;
     const categoryTitle = req.query.category;
-    const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * pageSize;
 
     let where = {};
-    if (filter) {
-      where.title = { $regex: filter, $options: "i" };
-    }
-
-    let categoryIds = [];
     if (categoryTitle) {
       const categories = await NewsCategories.find({
         title: { $regex: categoryTitle, $options: "i" },
       }).select("_id");
-      categoryIds = categories.map((category) => category._id);
+      const categoryIds = categories.map((category) => category._id);
       where.categories = { $in: categoryIds };
     }
 
-    const total = await News.find(where).countDocuments();
-    const pages = Math.ceil(total / pageSize);
-
-    res.header({
-      "x-filter": filter || "",
-      "x-totalcount": total.toString(),
-      "x-currentpage": page.toString(),
-      "x-pagesize": pageSize.toString(),
-      "x-totalpagecount": pages.toString(),
-    });
-
-    if (page > pages) {
-      return res.json([]);
-    }
-
     const result = await News.find(where)
-      .skip(skip)
-      .limit(pageSize)
       .populate({
         path: "categories",
         select: "title",
