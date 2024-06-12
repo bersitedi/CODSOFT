@@ -97,10 +97,6 @@ const NewsPage = () => {
     setActiveCategory(categoryTitle);
   };
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
   return (
     <MainLayout handleCategoryChange={handleHeaderDropdownChange}>
       <section className="flex flex-col justify-center items-center container mx-auto px-5 py-4 md:py-10 animate-fadeIn">
@@ -154,11 +150,6 @@ const NewsPage = () => {
               ))
             )}
           </div>
-          <Pagination
-            onPageChange={(page) => handlePageChange(page)}
-            currentPage={currentPage}
-            totalPageCount={totalPageCount}
-          />
         </div>
       </section>
     </MainLayout>

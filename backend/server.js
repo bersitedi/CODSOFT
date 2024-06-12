@@ -31,6 +31,7 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
+  "https://www.springconsultinget.com",
   "https://springconsultinget.com",
   "http://localhost:3000",
 ];

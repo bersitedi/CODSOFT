@@ -58,7 +58,7 @@ const AboutSection = () => {
       <div className="flex flex-col lg:flex-row items-center">
         <div className="lg:w-1/2 mb-4 md:mb-0">
           <img
-            src="https://images.unsplash.com/photo-1560264357-8d9202250f21?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://my-spring-blog-app.s3.eu-north-1.amazonaws.com/photo1717968729.jpeg"
             alt="Company"
             className="rounded-lg shadow-lg"
           />

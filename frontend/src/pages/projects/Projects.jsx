@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import ArticleCard from "../../components/ArticleCard";
 import MainLayout from "../../components/MainLayout";
-import { fetchPostsByCategory } from "../../services/index/posts"; // Change to import posts service function
 import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
-import Pagination from "../../components/Pagination";
 import { getAllCategories } from "../../services/index/postCategories";
 
 const Projects = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPageCount, setTotalPageCount] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategoryTitle, setSelectedCategoryTitle] = useState(null);
@@ -59,8 +56,16 @@ const Projects = () => {
       setIsError(false);
       try {
         const categoryToFetch = selectedCategoryTitle || categoryTitle;
-        const posts = await fetchPostsByCategory(categoryToFetch);
-        setPosts(posts);
+        const response = await axios.get(
+          "https://spring-97bs.onrender.com/api/posts/category",
+          {
+            params: {
+              category: categoryToFetch,
+            },
+          }
+        );
+
+        setPosts(response.data);
       } catch (error) {
         setIsError(true);
         console.error("Error fetching posts:", error);
@@ -91,10 +96,6 @@ const Projects = () => {
     setSelectedCategoryTitle(categoryTitle);
     setCategoryTitle(null);
     setActiveCategory(categoryTitle);
-  };
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
   };
 
   return (
@@ -130,7 +131,7 @@ const Projects = () => {
           <hr className="border-2 border-green w-16 mb-5" />
           <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
             {isLoading || isFetching ? (
-              [...Array(3)].map((item, index) => (
+              [...Array(3)].map((_, index) => (
                 <ArticleCardSkeleton
                   key={index}
                   className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
@@ -150,11 +151,6 @@ const Projects = () => {
               ))
             )}
           </div>
-          <Pagination
-            onPageChange={(page) => handlePageChange(page)}
-            currentPage={currentPage}
-            totalPageCount={totalPageCount}
-          />
         </div>
       </section>
     </MainLayout>

@@ -19,7 +19,7 @@ export const getAllNews = async (searchKeyword = "", page = 1, limit = 10) => {
 export const fetchNewsByCategory = async (categoryTitle) => {
   try {
     const response = await axios.get(
-      `${backendUrl}/api/news/category?category=${categoryTitle}`
+      `https://spring-97bs.onrender.com/api/news/category?category=${categoryTitle}`
     );
     return response.data;
   } catch (error) {
@@ -63,20 +63,17 @@ export const updateNews = async ({ updatedData, slug, token }) => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data", 
+        "Content-Type": "multipart/form-data",
       },
     };
 
-   
     const formData = new FormData();
-    formData.append("document", JSON.stringify(updatedData)); 
+    formData.append("document", JSON.stringify(updatedData));
 
-   
     if (updatedData.image instanceof File) {
-      formData.append("image", updatedData.image); 
+      formData.append("image", updatedData.image);
     }
 
-   
     const { data } = await axios.put(
       `${backendUrl}/api/news/${slug}`,
       formData,
