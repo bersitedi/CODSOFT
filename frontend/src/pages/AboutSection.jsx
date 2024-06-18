@@ -96,7 +96,6 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
-      <News />
       <div
         ref={ref}
         className={`mt-5 transition-opacity duration-1000 ${

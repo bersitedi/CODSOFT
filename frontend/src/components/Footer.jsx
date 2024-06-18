@@ -12,33 +12,23 @@ const Footer = () => {
 
   return (
     <footer className="bg-cta">
-      <div className="container mx-auto px-4 py-8 w-full p-4 lg:py-8">
-        <div className="lg:flex md:justify-between md:mb-20 md:mt-10">
-          <div className="mb-6 lg:mb-0 lg:mr-10">
-            <Link to="/" className="hidden lg:flex items-center">
-              <img src={logo} className="w-[200px] me-3" alt="FlowBite Logo" />
-            </Link>
-            <div className="text-white flex flex-row items-center justify-center mt-3 lg:mt-8 text-xl lg:text-2xl gap-x-8 cursor-pointer">
-              <Link to="#">
-                <AiOutlineTwitter />
-              </Link>
-              <Link to="#">
-                <FaFacebook />
-              </Link>
-              <Link to="#">
-                <BsTelegram />
-              </Link>
-              <Link to="#">
-                <AiFillInstagram />
-              </Link>
-            </div>
+      <div className="container mx-auto px-10 py-8">
+        <div className="md:flex md:justify-between">
+          <div className="mb-6 md:mb-0 hidden lg:flex w-full">
+            <a href="#" className="flex items-center">
+              <img
+                src={logo}
+                className="w-[300px] h-[100px] me-3"
+                alt="FlowBite Logo"
+              />
+            </a>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-2">
+          <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3 mt-10">
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-gray-100 uppercase dark:text-white">
                 Services
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-400 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <button
                     onClick={navigateToServicessPageTop}
@@ -59,10 +49,10 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-gray-100 uppercase dark:text-white">
                 Contact Us
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-400 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <Link to="#" className="hover:underline ">
                     Email: springconae@gmail.com
@@ -76,10 +66,10 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-gray-100 uppercase dark:text-white">
                 Location
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-400 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <Link to="#" className="hover:underline">
                     Spring Architects & Engineers, 10th floor, Mercy Plaza,
@@ -90,13 +80,13 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-gray-100 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <hr className="my-6 border-gray-400 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2023{" "}
-            <Link to="#" className="hover:underline">
+            © 2024{" "}
+            <a href="#" className="hover:underline">
               Spring™
-            </Link>
+            </a>
             . All Rights Reserved.
           </span>
         </div>
